@@ -49,7 +49,7 @@
 
 ## 🧶 프로젝트 개발환경
 ### Language
-- `Java`: https://www.azul.com/downloads/?package=jdk (Java 11 (LTS), 11.0.12+7, Windows)
+- `Java`: OpenJDK 11
 
 ### IDE
 - `STS`
