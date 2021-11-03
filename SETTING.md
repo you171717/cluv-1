@@ -5,4 +5,4 @@
    3. `~/intern.mv.db` 파일 생성 확인 
    4. 이후 부터는 `jdbc:h2:tcp://localhost/~/intern` 이렇게 접속
 
-2. com.gsitm.intern.test 패키지는 db 접속을 위한 test용 패키지이기 때문에, 무시하셔도 됩니다.
+2. com.gsitm.intern.test 패키지는 db 접속을 위한 test용 패키지입니다.
