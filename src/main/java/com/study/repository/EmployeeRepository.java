@@ -1,7 +1,7 @@
-package com.shop.repository;
+package com.study.repository;
 
-import com.shop.entity.Employee;
-import com.shop.entity.EmployeeId;
+import com.study.entity.Employee;
+import com.study.entity.EmployeeId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EmployeeRepository extends JpaRepository<Employee, EmployeeId> {

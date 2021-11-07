@@ -1,14 +1,13 @@
-package com.shop.repository;
+package com.study.repository;
 
-import com.shop.entity.Employer;
-import com.shop.entity.EmployerId;
+import com.study.entity.Employer;
+import com.study.entity.EmployerId;
+import com.study.repository.EmployerRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.properties")

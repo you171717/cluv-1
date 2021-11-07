@@ -1,4 +1,4 @@
-package com.shop.entity;
+package com.study.entity;
 
 import lombok.Data;
 import lombok.Getter;
