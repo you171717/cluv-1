@@ -1,12 +1,16 @@
 package com.gsitm.intern.shop.repository;
 
+// 임포트 시킨 툴
 import com.gsitm.intern.shop.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
-
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import java.util.List;
-public interface ItemRepository extends JpaRepository<Item, Long> {
+
+//인터페이스
+public interface ItemRepository extends JpaRepository<Item, Long>, QuerydslPredicateExecutor<Item> {
     List<Item> findByItemNm(String itemNm);
 
     List<Item> findByItemNmOrItemDetail(String itemNm, String itemDetail);

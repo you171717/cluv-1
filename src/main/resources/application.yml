@@ -24,6 +24,12 @@ spring:
   #      schema-locations: schema.sql
   #      data-locations: data.sql
 
+  # Thymeleaf cache 사용 중지
+
+    thymeleaf:
+      cache: false
+
+
   jpa:
     hibernate:
       ddl-auto: update
