@@ -1,0 +1,45 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url : jdbc:mysql://localhost:3306/mybatis?useUnicode=yes&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Seoul
+    #url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1668
+    username: root
+    password: cbdjqmf12!@
+  #    driver-class-name: org.h2.Driver     # [ h2 설정 ]
+
+# [ h2 설정 ]
+#  h2:
+#    console:
+#      enabled: true
+
+  devtools:
+    livereload:
+      enabled: true
+
+  sql:
+    init:
+      mode: always
+  #      schema-locations: schema.sql
+  #      data-locations: data.sql
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+      format_sql: true
+
+mybatis:
+  mapper-locations: sqlmap/mappers/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    multiple-result-sets-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: varchar
+    default-fetch-size: 500
+  #type-aliases-package: com.gsitm.career
+  type-aliases-package: com.gsitm.intern
+
