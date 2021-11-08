@@ -1,6 +1,6 @@
-package com.shop.entity;
+package com.gsitm.intern.shop.entity;
 
-import com.shop.constant.ItemSellStatus;
+import com.gsitm.intern.shop.constant.ItemSellStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
