@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/intern
-    username: admin
-    password: itm6700!
+    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1660
+    username: it1660
+    password: it1660
   #    driver-class-name: org.h2.Driver     # [ h2 설정 ]
 
 # [ h2 설정 ]
@@ -40,4 +40,3 @@ mybatis:
     jdbc-type-for-null: varchar
     default-fetch-size: 500
   type-aliases-package: com.gsitm.career
-
