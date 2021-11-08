@@ -1,5 +1,6 @@
-package com.gsitm.intern;
+package com.gsitm.intern.controller;
 
+import com.gsitm.intern.dto.UserDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

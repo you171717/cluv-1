@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+
 @SpringBootApplication
 public class InternApplication {
 
@@ -13,8 +13,4 @@ public class InternApplication {
 		SpringApplication.run(InternApplication.class, args);
 	}
 
-	@GetMapping(value = "/")
-	public String HelloWorld() {
-		return "Hello World";
-	}
 }

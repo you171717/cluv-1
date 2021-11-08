@@ -1,4 +1,4 @@
-package com.gsitm.intern;
+package com.gsitm.intern.dto;
 
 import lombok.Getter;
 import lombok.Setter;
