@@ -1,0 +1,53 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    hikari:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/[사번] # 사번 기입
+      username: [사번] # 사번 기입
+      password: [사번] # 사번 기입
+
+  #    driver-class-name: org.mariadb.jdbc.Driver
+  #    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/[사번] # 사번 기입
+  #    username: [사번] # 사번 기입
+  #    password: [사번] # 사번 기입
+
+  devtools:
+    livereload:
+      enabled: true
+
+  sql:
+    init:
+      mode: always
+  #      schema-locations: schema.sql
+  #      data-locations: data.sql
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+      format_sql: true
+
+mybatis:
+  mapper-locations: sqlmap/mappers/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    multiple-result-sets-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: varchar
+    default-fetch-size: 500
+  type-aliases-package: com.gsitm.career
+
+logging.level:
+  jdbc:
+    sqlonly: debug
+    sqltiming: info
+    resultsettable: info
+    audit: off
+    resultset: off
+    connection: off
+  org.hibernate.SQL: debug
+
