@@ -41,6 +41,7 @@ class ItemRepositoryTest {
         item.setItemSellStatus(ItemSellStatus.SELL);
         item.setStockNumber(100);
         item.setRegTime(LocalDateTime.now());
+        item.setUpdateTime(LocalDateTime.now());
         Item savedItem = itemRepository.save(item);
         System.out.println(savedItem.toString());
     }
@@ -127,7 +128,7 @@ class ItemRepositoryTest {
     @DisplayName("Querydsl 조회 테스트1")
     public void queryDslTest(){
         this.createItemList();
-        JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+        JPAQueryFactory queryFactory = new JPAQueryFactory(em); //JPAQueryFactory를 이용해 쿼리를 동적으로 생성
         QItem qItem = QItem.item;
         JPAQuery<Item> query =queryFactory.selectFrom(qItem)
                 .where(qItem.itemSellStatus.eq(ItemSellStatus.SELL))

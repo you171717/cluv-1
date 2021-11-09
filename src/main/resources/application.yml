@@ -9,11 +9,10 @@ spring:
     password: it1663
   #    driver-class-name: org.h2.Driver     # [ h2 설정 ]
 
-# [ h2 설정 ]
-#  h2:
-#    console:
-#      enabled: true
-
+  # [ h2 설정 ]
+  #  h2:
+  #    console:
+  #      enabled: true
   devtools:
     livereload:
       enabled: true
