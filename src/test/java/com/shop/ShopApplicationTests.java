@@ -1,10 +1,10 @@
-package com.gsitm.intern;
+package com.shop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class InternApplicationTests {
+class ShopApplicationTests {
 
 	@Test
 	void contextLoads() {
