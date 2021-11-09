@@ -21,35 +21,41 @@
                 #{updateTime});
     </insert>
     <select id="findByItemNm" resultType="com.shop.dto.ItemDto">
-        SELECT *
+        SELECT *,
+               item_id AS id
           FROM item
          WHERE item_nm = #{itemNm};
     </select>
     <select id="findByItemNmOrItemDetail" resultType="com.shop.dto.ItemDto">
-        SELECT *
+        SELECT *,
+               item_id AS id
           FROM item
          WHERE item_nm = #{itemNm}
             OR item_detail = #{itemDetail};
     </select>
     <select id="findByPriceLessThan" resultType="com.shop.dto.ItemDto">
-        SELECT *
+        SELECT *,
+               item_id AS id
           FROM item
          WHERE price &lt; #{price};
     </select>
     <select id="findByPriceLessThanOrderByPriceDesc" resultType="com.shop.dto.ItemDto">
-        SELECT *
+        SELECT *,
+               item_id AS id
           FROM item
          WHERE price &lt; #{price}
          ORDER BY price DESC;
     </select>
     <select id="findByItemDetail" resultType="com.shop.dto.ItemDto">
-        SELECT *
+        SELECT *,
+               item_id AS id
           FROM item
          WHERE item_detail LIKE '%' || #{itemDetail} || '%'
          ORDER BY price DESC
     </select>
     <select id="findByItemDetailByNative" resultType="com.shop.dto.ItemDto">
-        SELECT *
+        SELECT *,
+               item_id AS id
           FROM item
          WHERE item_detail LIKE '%' || #{itemDetail} || '%'
          ORDER BY price DESC
