@@ -4,7 +4,6 @@ server:
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    #url : jdbc:mysql://localhost:3306/mybatis?useUnicode=yes&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Seoul
     url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1668
     username: it1668
     password: it1668
@@ -45,5 +44,5 @@ mybatis:
     jdbc-type-for-null: varchar
     default-fetch-size: 500
   type-aliases-package: com.gsitm.career
-  #type-aliases-package: com.gsitm.intern
+    #type-aliases-package: com.gsitm.intern
 

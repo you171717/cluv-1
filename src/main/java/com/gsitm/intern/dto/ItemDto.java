@@ -1,5 +1,7 @@
 package com.gsitm.intern.dto;
 
+import com.gsitm.intern.constant.ItemSellStatus;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 
+@Data
 public class ItemDto {
     private Long id;
 
@@ -17,11 +20,15 @@ public class ItemDto {
 
     private String itemDetail;
 
+    private int stockNumber;
+
     private String sellStatCd;
 
     private LocalDateTime regTime;
 
     private LocalDateTime updateTime;
+
+    private ItemSellStatus itemSellStatus;
 }
 //
 //import com.gsitm.intern.constant.ItemSellStatus;

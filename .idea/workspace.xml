@@ -5,10 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ac7031b-2f11-463d-88fb-f3f3769d60f5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/mapper/ItemMapperTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/ThymeleafExController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/ThymeleafExController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/dto/ItemDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/dto/ItemDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/mapper/ItemMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com.gsitm.intern.mapper/UserMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlmap/mappers/MyBatisTestMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlmap/mappers/MyBatisTestMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/layout1.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/layout1.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/repository/ItemRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/repository/ItemRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,10 +61,10 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
-        <option value="JUnit5 Test Class" />
-        <option value="Class" />
         <option value="HTML File" />
         <option value="CSS File" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -77,7 +90,7 @@
     <option name="myId2Visible">
       <map>
         <entry key="JPA Inspector" value="true" />
-        <entry key="JPA Palette" value="true" />
+        <entry key="JPA Palette" value="false" />
         <entry key="JPA Structure" value="false" />
       </map>
     </option>
@@ -89,6 +102,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mariadb" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
@@ -106,7 +120,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
@@ -120,96 +134,88 @@
       <recent name="com.gsitm.intern.test" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.gsitm.intern.mapper" />
       <recent name="com.gsitm.intern.repository" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.InternApplication">
-    <configuration name="ItemRepositoryTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.gsitm.intern.repository.ItemRepositoryTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+  <component name="RunManager" selected="JUnit.MemberServiceTest.saveDuplicateMemberTest">
+    <configuration name="ItemRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="intern.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gsitm.intern.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.repository.ItemRepositoryTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="ItemRepositoryTest.createItemTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.gsitm.intern.repository.ItemRepositoryTest.createItemTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+    <configuration name="ItemRepositoryTest.createItemTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="intern.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gsitm.intern.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.repository.ItemRepositoryTest" />
+      <option name="METHOD_NAME" value="createItemTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="ItemRepositoryTest.findByItemDetailTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.gsitm.intern.repository.ItemRepositoryTest.findByItemDetailTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+    <configuration name="ItemRepositoryTest.findByItemNmOrItemDetailTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="intern.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gsitm.intern.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.repository.ItemRepositoryTest" />
+      <option name="METHOD_NAME" value="findByItemNmOrItemDetailTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="ItemRepositoryTest.itemTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.gsitm.intern.repository.ItemRepositoryTest.itemTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+    <configuration name="MemberServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="intern.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gsitm.intern.serivce.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.serivce" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.serivce.MemberServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="thymeleafEx01.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/intern/intern.main/templates/thymeleafEx/thymeleafEx01.html" useBuiltInWebServerPort="true">
-      <method v="2" />
+    <configuration name="MemberServiceTest.saveDuplicateMemberTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="intern.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gsitm.intern.serivce.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.serivce" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.serivce.MemberServiceTest" />
+      <option name="METHOD_NAME" value="saveDuplicateMemberTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="InternApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="intern.main" />
@@ -220,11 +226,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.thymeleafEx01.html" />
-        <item itemvalue="Gradle.ItemRepositoryTest.itemTest" />
-        <item itemvalue="Gradle.ItemRepositoryTest" />
-        <item itemvalue="Gradle.ItemRepositoryTest.findByItemDetailTest" />
-        <item itemvalue="Gradle.ItemRepositoryTest.createItemTest" />
+        <item itemvalue="JUnit.MemberServiceTest.saveDuplicateMemberTest" />
+        <item itemvalue="JUnit.MemberServiceTest" />
+        <item itemvalue="JUnit.ItemRepositoryTest" />
+        <item itemvalue="JUnit.ItemRepositoryTest.createItemTest" />
+        <item itemvalue="JUnit.ItemRepositoryTest.findByItemNmOrItemDetailTest" />
       </list>
     </recent_temporary>
   </component>
@@ -255,6 +261,12 @@
       <workItem from="1636357812865" duration="885000" />
       <workItem from="1636358766849" duration="3430000" />
       <workItem from="1636370393891" duration="5863000" />
+      <workItem from="1636415786996" duration="1092000" />
+      <workItem from="1636419915348" duration="2504000" />
+      <workItem from="1636422494117" duration="7190000" />
+      <workItem from="1636431912424" duration="5436000" />
+      <workItem from="1636437951517" duration="10267000" />
+      <workItem from="1636448355485" duration="81000" />
     </task>
     <servers />
   </component>

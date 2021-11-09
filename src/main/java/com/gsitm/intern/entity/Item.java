@@ -9,7 +9,6 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
 @Entity
 @Table(name = "item")
 @Getter
