@@ -13,9 +13,15 @@ spring:
   #  h2:
   #    console:
   #      enabled: true
+
+  #LiveReload 활성화
   devtools:
     livereload:
       enabled: true
+
+  #Thymeleaf cache 사용중지 (운영환경에서는 캐싱 기능사용, 개발환경에서는 캐싱 기능을 꺼둠)
+  thymeleaf:
+    cache: false
 
   sql:
     init:
@@ -30,6 +36,7 @@ spring:
       hibernate:
       format_sql: true
 
+
 mybatis:
   mapper-locations: sqlmap/mappers/*.xml
   configuration:
@@ -39,4 +46,3 @@ mybatis:
     jdbc-type-for-null: varchar
     default-fetch-size: 500
   type-aliases-package: com.gsitm.career
-
