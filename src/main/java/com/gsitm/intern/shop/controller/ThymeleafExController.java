@@ -47,6 +47,7 @@ public class ThymeleafExController {
             itemDto.setRegTime(LocalDateTime.now());
 
             itemDtoList.add(itemDto);
+
         }
 
         model.addAttribute("itemDtoList", itemDtoList);
