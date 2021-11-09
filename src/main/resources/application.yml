@@ -10,9 +10,9 @@ spring:
       password: [사번] # 사번 기입
 
   #    driver-class-name: org.mariadb.jdbc.Driver
-  #    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/intern
-  #    username: admin
-  #    password: itm6700!
+  #    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/[사번] # 사번 기입
+  #    username: [사번] # 사번 기입
+  #    password: [사번] # 사번 기입
 
   devtools:
     livereload:
