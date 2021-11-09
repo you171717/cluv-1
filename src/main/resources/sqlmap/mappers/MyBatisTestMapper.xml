@@ -3,6 +3,6 @@
 <mapper namespace="com.gsitm.intern.test.mybatis.MyBatisMapper">
     <select id="selectAll" resultType="com.gsitm.intern.test.mybatis.MyBatisTestDto">
         SELECT *
-        FROM MYBATIS;
+        FROM mybatis;
     </select>
 </mapper>
