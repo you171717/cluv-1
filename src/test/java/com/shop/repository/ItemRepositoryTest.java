@@ -1,4 +1,4 @@
-package com.shop.reporsitory;
+package com.shop.repository;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
