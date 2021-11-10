@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ac7031b-2f11-463d-88fb-f3f3769d60f5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/dto/MemberFormDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/dto/MemberFormDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/repository/ItemRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/repository/ItemRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/serivce/MemberServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/serivce/MemberServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +94,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="mariadb&#10;h2" />
+    <property name="DatabaseDriversLRU" value="h2&#10;mariadb" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
@@ -128,7 +130,7 @@
       <recent name="com.gsitm.intern.repository" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ItemRepositoryTest.createItemTest">
+  <component name="RunManager" selected="Spring Boot.InternApplication">
     <configuration name="ItemRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="intern.test" />
       <extension name="coverage">
@@ -210,15 +212,25 @@
     <configuration name="InternApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="intern.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.gsitm.intern.InternApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SHORTEN_COMMAND_LINE" value="NONE" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.ItemRepositoryTest" />
+      <item itemvalue="JUnit.ItemRepositoryTest.createItemTest" />
+      <item itemvalue="JUnit.ItemRepositoryTest.findByItemNmOrItemDetailTest" />
+      <item itemvalue="JUnit.MemberServiceTest" />
+      <item itemvalue="JUnit.MemberServiceTest.saveDuplicateMemberTest" />
+      <item itemvalue="Spring Boot.InternApplication" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MemberServiceTest" />
         <item itemvalue="JUnit.ItemRepositoryTest.createItemTest" />
         <item itemvalue="JUnit.MemberServiceTest.saveDuplicateMemberTest" />
-        <item itemvalue="JUnit.MemberServiceTest" />
         <item itemvalue="JUnit.ItemRepositoryTest" />
         <item itemvalue="JUnit.ItemRepositoryTest.findByItemNmOrItemDetailTest" />
       </list>
@@ -258,6 +270,9 @@
       <workItem from="1636437951517" duration="10267000" />
       <workItem from="1636448355485" duration="81000" />
       <workItem from="1636460277223" duration="7826000" />
+      <workItem from="1636469045328" duration="132000" />
+      <workItem from="1636501688690" duration="6468000" />
+      <workItem from="1636511403682" duration="2476000" />
     </task>
     <servers />
   </component>

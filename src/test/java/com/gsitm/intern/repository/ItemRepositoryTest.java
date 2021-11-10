@@ -14,8 +14,8 @@ import java.util.List;
 import java.time.LocalDateTime;
 
 @SpringBootTest
-//@TestPropertySource(properties = { "spring.config.location=classpath:application-test.yml"})
-@TestPropertySource(locations = "classpath:application-test.yml")
+@TestPropertySource(properties = { "spring.config.location=classpath:application-test.yml"})
+//@TestPropertySource(locations = "classpath:application-test.yml")
 class ItemRepositoryTest {
 
     @Autowired

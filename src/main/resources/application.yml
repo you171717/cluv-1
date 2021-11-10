@@ -45,4 +45,3 @@ mybatis:
     default-fetch-size: 500
   type-aliases-package: com.gsitm.career
     #type-aliases-package: com.gsitm.intern
-
