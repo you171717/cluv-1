@@ -11,13 +11,13 @@ import java.time.LocalDateTime;
 @Controller
 @RequestMapping(value = "thymeleaf")
 public class ThymeleafExController {
-    @GetMapping(value = "ex01")
+    @GetMapping(value = "/ex01")
     public String thymeleafExample01(Model model){
-        model.addAttribute("data", "타임리프 예제입니다.");//뷰에 전달할 data
+        model.addAttribute("data", "타임리프 예제입니다!");//뷰에 전달할 data
         return "thymeleafEx/thymeleafEx01";     //폴더 기준으로 뷰 위치와 이름 반환
     }
 
-    @GetMapping(value = "ex02")
+    @GetMapping(value = "/ex02")
     public String thymeleafExample02(Model model){
         ItemDto itemDto = new ItemDto();
         itemDto.setItemDetail("상품 상세 설명");
