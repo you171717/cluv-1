@@ -26,6 +26,6 @@ public class ThymeleafExController {
         itemDto.setRegTime(LocalDateTime.now());
 
         model.addAttribute("itemDto",itemDto);
-        return "thymeleaf/thymeleafEx02";
+        return "thymeleafEx/thymeleafEx02";
     }
 }
