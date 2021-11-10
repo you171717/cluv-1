@@ -13,8 +13,8 @@ import javax.persistence.*;
 @Table(name = "member")
 @Getter @Setter
 @ToString
-
 public class Member {
+
     @Id
     @Column(name="member_id")
     @GeneratedValue(strategy = GenerationType.AUTO)

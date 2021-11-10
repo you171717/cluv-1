@@ -2,17 +2,21 @@ package com.gsitm.intern.shop.service;
 
 import com.gsitm.intern.shop.dto.MemberFormDto;
 import com.gsitm.intern.shop.entity.Member;
+import org.aspectj.lang.annotation.RequiredTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @SpringBootTest
 @Transactional
@@ -24,6 +28,7 @@ class MemberServiceTest {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
 
     public Member createMember() {
         MemberFormDto memberFormDto = new MemberFormDto();
