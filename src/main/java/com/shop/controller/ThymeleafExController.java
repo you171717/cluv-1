@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
 
+
 @Controller
 @RequestMapping(value = "thymeleaf")
 public class ThymeleafExController {
