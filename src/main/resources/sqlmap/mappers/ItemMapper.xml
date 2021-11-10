@@ -28,10 +28,10 @@
     </select>
     <select id="findByItemNmOrItemDetail" resultType="com.shop.dto.ItemDto">
         SELECT *,
-        item_id AS id
-        FROM item
+               item_id AS id
+         FROM item
         WHERE item_nm = #{itemNm}
-        OR item_detail = #{itemDetail};
+           OR item_detail = #{itemDetail};
     </select>
     <select id="findByPriceLessThan" resultType="com.shop.dto.ItemDto">
         SELECT *,

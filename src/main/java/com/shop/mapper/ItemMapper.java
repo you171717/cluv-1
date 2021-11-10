@@ -14,7 +14,6 @@ public interface ItemMapper{
     List<ItemDto> findByItemNmOrItemDetail(String itemNm, String itemDetail);
     List<ItemDto> findByPriceLessThan(Integer price);
     List<ItemDto> findByPriceLessThanOrderByPriceDesc(Integer price);
-    List<ItemDto> findByItemDetail(@Param("itemDetail") String itemDetail);
-    List<ItemDto> findByItemDetailByNative(@Param("itemDetail") String itemDetail);
-
+    List<ItemDto> findByItemDetail(String itemDetail);
+    List<ItemDto> findByItemDetailByNative(String itemDetail);
 }
