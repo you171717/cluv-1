@@ -1,14 +1,10 @@
 package com.gsitm.intern.test.jpa;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import java.io.Serializable;
 
 /**
  * Description :
@@ -20,13 +16,19 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class JpaEntity {
+@IdClass(JpaCompositeKey.class)
+public class JpaEntity implements Serializable {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
     private Long id;
+    @Id
+    private String phone;
+
     private String name;
 
-    public JpaEntity(String name) {
+    @Builder
+    public JpaEntity(Long id, String phone, String name) {
+        this.id = id;
+        this.phone = phone;
         this.name = name;
     }
 }

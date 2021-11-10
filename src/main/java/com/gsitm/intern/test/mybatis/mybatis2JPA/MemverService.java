@@ -1,4 +1,4 @@
-package com.gsitm.intern.test.mybatis;
+package com.gsitm.intern.test.mybatis.mybatis2JPA;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -7,23 +7,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Description :
- *
- * @author leejinho
- * @version 1.0
- */
-
 @Log
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MyBatisService {
+public class MemverService {
 
-    private final MyBatisMapper myBatisMapper;
+    private final MemberMapper memberMapper;
 
-    public List<MyBatisTestDto> findAll() {
-        return myBatisMapper.selectAll();
+    public List<MemberDto> memberListAll(){
+        return memberMapper.memberListAll();
     }
-
 }

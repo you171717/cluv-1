@@ -24,4 +24,5 @@ public class MyBatisRestController {
     public ResponseEntity findAll() {
         return ResponseEntity.ok(myBatisService.findAll());
     }
+
 }
