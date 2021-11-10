@@ -1,4 +1,4 @@
-package com.gsitm.intern.repository;
+package com.gsitm.intern.study;
 
 import com.gsitm.intern.constant.ItemSellStatus;
 import com.gsitm.intern.dto.ItemDto;
