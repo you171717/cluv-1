@@ -39,6 +39,7 @@ dependencies {
 	implementation group: 'com.querydsl', name: 'querydsl-jpa', version: querydslVersion
 	implementation group: 'com.querydsl', name: 'querydsl-apt', version: querydslVersion
 	implementation group: 'com.querydsl', name: 'querydsl-core', version: querydslVersion
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.5.4'
 
 	annotationProcessor group: 'com.querydsl', name: 'querydsl-apt', version: querydslVersion
 	annotationProcessor group: 'com.querydsl', name: 'querydsl-apt', version: querydslVersion, classifier: 'jpa'
