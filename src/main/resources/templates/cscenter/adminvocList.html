@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<title>faq</title>
+
+<div layout:fragment="content">
+    <div class="row" style="float: none; margin:100 auto;">
+        <th:block th:replace="fragments/adminsearch"></th:block>
+        <div class="col-md-9" style="float: none; margin:0 auto;">
+            <table class="table">
+                <tr>
+                    <td>id</td>
+                    <td>제목</td>
+                    <td>등록일</td>
+                    <td>작성자</td>
+                </tr>
+                    <th:block th:each="Inquiry : ${InquiryList}">
+                        <tr>
+                            <td th:text="${Inquiry.id}"></td>
+                            <td><a th:href="'/admin/cscenter/voclist/'+${Inquiry.id}" th:text="${Inquiry.title}"></a></td>
+                            <td th:text="${Inquiry.regTime}"></td>
+                            <td th:text="${Inquiry.createdBy}"></td>
+                        </tr>
+                    </th:block>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

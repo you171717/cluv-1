@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<div layout:fragment="content">
+    <div class="row" style="float: none; margin:100 auto;">
+        <th:block th:replace="fragments/search"></th:block>
+        <div class="col-md-9" style="float: none; margin:0 auto;">
+            <h1 th:text="${inquiry.title}"></h1>
+            <h6 th:text="${inquiry.regTime}"></h6>
+            <h3 th:text="${inquiry.content}"></h3>
+            <hr>
+            <th:block th:each="commentlist : ${commentlist}">
+                <h6 th:text="${commentlist.createdBy}"></h6>
+                <h5 th:text="${commentlist.content}"></h5>
+            </th:block>
+        </div>
+    </div>
+</div>
+
+</html>

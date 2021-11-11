@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<title>faq</title>
+
+<th:block layout:fragment="css">
+    <style>
+        .search{
+            height:50px;
+            width:400px;
+            border: 1px solid #1b5ac2;
+            background:#ffffff;
+            float: none;
+            margin:auto;
+        }
+
+        .title{
+            margin:auto;
+        }
+
+        .search_header{
+            margin:auto;
+        }
+
+        .search_input{
+            font-size=16px;
+            width:325px;
+            padding:10px;
+            border:0px;
+            outline:none;
+            float:left;
+        }
+
+        .search_btn{
+            width:50px;
+            height:49px;
+            border;0px;
+            background:#1b5ac2;
+            outline:none;
+            float:right;
+            color:#ffffff;
+        }
+
+        .col-md-9{
+            height:120px;
+            display: flex;
+        }
+
+        .btn{
+            margin:auto;
+        }
+
+        *{
+            box-sizing: border-box;
+        }
+
+        .que:first-child{
+            border-top: 1px solid black;
+        }
+
+        .que{
+          position: relative;
+          padding: 17px 0;
+          cursor: pointer;
+          font-size: 14px;
+          border-bottom: 1px solid #dddddd;
+        }
+
+        .que::before{
+          display: inline-block;
+          content: 'Q';
+          font-size: 14px;
+          color: #006633;
+          margin-right: 5px;
+        }
+
+        .que.on>span{
+          font-weight: bold;
+          color: #006633;
+        }
+
+        .anw {
+          display: none;
+            overflow: hidden;
+          font-size: 14px;
+          background-color: #f4f4f2;
+          padding: 27px 0;
+        }
+
+        .anw::before {
+          display: inline-block;
+          content: 'A';
+          font-size: 14px;
+          font-weight: bold;
+          color: #666;
+          margin-right: 5px;
+        }
+        .ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+
+	    }
+
+        .li {
+        float: left;
+        }
+
+	.li a {
+		display: block;
+		text-align: center;
+		padding: 16px;
+		text-decoration: none;
+	}
+
+
+    </style>
+</th:block>
+
+<div layout:fragment="content">
+    <div class="row" style="float: none; margin:100 auto;">
+
+        <div class="col-md-9" id="search_header" style="float: none; margin:0 auto;background-color: #007bff;">
+            <h2 class="title">고객센터</h2>
+            <div class="search">
+                <form>
+                    <input type="text" class="search_input" placeholder="자주 묻는 질문 검색">
+                    <button class="search_btn">검색</button>
+                </form>
+            </div>
+
+        </div>
+        <div class="col-md-9" style="float: none; margin:0 auto;">
+
+            <ul class="ul">
+                <li class="li"><a href="/cscenter">faq</a></li>
+                <li class="li"><a href="/cscenter/voc">1:1 문의</a></li>
+                <li class="li"><a href="/cscenter/voclist">문의 내역</a></li>
+
+            </ul>
+        </div>
+
+        <div class="col-md-9" style="float: none; margin:0 auto;">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td>id</td>
+                    <td>제목</td>
+                    <td>등록일</td>
+                    <td>수정</td>
+                    <td>삭제</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><a href="#">배송 문의</a></td>
+                    <td>2020-12-31</td>
+                    <td><a href="#">수정</a></td>
+                    <td><a href="#">삭제</a></td>
+                </tr>
+                </tbody>
+            </table>
+
+
+<!--            <div class="col-md-9" style="float: none; margin:0 auto;" >-->
+<!--                <th:block>-->
+<!--                    <span th:text="${inquiry.title}"></span>-->
+<!--                    <span th:text="${inquiry.content}"></span>-->
+<!--                </th:block>-->
+<!--            </div>-->
+    </div>
+    </div>
+</div>
+
+

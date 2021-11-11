@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link th:href="@{/css/search.css}" rel="stylesheet">
+<title>Title</title>
+</head>
+
+<body>
+
+<div class="col-md-9" style="margin:0 auto;">
+    <h2 class="mb-4">고객센터</h2>
+    <div class="search">
+        <form action="/admin/cscenter/search" role="form" method="post" th:object="${faqsearchdto}">
+            <input type="text" th:field="*{searchQuery}" class="search_input" placeholder="자주 묻는 질문 검색">
+            <button class="search_btn" >검색</button>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        </form>
+    </div>
+</div>
+
+<div class="col-md-9" style="float: none; margin:0 auto;">
+    <ul class="ul">
+        <li class="li"><a href="/admin/cscenter">faq</a></li>
+        <li class="li"><a href="/admin/cscenter/voclist">문의 내역</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
