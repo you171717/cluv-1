@@ -18,11 +18,7 @@ public class BaseEntity extends BaseTimeEntity {
 
     @CreatedBy
     @Column(updatable = false)
-<<<<<<< HEAD
     private String createdBy;
-=======
-    private String createBy;
->>>>>>> a6f19c51ac9492c3a62c34802bd140afce4ed42a
 
     @LastModifiedBy
     private String modifiedBy;
