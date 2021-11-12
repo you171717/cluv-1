@@ -12,20 +12,17 @@
         <div class="col-md-9" style="float: none; margin:0 auto;">
             <table class="table">
                 <tr>
-                    <td>id</td>
                     <td>제목</td>
                     <td>등록일</td>
                     <td>작성자</td>
                 </tr>
-                    <th:block th:each="Inquiry : ${InquiryList}">
-                        <tr>
-                            <td th:text="${Inquiry.id}"></td>
-                            <td><a th:href="'/admin/cscenter/voclist/'+${Inquiry.id}" th:text="${Inquiry.title}"></a></td>
-                            <td th:text="${Inquiry.regTime}"></td>
-                            <td th:text="${Inquiry.createdBy}"></td>
-                        </tr>
-                    </th:block>
-                </tbody>
+                <th:block th:each="Inquiry : ${InquiryList}">
+                    <tr>
+                        <td><a th:href="'/admin/cscenter/voclist/'+${Inquiry.id}" th:text="${Inquiry.title}"></a></td>
+                        <td th:text="${Inquiry.regTime}"></td>
+                        <td th:text="${Inquiry.createdBy}"></td>
+                    </tr>
+                </th:block>
             </table>
         </div>
     </div>
