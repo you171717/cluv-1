@@ -1,15 +1,8 @@
 package com.shop.service;
 
-import com.shop.dto.FAQDto;
 import com.shop.dto.InquiryFormDto;
-import com.shop.dto.ItemFormDto;
-import com.shop.dto.ItemImgDto;
-import com.shop.entity.FAQ;
 import com.shop.entity.Inquiry;
-import com.shop.entity.Item;
-import com.shop.entity.ItemImg;
 import com.shop.repository.InquiryRepository;
-import com.shop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -83,10 +76,6 @@ public class InquiryService {
                     .build();
             inquiryDtoList.add(inquiryFormDto);
         }
-
         return inquiryDtoList;
     }
-
-
-
 }
