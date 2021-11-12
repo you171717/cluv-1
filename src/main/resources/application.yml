@@ -10,6 +10,10 @@ spring:
   #Thymeleaf cache 사용 중지
   thymeleaf:
     cache: false
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
   #    driver-class-name: org.h2.Driver     # [ h2 설정 ]
 
 # [ h2 설정 ]
@@ -30,12 +34,12 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
       format_sql: true
     show-sql: true
-    #generate-ddl: true
+    generate-ddl: true
 
 mybatis:
   mapper-locations: sqlmap/mappers/*.xml
@@ -47,4 +51,8 @@ mybatis:
     default-fetch-size: 500
   type-aliases-package: com.gsitm.career
 
-bean class: org.springframework.mock.web.MockServletContext
+# 상품 이미지 업로드 경로
+itemImgLocation: C:/shop/item
+
+# 리소스 업로드 경로
+uploadPath: file:///C:/shop/

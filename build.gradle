@@ -37,7 +37,6 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
-	implementation 'junit:junit:4.12'
 
 	// Validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -51,6 +50,9 @@ dependencies {
 	implementation group: 'com.querydsl', name: 'querydsl-jpa', version: querydslVersion
 	implementation group: 'com.querydsl', name: 'querydsl-apt', version: querydslVersion
 	implementation group: 'com.querydsl', name: 'querydsl-core', version: querydslVersion
+
+	// ModelMapper
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
 
 	annotationProcessor group: 'com.querydsl', name: 'querydsl-apt', version: querydslVersion
 	annotationProcessor group: 'com.querydsl', name: 'querydsl-apt', version: querydslVersion, classifier: 'jpa'
