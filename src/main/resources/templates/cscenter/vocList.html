@@ -20,7 +20,7 @@
                 <th:block th:each="Inquiry : ${InquiryList}">
                     <tr>
                         <td><a th:href="'/cscenter/voclist/'+${Inquiry.id}" th:text="${Inquiry.title}"></a></td>
-                        <td th:text="${Inquiry.regTime}"></td>
+                        <td th:text="${#strings.substring(Inquiry.regTime,0,10)}"></td>
                         <td><a th:href="'/cscenter/voclist/edit/'+${Inquiry.id}">수정</a></td>
                         <td><a th:href="'/cscenter/voclist/delete/'+${Inquiry.id}">삭제</a></td>
                     </tr>
