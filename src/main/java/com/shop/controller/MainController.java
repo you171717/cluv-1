@@ -1,5 +1,6 @@
 package com.shop.controller;
 
+<<<<<<< HEAD
 import com.shop.dto.ItemSearchDto;
 import com.shop.dto.MainItemDto;
 import com.shop.service.ItemService;
@@ -28,6 +29,16 @@ public class MainController {
         model.addAttribute("itemSearchDto",itemSearchDto);
         model.addAttribute("maxPage", 5);
 
+=======
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class MainController {
+
+    @GetMapping(value = "/")
+    public String main() {
+>>>>>>> a6f19c51ac9492c3a62c34802bd140afce4ed42a
         return "main";
     }
 

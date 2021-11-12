@@ -1,5 +1,6 @@
 package com.shop.controller;
 
+<<<<<<< HEAD
 import com.shop.dto.ItemFormDto;
 import com.shop.dto.ItemSearchDto;
 import com.shop.entity.Item;
@@ -111,6 +112,17 @@ public class ItemController {
         ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
         model.addAttribute("item", itemFormDto);
         return "item/itemDtl";
+=======
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class ItemController {
+
+    @GetMapping(value = "/admin/item/new")
+    public String itemForm() {
+        return "/item/itemForm";
+>>>>>>> a6f19c51ac9492c3a62c34802bd140afce4ed42a
     }
 
 }
