@@ -1,8 +1,8 @@
 package com.gsitm.intern.shop.controller;
 
 import com.gsitm.intern.shop.dto.MemberFormDto;
-import com.gsitm.intern.shop.entity.Member;
 import com.gsitm.intern.shop.service.MemberService;
+import com.gsitm.intern.shop.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "member")
+@Table(name="member")
 @Getter @Setter
 @ToString
 public class Member {
@@ -36,7 +36,8 @@ public class Member {
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
 
         Member member = new Member();
-        member.setName(memberFormDto.getEmail());
+//      첫번째 오류 발견 ( getName 을 getEmail() 이라고 썻다.)
+        member.setName(memberFormDto.getName());
         member.setEmail(memberFormDto.getEmail());
         member.setAddress(memberFormDto.getAddress());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
