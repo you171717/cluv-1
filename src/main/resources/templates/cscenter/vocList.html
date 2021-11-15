@@ -39,6 +39,27 @@
                 $(".chk").prop("checked", false);
             }
         }
+
+        //자식 체크박스 클릭 이벤트
+        function cchkClicked(){
+
+            //체크박스 전체개수
+            var allCount = $("input:checkbox[name=cchk]").length;
+
+            //체크된 체크박스 전체개수
+            var checkedCount = $("input:checkbox[name=cchk]:checked").length;
+
+            //체크박스 전체개수와 체크된 체크박스 전체개수가 같으면 체크박스 전체 체크
+            if(allCount == checkedCount){
+                $(".chk").prop("checked", true);
+            }
+
+            //같지않으면 전체 체크박스 해제
+            else{
+                $("#allCheckBox").prop("checked", false);
+            }
+        }
+
 	</script>
 </th:block>
 
@@ -53,18 +74,16 @@
                     <td>제목</td>
                     <td>등록일</td>
                     <td>수정</td>
-                    <td>삭제</td>
                 </tr>
                 <th:block th:each="Inquiry : ${InquiryList}">
                     <tr>
                         <td><input type="checkbox" class="chk" name="cchk" th:onclick="cchkClicked()" value="${Inquiry.id}"></td>
                         <td><a th:href="'/cscenter/voclist/'+${Inquiry.id}" th:text="${Inquiry.title}"></a></td>
                         <td th:text="${#strings.substring(Inquiry.regTime,0,10)}"></td>
-                        <td><button class="btn btn-outline-secondary" th:onclick="|location.href='@{/cscenter/voclist/edit/{id}(id=${Inquiry.id})}'|">수정</button></td>
-                        <td><button class="btn btn-outline-secondary" th:onclick="deleteInquiry([[${Inquiry.id}]])">삭제</button></td>
                     </tr>
                 </th:block>
             </table>
+            <button class="btn btn-outline-secondary" th:onclick="deleteInquiry()">삭제</button>
         </div>
     </div>
     </div>
