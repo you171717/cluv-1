@@ -36,3 +36,4 @@ out/
 ### VS Code ###
 .vscode/
 /src/main/resources/templates/fragments/footer.html
+/src/main/generated/com/shop/entity/QMember.java
