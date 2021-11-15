@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7ac7031b-2f11-463d-88fb-f3f3769d60f5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/repository/ItemRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/repository/ItemRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/serivce/MemberServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/serivce/MemberServiceTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="intern" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="CSS File" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="JPA Inspector" value="true" />
+        <entry key="JPA Palette" value="true" />
+        <entry key="JPA Structure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="JPA Inspector" value="true" />
+        <entry key="JPA Palette" value="false" />
+        <entry key="JPA Structure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectId" id="20POAagFeIBjtyMiSVHOTc0b4ZR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="h2&#10;mariadb" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../SpirngBoot/cluv-zeeno" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bgb75\IdeaProjects\cluv\src\main\resources\templates\thymeleafEx" />
+      <recent name="C:\Users\bgb75\IdeaProjects\cluv\src\main\resources\templates" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.gsitm.intern.test" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.gsitm.intern.mapper" />
+      <recent name="com.gsitm.intern.repository" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.InternApplication">
+    <configuration name="ItemRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="intern.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gsitm.intern.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.repository.ItemRepositoryTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ItemRepositoryTest.createItemTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="intern.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gsitm.intern.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.repository.ItemRepositoryTest" />
+      <option name="METHOD_NAME" value="createItemTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ItemRepositoryTest.findByItemNmOrItemDetailTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="intern.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gsitm.intern.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.repository.ItemRepositoryTest" />
+      <option name="METHOD_NAME" value="findByItemNmOrItemDetailTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="intern.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gsitm.intern.serivce.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.serivce" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.serivce.MemberServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberServiceTest.saveDuplicateMemberTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="intern.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gsitm.intern.serivce.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.serivce" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.serivce.MemberServiceTest" />
+      <option name="METHOD_NAME" value="saveDuplicateMemberTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InternApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="intern.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gsitm.intern.InternApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SHORTEN_COMMAND_LINE" value="NONE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.ItemRepositoryTest" />
+      <item itemvalue="JUnit.ItemRepositoryTest.createItemTest" />
+      <item itemvalue="JUnit.ItemRepositoryTest.findByItemNmOrItemDetailTest" />
+      <item itemvalue="JUnit.MemberServiceTest" />
+      <item itemvalue="JUnit.MemberServiceTest.saveDuplicateMemberTest" />
+      <item itemvalue="Spring Boot.InternApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MemberServiceTest" />
+        <item itemvalue="JUnit.ItemRepositoryTest.createItemTest" />
+        <item itemvalue="JUnit.MemberServiceTest.saveDuplicateMemberTest" />
+        <item itemvalue="JUnit.ItemRepositoryTest" />
+        <item itemvalue="JUnit.ItemRepositoryTest.findByItemNmOrItemDetailTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7ac7031b-2f11-463d-88fb-f3f3769d60f5" name="Changes" comment="" />
+      <created>1635942615026</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1635942615026</updated>
+      <workItem from="1635942621459" duration="65000" />
+      <workItem from="1635942772259" duration="76000" />
+      <workItem from="1635942853987" duration="281000" />
+      <workItem from="1635943299840" duration="320000" />
+      <workItem from="1635943854621" duration="243000" />
+      <workItem from="1635944133597" duration="567000" />
+      <workItem from="1635983191495" duration="25359000" />
+      <workItem from="1636070182246" duration="1067000" />
+      <workItem from="1636076576687" duration="5203000" />
+      <workItem from="1636102089209" duration="84000" />
+      <workItem from="1636105370616" duration="946000" />
+      <workItem from="1636106361210" duration="1990000" />
+      <workItem from="1636109343364" duration="167000" />
+      <workItem from="1636191044280" duration="8879000" />
+      <workItem from="1636329212255" duration="6531000" />
+      <workItem from="1636356854339" duration="907000" />
+      <workItem from="1636357812865" duration="885000" />
+      <workItem from="1636358766849" duration="3430000" />
+      <workItem from="1636370393891" duration="5863000" />
+      <workItem from="1636415786996" duration="1092000" />
+      <workItem from="1636419915348" duration="2504000" />
+      <workItem from="1636422494117" duration="7190000" />
+      <workItem from="1636431912424" duration="5436000" />
+      <workItem from="1636437951517" duration="10267000" />
+      <workItem from="1636448355485" duration="81000" />
+      <workItem from="1636460277223" duration="7826000" />
+      <workItem from="1636469045328" duration="132000" />
+      <workItem from="1636501688690" duration="6468000" />
+      <workItem from="1636511403682" duration="2476000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

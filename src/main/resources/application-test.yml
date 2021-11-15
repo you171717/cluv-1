@@ -1,0 +1,27 @@
+#Datasource
+#spring.datasource.driver-class-name=org.h2.Driver
+#spring.datasource.url=jdbc:h2:mem:test
+#spring.datasource.username=sa
+#spring.datasource.password=
+
+#H2
+#spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+spring:
+    datasource:
+        driver-class-name : org.h2.Driver
+        username : sa
+        url : jdbc:h2:mem:test
+        password :
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+
+#mybatis:
+#    mapper-locations: sqlmap/mappers/*.xml
+#    configuration:
+#        map-underscore-to-camel-case: true
+#        multiple-result-sets-enabled: false
+#        call-setters-on-nulls: true
+#        jdbc-type-for-null: varchar
+#        default-fetch-size: 500
+#    type-aliases-package: com.gsitm.intern
