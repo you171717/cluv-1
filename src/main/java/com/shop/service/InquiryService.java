@@ -4,6 +4,7 @@ import com.shop.dto.InquiryFormDto;
 import com.shop.entity.Inquiry;
 import com.shop.repository.InquiryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -63,7 +64,7 @@ public class InquiryService {
 
     @Transactional
     public List<InquiryFormDto> getALLInquiryList() {
-        List<Inquiry> inquiryList = inquiryRepository.findAll();
+        List<Inquiry> inquiryList = inquiryRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
         List<InquiryFormDto> inquiryDtoList = new ArrayList<>();
 
         for(Inquiry inquiry : inquiryList) {

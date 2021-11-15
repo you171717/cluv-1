@@ -23,6 +23,7 @@ public class Inquiry extends BaseEntity{
     private String content;
 
 
+
     @Builder
     public Inquiry(Long id, String title, String content) {
         this.id=id;
