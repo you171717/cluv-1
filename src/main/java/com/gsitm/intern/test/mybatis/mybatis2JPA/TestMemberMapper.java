@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface MemberMapper {
-    List<MemberDto> memberListAll();
+public interface TestMemberMapper {
+    List<TestMemberDto> memberListAll();
 
 }

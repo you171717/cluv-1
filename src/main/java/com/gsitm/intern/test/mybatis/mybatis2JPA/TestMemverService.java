@@ -11,11 +11,11 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MemverService {
+public class TestMemverService {
 
-    private final MemberMapper memberMapper;
+    private final TestMemberMapper memberMapper;
 
-    public List<MemberDto> memberListAll(){
+    public List<TestMemberDto> memberListAll(){
         return memberMapper.memberListAll();
     }
 }

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/member/test")
 @RequiredArgsConstructor
-public class MemberRestController {
+public class TestMemberRestController {
 
-    private final MemverService memberService;
+    private final TestMemverService memberService;
 
     @GetMapping("/allUser")
     public ResponseEntity memberListAll(){
