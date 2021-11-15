@@ -39,6 +39,9 @@ dependencies {
 
 	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
 
+	// modelmapper
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
+
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
