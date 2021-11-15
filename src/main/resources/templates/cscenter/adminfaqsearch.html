@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<head>
+    <title>shop</title>
+    <meta charset="UTF-8">
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+<div layout:fragment="content">
+    <th:block th:replace="fragments/adminsearch"></th:block>
+    <div class="container">
+    <div class="row" style="float: none; margin:100 auto;">
+
+        <div class="col-md-12" style="float: none; margin:0 auto;" >
+            <th:block th:each="FAQDtoList : ${FAQDtoList}">
+                <div style="margin-top:10px;">
+                    <h5 style="color:green;">Q</h5><p  th:text="${FAQDtoList.question}"></p>
+                    <h5 style="color:green;">A</h5><p th:text="${FAQDtoList.answer}"></p>
+                    <hr>
+                </div>
+            </th:block>
+        </div>
+    </div>
+</div>
+</div>
+
+
