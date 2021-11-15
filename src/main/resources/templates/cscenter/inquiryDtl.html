@@ -15,7 +15,7 @@
 
         <div class="col-md-12" style="float: none; margin:0 auto;">
             <h1 th:text="${inquiry.title}"></h1>
-            <h6 th:text="${inquiry.regTime}"></h6>
+            <h6 th:text="${#strings.substring(inquiry.regTime,0,10)}"></h6>
             <h3 th:text="${inquiry.content}"></h3>
             <button class="btn btn-outline-secondary" th:onclick="|location.href='@{/cscenter/voclist/edit/{id}(id=${inquiry.id})}'|">수정</button>
 
