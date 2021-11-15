@@ -90,6 +90,7 @@ public class InquiryController {
     //문의 사항 삭제 기능
     @GetMapping(value = "/cscenter/voclist/delete/{id}")
     public String inquiryDelete(@PathVariable("id") Long id){
+        commentService.deleteComment(id);
         inquiryService.deleteInquiry(id);
         return "redirect:/cscenter/voclist/";
     }

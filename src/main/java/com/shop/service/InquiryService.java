@@ -27,7 +27,7 @@ public class InquiryService {
 
     @Transactional
     public List<InquiryFormDto> getInquiryList(String email) {
-        List<Inquiry> inquiryList = inquiryRepository.findbyCreateBy(email);
+        List<Inquiry> inquiryList = inquiryRepository.findByCreateBy(email);
         List<InquiryFormDto> inquiryDtoList = new ArrayList<>();
 
         for(Inquiry inquiry : inquiryList) {
