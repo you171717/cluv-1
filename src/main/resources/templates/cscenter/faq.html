@@ -13,10 +13,10 @@
 
 
 <div layout:fragment="content">
+    <th:block th:replace="fragments/search"></th:block>
+    <div class="container">
     <div class="row" style="float: none; margin:100 auto;">
-        <th:block th:replace="fragments/search"></th:block>
-        <div class="col-md-9" style="float: none; margin:0 auto;" >
-
+        <div class="col-md-12" style="float: none; margin:0 auto;" >
 
                 <th:block th:each="faq : ${FAQList}">
                     <div style="margin-top:10px;">
@@ -25,10 +25,8 @@
                         <hr>
                     </div>
                 </th:block>
-
-
         </div>
     </div>
 </div>
-
+</div>
 

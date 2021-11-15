@@ -9,9 +9,11 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <div layout:fragment="content">
+    <th:block th:replace="fragments/adminsearch"></th:block>
+    <div class="container">
     <div class="row" style="float: none; margin:100 auto;">
-        <th:block th:replace="fragments/adminsearch"></th:block>
-        <div class="col-md-9" style="float: none; margin:0 auto;" >
+
+        <div class="col-md-12" style="float: none; margin:0 auto;" >
 
                 <th:block th:each="faq : ${FAQList}">
                     <div style="margin-top:10px;">
@@ -24,4 +26,5 @@
     </div>
 </div>
 
+</div>
 
