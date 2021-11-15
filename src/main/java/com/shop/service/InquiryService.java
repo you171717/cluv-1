@@ -36,6 +36,7 @@ public class InquiryService {
                     .title(inquiry.getTitle())
                     .content(inquiry.getContent())
                     .regTime(inquiry.getRegTime())
+                    .createdBy(inquiry.getCreatedBy())
                     .build();
             inquiryDtoList.add(inquiryFormDto);
         }
