@@ -1,0 +1,66 @@
+<!-- 리뷰 작성 페이지 -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+        .content-mg{
+            margin-left:30%;
+            margin-right:30%;
+            margin-top:2%;
+            margin-bottom:100px;
+        }
+        .repImgDiv{
+            margin-right:15px;
+            margin-left:15px;
+            height:auto;
+        }
+        .repImg{
+            height:100px;
+            width:100px;
+        }
+        .card{
+            width:750px;
+            height:100%;
+            padding:30px;
+            margin-bottom:20px;
+        }
+        .fs18{
+            font-size:18px
+        }
+        .fs24{
+            font-size:24px
+        }
+    </style>
+</th:block>
+
+
+<div layout:fragment="content" class="content-mg">
+
+    <h2 class="mb-4">
+        리뷰 작성
+    </h2>
+
+    <form role="form" method="post" th:object="${reviewDto}">
+<!--         <input type="hidden" th:field="*{id}"> -->
+
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"></span>
+            </div>
+            <textarea th:field="*{comment}"class="form-control" aria-label="With textarea" placeholder="상품 후기를 남겨주세요."></textarea>
+        </div>
+
+        <div class="text-center mt-3">
+            <button type="submit" class="btn btn-primary btn-lg">저장</button>
+        </div>
+    </form>
+
+
+</div>
+
+</html>

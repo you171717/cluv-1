@@ -1,10 +1,10 @@
 package com.shop.entity;
 
+import com.shop.dto.OrderItemDto;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -25,4 +25,30 @@ public class OrderItem extends BaseEntity{
     private int orderPrice; //주문가격
 
     private int count; //수량
+
+    private String reviewYn; //리뷰를 작성한 상품인지 여부
+
+    private String comment; //리뷰 내용
+
+    public static OrderItem createOrderItem(Item item, int count){
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setCount(count);
+        orderItem.setOrderPrice(item.getPrice());
+        orderItem.setReviewYn("N");
+        item.removeStock(count);
+        return orderItem;
+    }
+
+    public int getTotalPrice(){
+        return orderPrice*count;
+    }
+
+    public void cancel(){
+        this.getItem().addStock(count);
+    }
+
+    public void createComment(OrderItemDto orderItemDto){
+        this.comment = orderItemDto.getComment();
+    }
 }
