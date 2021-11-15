@@ -7,7 +7,18 @@
     <meta charset="UTF-8">
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+<th:block layout:fragment="css">
+    <style>
+        td{
+            overflow:hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+        }
+        .table{
+            table-layout:fixed;
+        }
+    </style>
+</th:block>
 
 <div layout:fragment="content">
     <th:block th:replace="fragments/adminsearch"></th:block>
