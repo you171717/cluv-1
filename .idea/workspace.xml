@@ -5,15 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ac7031b-2f11-463d-88fb-f3f3769d60f5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/entity/QItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/entity/QItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/entity/QMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/entity/QMember.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/Member.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/repository/ItemRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/repository/ItemRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/serivce/MemberServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/serivce/MemberServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sqlmap/mappers/MyBatisTestMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sqlmap/mappers/MyBatisTestMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/layout1.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/layout1.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/layouts/layout1.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layouts/layout1.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,12 +56,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="CSS File" />
+        <option value="HTML File" />
         <option value="Enum" />
         <option value="Interface" />
-        <option value="CSS File" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
-        <option value="HTML File" />
+        <option value="JUnit5 Test Class" />
+        <option value="Tag Library Descriptor" />
       </list>
     </option>
   </component>
@@ -126,84 +132,87 @@
       <recent name="com.gsitm.intern.test" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.gsitm.intern.entity" />
+      <recent name="com.gsitm.intern.controller" />
       <recent name="com.gsitm.intern.mapper" />
       <recent name="com.gsitm.intern.repository" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.InternApplication">
-    <configuration name="ItemRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MemberControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="intern.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.gsitm.intern.repository.*" />
+          <option name="PATTERN" value="com.gsitm.intern.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.gsitm.intern.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.repository.ItemRepositoryTest" />
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.controller.MemberControllerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ItemRepositoryTest.createItemTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MemberControllerTest.loginSuccessTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="intern.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.gsitm.intern.repository.*" />
+          <option name="PATTERN" value="com.gsitm.intern.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.gsitm.intern.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.repository.ItemRepositoryTest" />
-      <option name="METHOD_NAME" value="createItemTest" />
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.controller.MemberControllerTest" />
+      <option name="METHOD_NAME" value="loginSuccessTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ItemRepositoryTest.findByItemNmOrItemDetailTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MemberTest.auditingTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="intern.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.gsitm.intern.repository.*" />
+          <option name="PATTERN" value="com.gsitm.intern.entity.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.gsitm.intern.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.repository.ItemRepositoryTest" />
-      <option name="METHOD_NAME" value="findByItemNmOrItemDetailTest" />
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.entity" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.entity.MemberTest" />
+      <option name="METHOD_NAME" value="auditingTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MemberServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="OrderTest.lazyLoadingTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="intern.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.gsitm.intern.serivce.*" />
+          <option name="PATTERN" value="com.gsitm.intern.entity.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.gsitm.intern.serivce" />
-      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.serivce.MemberServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.entity" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.entity.OrderTest" />
+      <option name="METHOD_NAME" value="lazyLoadingTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MemberServiceTest.saveDuplicateMemberTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="OrderTest.orphanRemovalTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="intern.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.gsitm.intern.serivce.*" />
+          <option name="PATTERN" value="com.gsitm.intern.entity.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.gsitm.intern.serivce" />
-      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.serivce.MemberServiceTest" />
-      <option name="METHOD_NAME" value="saveDuplicateMemberTest" />
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.entity" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.entity.OrderTest" />
+      <option name="METHOD_NAME" value="orphanRemovalTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -219,20 +228,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.ItemRepositoryTest" />
-      <item itemvalue="JUnit.ItemRepositoryTest.createItemTest" />
-      <item itemvalue="JUnit.ItemRepositoryTest.findByItemNmOrItemDetailTest" />
-      <item itemvalue="JUnit.MemberServiceTest" />
-      <item itemvalue="JUnit.MemberServiceTest.saveDuplicateMemberTest" />
+      <item itemvalue="JUnit.OrderTest.orphanRemovalTest" />
+      <item itemvalue="JUnit.OrderTest.lazyLoadingTest" />
+      <item itemvalue="JUnit.MemberTest.auditingTest" />
       <item itemvalue="Spring Boot.InternApplication" />
+      <item itemvalue="JUnit.MemberControllerTest.loginSuccessTest" />
+      <item itemvalue="JUnit.MemberControllerTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.MemberServiceTest" />
-        <item itemvalue="JUnit.ItemRepositoryTest.createItemTest" />
-        <item itemvalue="JUnit.MemberServiceTest.saveDuplicateMemberTest" />
-        <item itemvalue="JUnit.ItemRepositoryTest" />
-        <item itemvalue="JUnit.ItemRepositoryTest.findByItemNmOrItemDetailTest" />
+        <item itemvalue="JUnit.MemberControllerTest" />
+        <item itemvalue="JUnit.MemberControllerTest.loginSuccessTest" />
+        <item itemvalue="JUnit.MemberTest.auditingTest" />
+        <item itemvalue="JUnit.OrderTest.lazyLoadingTest" />
+        <item itemvalue="JUnit.OrderTest.orphanRemovalTest" />
       </list>
     </recent_temporary>
   </component>
@@ -272,7 +281,13 @@
       <workItem from="1636460277223" duration="7826000" />
       <workItem from="1636469045328" duration="132000" />
       <workItem from="1636501688690" duration="6468000" />
-      <workItem from="1636511403682" duration="2476000" />
+      <workItem from="1636511403682" duration="15388000" />
+      <workItem from="1636544430441" duration="5291000" />
+      <workItem from="1636595308026" duration="3357000" />
+      <workItem from="1636698232166" duration="3000" />
+      <workItem from="1636793024998" duration="6966000" />
+      <workItem from="1636864904187" duration="5816000" />
+      <workItem from="1636939908205" duration="7573000" />
     </task>
     <servers />
   </component>
