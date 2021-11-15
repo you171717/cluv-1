@@ -13,16 +13,23 @@
         function deleteInquiry(id) {
           if(confirm("게시글을 삭제할까요?")){
              location.href="/cscenter/voclist/delete/"+id;
-          }else{
-
           }
+        }
 
+        function allChecked(target){
+            if($(target).is(":checked")){
+                //체크박스 전체 체크
+                $(".chk").prop("checked", true);
+            }
 
-
+            else{
+                //체크박스 전체 해제
+                $(".chk").prop("checked", false);
+            }
         }
 
 
-		</script>
+	</script>
 </th:block>
 
 <div layout:fragment="content">
@@ -32,6 +39,7 @@
         <div class="col-md-12" style="float: none; margin:0 auto;">
             <table class="table">
                 <tr>
+                    <td><input type="checkbox" id="allCheckBox" onclick="allChecked(this)"></td>
                     <td>제목</td>
                     <td>등록일</td>
                     <td>수정</td>
@@ -39,6 +47,7 @@
                 </tr>
                 <th:block th:each="Inquiry : ${InquiryList}">
                     <tr>
+                        <td><input type="checkbox" class="chk" name="cchk" th:onclick="cchkClicked()" value="${Inquiry.id}"></td>
                         <td><a th:href="'/cscenter/voclist/'+${Inquiry.id}" th:text="${Inquiry.title}"></a></td>
                         <td th:text="${#strings.substring(Inquiry.regTime,0,10)}"></td>
                         <td><button class="btn btn-outline-secondary" th:onclick="|location.href='@{/cscenter/voclist/edit/{id}(id=${Inquiry.id})}'|">수정</button></td>
