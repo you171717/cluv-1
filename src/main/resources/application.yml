@@ -31,7 +31,6 @@ spring:
 #      enabled: true
 
 
-
 #mybatis:
 #  mapper-locations: sqlmap/mappers/*.xml
 #  configuration:
