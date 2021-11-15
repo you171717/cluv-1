@@ -9,10 +9,10 @@ spring:
     password: it1660
   #    driver-class-name: org.h2.Driver     # [ h2 설정 ]
 
-# [ h2 설정 ]
-#  h2:
-#    console:
-#      enabled: true
+  # [ h2 설정 ]
+  #  h2:
+  #    console:
+  #      enabled: true
 
   devtools:
     livereload:
@@ -23,6 +23,13 @@ spring:
       mode: always
   #      schema-locations: schema.sql
   #      data-locations: data.sql
+
+   # Thymeleaf cache 사용 중지
+  thymeleaf:
+    cache: false
+#    check-template-location: true
+#    prefix: classpath:/templates/thymeleafEx
+#    suffix: .html
 
   jpa:
     hibernate:

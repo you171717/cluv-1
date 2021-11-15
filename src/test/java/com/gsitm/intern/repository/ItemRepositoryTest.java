@@ -4,7 +4,7 @@ import com.gsitm.intern.constant.ItemSellStatus;
 import com.gsitm.intern.entity.Item;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.util.StringUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
@@ -22,7 +22,8 @@ import com.querydsl.core.BooleanBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-//import org.thymeleaf.util.StringUtils;
+import org.thymeleaf.util.StringUtils;
+
 
 
 @SpringBootTest
@@ -168,35 +169,34 @@ class ItemRepositoryTest {
         }
     }
 
-//    @Test
-//    @DisplayName("상품 Querydsl 조회 테스트 2")
-//    public void queryDslTest2(){
-//
-//        this.createItemList2();
-//
-//        BooleanBuilder booleanBuilder = new BooleanBuilder();
-//        QItem item = QItem.item;
-//        String itemDetail = "테스트 상품 상세 설명";
-//        int price = 10003;
-//        String itemSellStat = "SELL";
-//
-//        booleanBuilder.and(item.itemDetail.like("%" + itemDetail + "%"));
-//        booleanBuilder.and(item.price.gt(price));
-//
-//        if (StringUtils.equals(itemSellStat, ItemSellStatus.SELL)){
-//            booleanBuilder.and(item.itemSellStatus.eq(ItemSellStatus.SELL));
-//        }
-//
-//        Pageable pageable = PageRequest.of(0, 5);
-//        Page<Item> itemPaginResult =
-//                itemRepository.findAll(booleanBuilder, pageable);
-//        System.out.println("total elements : " +
-//                itemPaginResult. getTotalElements());
-//
-//        List<Item> resultItemList = itemPaginResult.getContent();
-//        for (Item resultItem: resultItemList){
-//            System.out.println(resultItem.toString());
-//        }
-//    }
+    @Test
+    @DisplayName("상품 Querydsl 조회 테스트 2")
+    public void queryDslTest2() {
 
+        this.createItemList2();
+
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        QItem item = QItem.item;
+        String itemDetail = "테스트 상품 상세 설명";
+        int price = 10003;
+        String itemSellStat = "SELL";
+
+        booleanBuilder.and(item.itemDetail.like("%" + itemDetail + "%"));
+        booleanBuilder.and(item.price.gt(price));
+
+        if (StringUtils.equals(itemSellStat, ItemSellStatus.SELL)) {
+            booleanBuilder.and(item.itemSellStatus.eq(ItemSellStatus.SELL));
+        }
+
+        Pageable pageable = PageRequest.of(0, 5);
+        Page<Item> itemPagingResult =
+                itemRepository.findAll(booleanBuilder, pageable);
+        System.out.println("total elements : " +
+                itemPagingResult.getTotalElements());
+
+        List<Item> resultItemList = itemPagingResult.getContent();
+        for (Item resultItem : resultItemList) {
+            System.out.println(resultItem.toString());
+        }
+    }
 }
