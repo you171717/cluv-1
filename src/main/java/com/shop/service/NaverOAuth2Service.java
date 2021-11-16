@@ -18,10 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
-public class NaverOAuth2Service implements OAuth2ServiceType {
-
-    private final ObjectMapper objectMapper;
+public class NaverOAuth2Service extends OAuth2ServiceType {
 
     @Value("${oauth.naver.client.id}")
     private String clientId;
@@ -97,51 +94,6 @@ public class NaverOAuth2Service implements OAuth2ServiceType {
         Map<String, String> userInfo = (Map<String, String>) response.get("response");
 
         return userInfo;
-    }
-
-    private Map<String, Object> sendRequest(String requestUrl, int expectResponseCode) throws Exception {
-        return this.sendRequest(requestUrl, expectResponseCode, null);
-    }
-
-    private Map<String, Object> sendRequest(String requestUrl, int expectResponseCode, Map<String, String> requestHeaders) throws Exception {
-        URL url = new URL(requestUrl);
-
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-        conn.setRequestMethod("GET");
-
-        if(requestHeaders != null) {
-            for(Map.Entry<String, String> header : requestHeaders.entrySet()) {
-                conn.setRequestProperty(header.getKey(), header.getValue());
-            }
-        }
-
-        int responseCode = conn.getResponseCode();
-
-        BufferedReader br;
-
-        if(responseCode == expectResponseCode) {
-            br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        } else {
-            br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-        }
-
-        String line;
-        StringBuffer content = new StringBuffer();
-
-        while((line = br.readLine()) != null) {
-            content.append(line);
-        }
-
-        br.close();
-
-        Map<String, Object> json = objectMapper.readValue(content.toString(), new TypeReference<Map<String, Object>>() {});
-
-        if(responseCode == expectResponseCode) {
-            return json;
-        } else {
-            throw new IllegalStateException((String) json.getOrDefault("error_description", ""));
-        }
     }
 
 }

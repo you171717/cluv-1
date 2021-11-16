@@ -3,7 +3,7 @@ package com.shop.controller;
 import com.shop.constant.OAuth2ProviderType;
 import com.shop.dto.OAuth2FormDto;
 import com.shop.entity.Member;
-import com.shop.entity.OAuth2MemberInfo;
+import com.shop.entity.OAuth2Member;
 import com.shop.service.NaverOAuth2Service;
 import com.shop.service.OAuth2Service;
 import com.shop.service.OAuth2ServiceType;
@@ -35,11 +35,9 @@ public class OAuth2Controller {
     @GetMapping(value = "/callback/{code}")
     public String oauthCallback(@PathVariable("code") String code, @RequestParam Map<String,String> paramMap, Model model) throws Exception {
         OAuth2ProviderType providerType = OAuth2ProviderType.valueOf(code.toUpperCase());
-
         OAuth2ServiceType service = oAuth2Service.getProviderService(providerType);
 
         String authorizationCode = paramMap.get("code");
-
         String accessToken;
 
         if(service instanceof NaverOAuth2Service) {
@@ -52,12 +50,19 @@ public class OAuth2Controller {
 
         Map<String, String> userInfo = service.getUserInfo(accessToken);
 
-        Authentication authentication = oAuth2Service.getAuthenticationByEmail(userInfo.get("email"));
+        String email = userInfo.get("email");
+        String name = userInfo.get("name");
+
+        if(email == null || name == null || email.isBlank() || name.isBlank()) {
+            throw new IllegalArgumentException("이메일이나 이름을 확인할 수 없습니다.");
+        }
+
+        Authentication authentication = oAuth2Service.getAuthentication(email);
 
         if(authentication == null) {
             OAuth2FormDto oAuth2FormDto = new OAuth2FormDto();
-            oAuth2FormDto.setName(userInfo.get("name"));
-            oAuth2FormDto.setEmail(userInfo.get("email"));
+            oAuth2FormDto.setName(name);
+            oAuth2FormDto.setEmail(email);
 
             model.addAttribute("OAuth2FormDto", oAuth2FormDto);
             model.addAttribute("code", code);
@@ -81,14 +86,11 @@ public class OAuth2Controller {
         }
 
         try {
-            Member member = OAuth2MemberInfo.createMember(oAuth2FormDto);
+            OAuth2Member oAuth2Member = OAuth2Member.createOAuth2Member(oAuth2FormDto, providerType);
 
-            OAuth2MemberInfo oAuth2MemberInfo = OAuth2MemberInfo.createOAuth2MemberInfo(oAuth2FormDto, providerType);
-            oAuth2MemberInfo.setMember(member);
+            oAuth2Service.saveOAuth2User(oAuth2Member);
 
-            oAuth2Service.saveOAuth2User(member, oAuth2MemberInfo);
-
-            Authentication authentication = oAuth2Service.getAuthenticationByEmail(member.getEmail());
+            Authentication authentication = oAuth2Service.getAuthentication(oAuth2Member);
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch(IllegalStateException e) {
