@@ -3,15 +3,18 @@ package com.shop.entity;
 import com.shop.constant.Role;
 import com.shop.dto.MemberFormDto;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "member")
-@Data
+@Getter
+@Setter
 
-public class Member {
+public class Member extends BaseEntity{
 
 
     @Id

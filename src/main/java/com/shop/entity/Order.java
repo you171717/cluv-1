@@ -28,7 +28,8 @@ public class Order{
     private OrderStatus orderStatus; //주문상태
 
     //주문 상품 엔티티와 일대다 매핑
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true,
+            fetch = FetchType.LAZY)
     // 하나의 주문이 여러 개의 주문 상품 갖는다 -> List 자료형 사용해 매핑
     private List<OrderItem> orderItems = new ArrayList<>();
 
@@ -40,3 +41,4 @@ public class Order{
 
 
 }
+
