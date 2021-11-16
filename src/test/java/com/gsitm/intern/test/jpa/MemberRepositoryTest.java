@@ -17,7 +17,7 @@ import java.util.List;
 class MemberRepositoryTest {
 
     @Autowired
-    MemberRepository memberRepository;
+    TestMemberRepository memberRepository;
     EntityManager em;
     @PersistenceUnit
     EntityManagerFactory emf;

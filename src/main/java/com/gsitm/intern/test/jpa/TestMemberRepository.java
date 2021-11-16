@@ -9,6 +9,6 @@ import javax.persistence.PersistenceUnit;
 import java.util.List;
 
 @Repository
-public interface MemberRepository extends JpaRepository<JpaEntity, JpaCompositeKey> {
+public interface TestMemberRepository extends JpaRepository<JpaEntity, JpaCompositeKey> {
     List<JpaEntity> findAll();
 }

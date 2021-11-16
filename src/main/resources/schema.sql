@@ -1,5 +1,5 @@
 -- DROP TABLE IF EXISTS mybatis;
--- DROP TABLE IF EXISTS mybatis2;
+DROP TABLE IF EXISTS mybatis2;
 
 DROP TABLE IF EXISTS member;
 CREATE TABLE member
