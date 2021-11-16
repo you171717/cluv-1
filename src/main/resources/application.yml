@@ -3,6 +3,7 @@ server:
   error:
     whitelabel:
       enabled: false
+
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
@@ -10,18 +11,6 @@ spring:
     username: it1662
     password: it1662
 
-#spring:
-#  datasource:
-#    driver-class-name: org.mariadb.jdbc.Driver
-#    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1662
-#    username: it1662
-#    password: it1662
-  #    driver-class-name: org.h2.Driver     # [ h2 설정 ]
-
-# [ h2 설정 ]
-#  h2:
-#    console:
-#      enabled: true
 
   devtools:
     livereload:
@@ -30,14 +19,9 @@ spring:
   sql:
     init:
       mode: always
-  #      schema-locations: schema.sql
-  #      data-locations: data.sql
-
-  # Thymeleaf cache 사용 중지
 
   thymeleaf:
     cache: false
-
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -59,6 +43,17 @@ spring:
       default-fetch-size: 500
     type-aliases-package: com.gsitm.career
 
+  servlet:
+    multipart:
+      #파일 한 개당 최대 사이즈
+      max-file-size: 20MB
+      #요청당 최대 파일 크기
+      max-request-size: 100MB
+  # 상품 이미지 업로드 경로
+  itemImgLocation: C:/shop/item
+  # 리소스 업로드 경로
+  uploadPath: file:///C:/shop/
+
 #  logging.level:
 #    jdbc:
 #      sqlonly: debug
@@ -78,3 +73,16 @@ spring:
 #    jdbc-type-for-null: varchar
 #    default-fetch-size: 500
 #  type-aliases-package: com.gsitm.career
+
+#spring:
+#  datasource:
+#    driver-class-name: org.mariadb.jdbc.Driver
+#    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1662
+#    username: it1662
+#    password: it1662
+#    driver-class-name: org.h2.Driver     # [ h2 설정 ]
+
+# [ h2 설정 ]
+#  h2:
+#    console:
+#      enabled: true
