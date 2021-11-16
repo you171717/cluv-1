@@ -34,11 +34,12 @@ public class CommentFormDto extends BaseEntity {
     }
 
     @Builder
-    public CommentFormDto(Long id, String content, Inquiry inquiry,String createdBy) {
+    public CommentFormDto(Long id, String content, Inquiry inquiry,String createdBy,LocalDateTime regTime) {
         this.id=id;
         this.content = content;
         this.inquiry=inquiry;
         this.createdBy=createdBy;
+        this.regTime=regTime;
     }
 
 

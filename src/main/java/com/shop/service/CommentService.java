@@ -39,6 +39,7 @@ public class CommentService {
                     .id(comment.getId())
                     .content(comment.getContent())
                     .createdBy(comment.getCreatedBy())
+                    .regTime(comment.getRegTime())
                     .build();
             commentDtoList.add(commentFormDto);
         }
