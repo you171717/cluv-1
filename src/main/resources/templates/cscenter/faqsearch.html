@@ -16,13 +16,19 @@
     <div class="container">
     <div class="row" style="float: none; margin:100 auto;">
         <div class="col-md-12" style="float: none; margin:0 auto;" >
-            <th:block th:each="FAQDtoList : ${FAQDtoList}">
-                <div style="margin-top:10px;">
-                    <h5 style="color:green;">Q</h5><p  th:text="${FAQDtoList.question}"></p>
-                    <h5 style="color:green;">A</h5><p th:text="${FAQDtoList.answer}"></p>
-                    <hr>
+            <div id="accordion" >
+                <div class="card" th:each="FAQDtoList : ${FAQDtoList}">
+                    <div class="card-header" th:id="|heading${FAQDtoList.id}|">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" th:attr="data-target='#collapse'+${FAQDtoList.id}"  aria-expanded="true" aria-controls="collapseThree" th:text="|Q. ${FAQDtoList.question}|">
+                            </button>
+                        </h5>
+                    </div>
+                    <div th:id="|collapse${FAQDtoList.id}|" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="card-body" th:text="|A. ${FAQDtoList.answer}|"></div>
+                    </div>
                 </div>
-            </th:block>
+            </div>
         </div>
     </div>
 </div>
