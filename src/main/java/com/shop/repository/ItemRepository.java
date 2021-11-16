@@ -10,7 +10,7 @@ import java.util.List;
 
 // JpaRepository <엔티티 타입 클래스, 기본키 타입>
 public interface ItemRepository extends JpaRepository<Item, Long>,
-        QuerydslPredicateExecutor<Item> {
+        QuerydslPredicateExecutor<Item>, ItemRepositoryCustom {
 
     List<Item> findByItemNm(String itemNm);   // find + (엔티티) + By + 변수이름
 

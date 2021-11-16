@@ -81,7 +81,7 @@ class OrderTest {
     }
 
     @Test
-    @DisplayName("고아객체 제거 테스트")
+    @DisplayName("고아 객체 제거 테스트")
     public void orphanRemovalTest(){
         Order order = this.createOrder();
         // order 엔티티에서 관리하고 있는 orderItem 리스트의 0번째 인텍스 요소 제거

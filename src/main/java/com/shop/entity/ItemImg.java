@@ -22,7 +22,7 @@ public class ItemImg extends BaseEntity{
 
     private String imgUrl;        // 이미지 조회 경로
 
-    private String repimgYn;      // 대표 이미지 여부
+    private String repimgYn;      // 대표 이미지 여부 - Y인 경우 메인 페이지에 보임
 
     @ManyToOne(fetch = FetchType.LAZY)       // 다대일 단방향 매핑, 지연로딩
     @JoinColumn(name = "item_id")
