@@ -8,13 +8,14 @@ import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="member")
 @Getter
 @Setter
 @ToString
-public class Member extends BaseEntity {
+public class Member extends BaseEntity implements Serializable {
 
     @Id
     @Column(name="member_id")

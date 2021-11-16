@@ -1,7 +1,9 @@
 package com.shop.service;
 
 import com.shop.entity.Member;
+import com.shop.entity.OAuth2MemberInfo;
 import com.shop.repository.MemberRepository;
+import com.shop.repository.OAuth2MemberInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,9 +19,21 @@ public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
+    private final OAuth2MemberInfoRepository oAuth2MemberInfoRepository;
+
     public Member saveMember(Member member) {
+        validateSocialMember(member);
         validateDuplicateMember(member);
+
         return memberRepository.save(member);
+    }
+
+    private void validateSocialMember(Member member) {
+        OAuth2MemberInfo findMember = oAuth2MemberInfoRepository.findByEmail(member.getEmail());
+
+        if(findMember != null) {
+            throw new IllegalStateException("해당 이메일은 소셜 로그인으로 등록된 이메일입니다, 소셜 로그인을 이용해 주세요.");
+        }
     }
 
     private void validateDuplicateMember(Member member) {
