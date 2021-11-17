@@ -31,6 +31,11 @@ spring:
 #    prefix: classpath:/templates/thymeleafEx
 #    suffix: .html
 
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -47,3 +52,7 @@ mybatis:
     jdbc-type-for-null: varchar
     default-fetch-size: 500
   type-aliases-package: com.gsitm.career
+
+itemImgLocation: C:/shop/item
+
+uploadPath: file:///C:/shop/
