@@ -4,9 +4,7 @@ import com.shop.constant.OAuth2ProviderType;
 import com.shop.dto.OAuth2FormDto;
 import com.shop.entity.Member;
 import com.shop.entity.OAuth2Member;
-import com.shop.service.NaverOAuth2Service;
-import com.shop.service.OAuth2Service;
-import com.shop.service.OAuth2ServiceType;
+import com.shop.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Map;
 
 @RequestMapping("/oauth2")
@@ -27,8 +27,25 @@ public class OAuth2Controller {
     private final OAuth2Service oAuth2Service;
 
     @GetMapping(value = "/login/{code}")
-    public String oauthRedirect(@PathVariable("code") String code) {
+    public String oauthRedirect(@PathVariable("code") String code, HttpSession session) {
         OAuth2ProviderType providerType = OAuth2ProviderType.valueOf(code.toUpperCase());
+        OAuth2ServiceType service = oAuth2Service.getProviderService(providerType);
+
+        if(service instanceof GoogleOAuth2Service || service instanceof KakaoOAuth2Service) {
+            String state = new BigInteger(130, new SecureRandom()).toString(32);
+
+            session.setAttribute("state", state);
+
+            if(service instanceof GoogleOAuth2Service) {
+                GoogleOAuth2Service googleOAuth2Service = (GoogleOAuth2Service) service;
+
+                return "redirect:" + googleOAuth2Service.getRedirectURL(state);
+            } else {
+                KakaoOAuth2Service kakaoOAuth2Service = (KakaoOAuth2Service) service;
+
+                return "redirect:" + kakaoOAuth2Service.getRedirectURL(state);
+            }
+        }
 
         return "redirect:" + oAuth2Service.getRedirectURL(providerType);
     }
@@ -46,7 +63,19 @@ public class OAuth2Controller {
 
             accessToken = ((NaverOAuth2Service) service).getToken(stateCode, authorizationCode);
         } else {
+            if(service instanceof GoogleOAuth2Service || service instanceof KakaoOAuth2Service) {
+                String stateCode = paramMap.get("state");
+
+                if(!stateCode.equals(session.getAttribute("state"))) {
+                    throw new IllegalStateException("정상적인 접근이 아닙니다.");
+                }
+            }
+
             accessToken = service.getToken(authorizationCode);
+        }
+
+        if(accessToken == null) {
+            throw new IllegalStateException("토큰을 발급받을 수 없습니다.");
         }
 
         Map<String, String> userInfo = service.getUserInfo(accessToken);
@@ -92,6 +121,10 @@ public class OAuth2Controller {
             OAuth2FormDto originalFormDto = (OAuth2FormDto) session.getAttribute("OAuth2FormDto");
 
             originalFormDto.setAddress(oAuth2FormDto.getAddress());
+
+            if(providerType.equals(OAuth2ProviderType.GOOGLE)) {
+                originalFormDto.setName(oAuth2FormDto.getName());
+            }
 
             OAuth2Member oAuth2Member = OAuth2Member.createOAuth2Member(originalFormDto, providerType);
 

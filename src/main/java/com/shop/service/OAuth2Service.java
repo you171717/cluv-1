@@ -24,10 +24,14 @@ public class OAuth2Service {
     private final OAuth2MemberRepository oAuth2MemberRepository;
 
     private final NaverOAuth2Service naverOAuth2Service;
+    private final GoogleOAuth2Service googleOAuth2Service;
+    private final KakaoOAuth2Service kakaoOAuth2Service;
 
     public OAuth2ServiceType getProviderService(OAuth2ProviderType providerType) {
         switch(providerType) {
             case NAVER: return naverOAuth2Service;
+            case GOOGLE: return googleOAuth2Service;
+            case KAKAO: return kakaoOAuth2Service;
         }
 
         throw new IllegalArgumentException("Invalid OAuth2 Provider Type");

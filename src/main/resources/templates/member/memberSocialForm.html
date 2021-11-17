@@ -25,14 +25,14 @@
     <div layout:fragment="content">
         <form th:action="@{/oauth2/new/__${code}__}" role="form" method="post" th:object="${OAuth2FormDto}">
             <div class="form-group">
-                <label th:for="name">이름</label>
-                <input type="text" th:field="*{name}" class="form-control" placeholder="이름을 입력해주세요" readonly>
-                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">Incorrect data</p>
-            </div>
-            <div class="form-group">
                 <label th:for="email">이메일주소</label>
                 <input type="email" th:field="*{email}" class="form-control" placeholder="이메일을 입력해주세요" readonly>
                 <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect data</p>
+            </div>
+            <div class="form-group">
+                <label th:for="name">이름</label>
+                <input type="text" th:field="*{name}" class="form-control" placeholder="이름을 입력해주세요" th:readonly="${#strings.toUpperCase(code)!='GOOGLE'}">
+                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">Incorrect data</p>
             </div>
             <div class="form-group">
                 <label th:for="address">주소</label>

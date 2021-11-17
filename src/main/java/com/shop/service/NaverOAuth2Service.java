@@ -79,7 +79,7 @@ public class NaverOAuth2Service extends OAuth2ServiceType {
         stringBuilder.append("&state=");
         stringBuilder.append(stateCode);
 
-        Map<String, Object> response = this.sendRequest(stringBuilder.toString(), HttpURLConnection.HTTP_OK);
+        Map<String, Object> response = this.sendRequest("GET", stringBuilder.toString());
 
         return (String) response.get("access_token");
     }
@@ -90,7 +90,7 @@ public class NaverOAuth2Service extends OAuth2ServiceType {
 
         requestHeaders.put("Authorization", "Bearer " + accessToken);
 
-        Map<String, Object> response = this.sendRequest(userInfoUrl, HttpURLConnection.HTTP_OK, requestHeaders);
+        Map<String, Object> response = this.sendRequest("GET", userInfoUrl, null, requestHeaders);
         Map<String, String> userInfo = (Map<String, String>) response.get("response");
 
         return userInfo;

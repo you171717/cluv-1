@@ -5,9 +5,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 import java.util.Map;
 
 public abstract class OAuth2ServiceType {
@@ -18,16 +22,46 @@ public abstract class OAuth2ServiceType {
 
     public abstract Map<String, String> getUserInfo(String accessToken) throws Exception;
 
-    protected Map<String, Object> sendRequest(String requestUrl, int expectResponseCode) throws Exception {
-        return this.sendRequest(requestUrl, expectResponseCode, null);
+    protected Map<String, Object> sendRequest(String method, String requestUrl) throws Exception {
+        return this.sendRequest(method, requestUrl, null, null, HttpURLConnection.HTTP_OK);
     }
 
-    protected Map<String, Object> sendRequest(String requestUrl, int expectResponseCode, Map<String, String> requestHeaders) throws Exception {
-        URL url = new URL(requestUrl);
+    protected Map<String, Object> sendRequest(String method, String requestUrl, Map<String, Object> parameter) throws Exception {
+        return this.sendRequest(method, requestUrl, parameter, null, HttpURLConnection.HTTP_OK);
+    }
+
+    protected Map<String, Object> sendRequest(String method, String requestUrl, Map<String, Object> parameter, Map<String, String> requestHeaders) throws Exception {
+        return this.sendRequest(method, requestUrl, parameter, requestHeaders, HttpURLConnection.HTTP_OK);
+    }
+
+    protected Map<String, Object> sendRequest(String method, String requestUrl, Map<String, Object> parameter, Map<String, String> requestHeaders, int expectResponseCode) throws Exception {
+        final boolean isGet = method.equalsIgnoreCase("GET");
+        final boolean isPost = method.equalsIgnoreCase("POST");
+
+        StringBuilder queryStringBuilder = new StringBuilder();
+
+        if(parameter != null) {
+            for (Map.Entry<String, Object> param : parameter.entrySet()) {
+                if (queryStringBuilder.length() != 0)
+                    queryStringBuilder.append('&');
+
+                queryStringBuilder.append(URLEncoder.encode(param.getKey(), StandardCharsets.UTF_8));
+                queryStringBuilder.append('=');
+                queryStringBuilder.append(URLEncoder.encode(String.valueOf(param.getValue()), StandardCharsets.UTF_8));
+            }
+        }
+
+        String queryString = queryStringBuilder.toString();
+
+        URL url = new URL(isGet ? requestUrl + queryString : requestUrl);
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-        conn.setRequestMethod("GET");
+        conn.setRequestMethod(method);
+
+        if(isPost) {
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        }
 
         if(requestHeaders != null) {
             for(Map.Entry<String, String> header : requestHeaders.entrySet()) {
@@ -35,18 +69,25 @@ public abstract class OAuth2ServiceType {
             }
         }
 
-        int responseCode = conn.getResponseCode();
+        if(isPost) {
+            byte[] queryStringBytes = queryString.getBytes(StandardCharsets.UTF_8);
+
+            conn.setRequestProperty("Content-Length", String.valueOf(queryStringBytes.length));
+            conn.setDoOutput(true);
+            conn.getOutputStream().write(queryStringBytes);
+        }
 
         BufferedReader br;
 
-        if(responseCode == expectResponseCode) {
+        int responseCode = conn.getResponseCode();
+
+        if(expectResponseCode != 0 && responseCode == expectResponseCode) {
             br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         } else {
             br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
         }
 
         StringBuilder content = new StringBuilder();
-
         String line;
 
         while((line = br.readLine()) != null) {
@@ -62,7 +103,7 @@ public abstract class OAuth2ServiceType {
         if(responseCode == expectResponseCode) {
             return json;
         } else {
-            throw new IllegalStateException((String) json.getOrDefault("error_description", ""));
+            throw new IllegalStateException(json.toString());
         }
     }
 
