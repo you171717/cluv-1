@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class Item {
+public class Item extends BaseEntity{
 
     @Id
     @Column(name = "item_id")
@@ -38,9 +38,9 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus; //상품 판매 상태
 
-    private LocalDateTime regTime; //등록 시간
-
-    private LocalDateTime updateTime; //수정 시간
+//    private LocalDateTime regTime; //등록 시간
+//
+//    private LocalDateTime updateTime; //수정 시간
 
     //상품 업데이트 하는 로직 구현 중 상품 데이터 업데이트 하는 로직
     public void updateItem(ItemFormDto itemFormDto){

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<body>
+
+<div layout:fragment="content">
+    <h1>This is 404 Error Page!</h1>
+        CODE: <span th:text="${code}"></span><br>
+        MSG: <span th:text="${msg}"></span><br>
+        TIMESTAMP: <span th:text="${timestamp}"></span><br>
+</div>
+
+</body>
+
+</html>
