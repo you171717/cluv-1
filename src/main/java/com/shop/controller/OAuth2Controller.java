@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public class OAuth2Controller {
     }
 
     @GetMapping(value = "/callback/{code}")
-    public String oauthCallback(@PathVariable("code") String code, @RequestParam Map<String,String> paramMap, Model model) throws Exception {
+    public String oauthCallback(@PathVariable("code") String code, @RequestParam Map<String,String> paramMap, Model model, HttpSession session) throws Exception {
         OAuth2ProviderType providerType = OAuth2ProviderType.valueOf(code.toUpperCase());
         OAuth2ServiceType service = oAuth2Service.getProviderService(providerType);
 
@@ -67,6 +68,8 @@ public class OAuth2Controller {
             model.addAttribute("OAuth2FormDto", oAuth2FormDto);
             model.addAttribute("code", code);
 
+            session.setAttribute("OAuth2FormDto", oAuth2FormDto);
+
             return "member/memberSocialForm";
         }
 
@@ -76,7 +79,7 @@ public class OAuth2Controller {
     }
 
     @PostMapping(value = "/new/{code}")
-    public String oauthForm(@PathVariable("code") String code, @Valid OAuth2FormDto oAuth2FormDto, BindingResult bindingResult, Model model) {
+    public String oauthForm(@PathVariable("code") String code, @Valid OAuth2FormDto oAuth2FormDto, BindingResult bindingResult, Model model, HttpSession session) {
         OAuth2ProviderType providerType = OAuth2ProviderType.valueOf(code.toUpperCase());
 
         model.addAttribute("code", code);
@@ -86,7 +89,11 @@ public class OAuth2Controller {
         }
 
         try {
-            OAuth2Member oAuth2Member = OAuth2Member.createOAuth2Member(oAuth2FormDto, providerType);
+            OAuth2FormDto originalFormDto = (OAuth2FormDto) session.getAttribute("OAuth2FormDto");
+
+            originalFormDto.setAddress(oAuth2FormDto.getAddress());
+
+            OAuth2Member oAuth2Member = OAuth2Member.createOAuth2Member(originalFormDto, providerType);
 
             oAuth2Service.saveOAuth2User(oAuth2Member);
 
