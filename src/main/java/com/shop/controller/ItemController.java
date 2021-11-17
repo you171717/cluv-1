@@ -1,7 +1,8 @@
 package com.shop.controller;
 
 import com.shop.dto.ItemFormDto;
-import com.shop.dto.ItemSerachDto;
+import com.shop.dto.ItemSearchDto;
+
 import com.shop.entity.Item;
 import com.shop.service.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -101,13 +102,13 @@ public class ItemController {
 
     // 상품 관리 페이지
     @GetMapping(value = {"/admin/items", "/admin/items/{page}"})
-    public String itemManage(ItemSerachDto itemSerachDto, @PathVariable("page")Optional<Integer> page, Model model){
+    public String itemManage(ItemSearchDto itemSearchDto, @PathVariable("page")Optional<Integer> page, Model model){
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
 
             Page<Item> items =
-        itemService.getAdminItemPage(itemSerachDto, pageable);
+        itemService.getAdminItemPage(itemSearchDto, pageable);
             model.addAttribute("items", items);
-            model.addAttribute("itemSearchDto", itemSerachDto);
+            model.addAttribute("itemSearchDto", itemSearchDto);
             model.addAttribute("maxPage", 5);
             return "item/itemMng";
     }

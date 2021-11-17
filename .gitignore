@@ -45,3 +45,9 @@ out/
 /src/main/generated/com/shop/entity/QOrderItem.java
 /src/main/generated/com/shop/entity/QItemImg.java
 /src/main/generated/com/shop/dto/QMainItemDto.java
+/src/main/generated/com/shop/entity/QCategory.java
+/src/main/generated/com/shop/entity/QMessage.java
+/src/main/generated/com/shop/entity/QUser.java
+
+# ignore properties file
+application-oauth.properties

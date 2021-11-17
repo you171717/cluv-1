@@ -2,7 +2,7 @@ package com.shop.service;
 
 import com.shop.dto.ItemFormDto;
 import com.shop.dto.ItemImgDto;
-import com.shop.dto.ItemSerachDto;
+import com.shop.dto.ItemSearchDto;
 import com.shop.dto.MainItemDto;
 import com.shop.entity.Item;
 import com.shop.entity.ItemImg;
@@ -86,13 +86,13 @@ public class ItemService {
 
     // 상품 관리 페이지 목록 불러옴 (읽기 전용)
     @Transactional(readOnly= true)
-    public Page<Item> getAdminItemPage(ItemSerachDto itemSerachDto, Pageable pageable){
+    public Page<Item> getAdminItemPage(ItemSearchDto itemSerachDto, Pageable pageable){
         return itemRepository.getAdminItemPage(itemSerachDto, pageable);
     }
 
     // 메인 페이지 상품 데이터
     @Transactional(readOnly = true)
-    public Page<MainItemDto> getMainItemPage(ItemSerachDto itemSerachDto, Pageable pageable){
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSerachDto, Pageable pageable){
         return itemRepository.getMainItemPage(itemSerachDto, pageable);
     }
 }

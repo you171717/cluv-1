@@ -2,6 +2,7 @@ package com.shop.entity;
 
 import com.shop.constant.ItemSellStatus;
 import com.shop.dto.ItemFormDto;
+import com.shop.exception.OutOfStockException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,6 +22,10 @@ public class Item extends BaseEntity{
     @Column(name="item_id")
     @GeneratedValue(strategy = GenerationType.AUTO)   // 기본키 생성 전략 자동으로 설정
     private Long id;      // 상품 코드
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cateCode")
+    private Category category;       // 카테고리 코드
 
     @Column(nullable = false, length = 50)          // not null 설정
     private String itemNm;    // 상품명
@@ -44,6 +49,16 @@ public class Item extends BaseEntity{
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();
         this.itemSellStatus = itemFormDto.getItemSellStatus();
+    }
+
+    // 상품 재고 감소 로직
+    public void removeStock(int stockNumber){
+        int restStock = this.stockNumber - stockNumber;
+        if(restStock<0){
+            throw new OutOfStockException("상품의 재고가 부족 합니다. " +
+                    "(현재 재고 수량 : "+ this.stockNumber+")");
+        }
+        this.stockNumber = restStock;
     }
 
 }

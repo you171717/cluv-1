@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ItemSerachDto {
+public class ItemSearchDto {
 
     private String searchDateType;               // 현재 시간과 상품 등록일 비교
 

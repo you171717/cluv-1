@@ -5,7 +5,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shop.constant.ItemSellStatus;
-import com.shop.dto.ItemSerachDto;
+import com.shop.dto.ItemSearchDto;
 import com.shop.dto.MainItemDto;
 import com.shop.dto.QMainItemDto;
 import com.shop.entity.Item;
@@ -66,15 +66,15 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{    // Ite
 
 
     @Override
-    public Page<Item> getAdminItemPage(ItemSerachDto itemSerachDto, Pageable pageable) {
+    public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
 
         // queryFactory를 이용해 쿼리 생성
         QueryResults<Item> results = queryFactory
                 .selectFrom(QItem.item)            // 상품데이터 조회를 위해 Qitem의 item 지정
-                .where(regDtsAfter(itemSerachDto.getSearchDateType()),
-                        searchSellStatusEq(itemSerachDto.getSearchSellStatus()),
-                        searchByLike(itemSerachDto.getSearchBy(),
-                        itemSerachDto.getSearchQuery()))
+                .where(regDtsAfter(itemSearchDto.getSearchDateType()),
+                        searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
+                        searchByLike(itemSearchDto.getSearchBy(),
+                        itemSearchDto.getSearchQuery()))
                 .orderBy(QItem.item.id.desc())
                 .offset(pageable.getOffset())     // 시작 인덱스 지정
                 .limit(pageable.getPageSize())    // 한번에 가지고 올 최대 개수 지정
@@ -94,7 +94,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{    // Ite
 
 
     @Override
-    public Page<MainItemDto> getMainItemPage(ItemSerachDto itemSerachDto,
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSerachDto,
                                              Pageable pageable) {
         QItem item = QItem.item;
         QItemImg itemImg = QItemImg.itemImg;
@@ -122,4 +122,5 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{    // Ite
         return new PageImpl<>(content, pageable, total);
 
     }
+
 }
