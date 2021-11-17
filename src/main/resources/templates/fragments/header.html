@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html xmlns:th=http://www.thymeleaf.org
         xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
@@ -33,6 +33,11 @@
                     sec:authorize="isAnonymous()">
                     <a class="nav-link" href="/members/login">로그인</a>
                 </li>
+                <div th:if="${#strings.isEmpty(userName)}" sec:authorize="isAnonymous()">
+                    <!-- 스프링 시큐리티에서 기본 제공하는 URL - 별도 컨트롤러 작성 필요 없음 -->
+                    <a href="/oauth2/authorization/google" class="btn btn-sm btn-success active" role="button">Google Login</a>
+                </div>
+
                 <li class="nav-item"
                     sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/point">포인트</a>
@@ -41,11 +46,21 @@
                     sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/members/logout">로그아웃</a>
                 </li>
+
+                <!--  oauth 로그인 -->
+                <div th:if="${not #strings.isEmpty(userName)}">
+                    <img style="width:45px; height:45px" src="/image/unnamed.png" th:src="${userImg}"
+                         class="rounded-circle img-thumbnail img-responsive">
+                    <span id="login-user" th:text="${userName}">사용자</span> 님, 안녕하세요.
+                </div>
+
+
             </ul>
             <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="get">
                 <input name="searchQuery" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
+
         </div>
     </nav>
 </div>

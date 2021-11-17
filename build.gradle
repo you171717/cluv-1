@@ -2,6 +2,8 @@ plugins {
 	id 'org.springframework.boot' version '2.5.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+//	id 'org.jetbrains.kotlin.jvm' version '1.6.0-RC2'
+//	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'com.example'
@@ -35,6 +37,9 @@ dependencies {
 	implementation 'junit:junit:4.13.1'
 	implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
+
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 	implementation 'org.springframework.security:spring-security-test'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
@@ -47,9 +52,9 @@ dependencies {
 	implementation group: 'com.querydsl', name: 'querydsl-jpa', version: querydslVersion
 	implementation group: 'com.querydsl', name: 'querydsl-apt', version: querydslVersion
 	implementation group: 'com.querydsl', name: 'querydsl-core', version: querydslVersion
-
+	implementation 'com.querydsl:querydsl-jpa'
 	implementation "org.springframework.boot:spring-boot-starter-security"
-
+	implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
 	annotationProcessor group: 'com.querydsl', name: 'querydsl-apt', version: querydslVersion
 	annotationProcessor group: 'com.querydsl', name: 'querydsl-apt', version: querydslVersion, classifier: 'jpa'
 	annotationProcessor("jakarta.persistence:jakarta.persistence-api")
@@ -64,9 +69,38 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
-
+//compileKotlin {
+//	kotlinOptions {
+//		jvmTarget = "1.8"
+//	}
+//}
+//compileTestKotlin {
+//	kotlinOptions {
+//		jvmTarget = "1.8"
+//	}
+//}
 compileJava.options.encoding = 'UTF-8'
 
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
+
+//def querydslDir = "$buildDir/generated/querydsl"
+//
+//querydsl {
+//	jpa = true
+//	querydslSourcesDir = querydslDir
+//}
+//
+//sourceSets {
+//	main.java.srcDir querydslDir
+//}
+//
+//configurations {
+//	querydsl.extendsFrom compileClasspath
+//}
+//
+//compileQuerydsl {
+//	options.annotationProcessorPath = configurations.querydsl
+//}
+////querydsl 추가 끝

@@ -20,13 +20,13 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">1</div>
+<div class="counter">30</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">30</div>
 <p>failures</p>
 </div>
 </td>
@@ -38,7 +38,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.356s</div>
+<div class="counter">0.028s</div>
 <p>duration</p>
 </div>
 </td>
@@ -47,8 +47,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">0%</div>
 <p>successful</p>
 </div>
 </td>
@@ -58,13 +58,141 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Packages</a>
+<a href="#tab0">Failed tests</a>
 </li>
 <li>
-<a href="#tab1">Classes</a>
+<a href="#tab1">Packages</a>
+</li>
+<li>
+<a href="#tab2">Classes</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<ul class="linkList">
+<li>
+<a href="classes/com.gsitm.intern.InternApplicationTests.html">InternApplicationTests</a>.
+<a href="classes/com.gsitm.intern.InternApplicationTests.html#contextLoads()">contextLoads()</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.controller.ItemControllerTest.html">ItemControllerTest</a>.
+<a href="classes/com.gsitm.intern.controller.ItemControllerTest.html#itemFormNotAdminTEst()">상품 등록 페이지 일반 회원 접근 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.controller.ItemControllerTest.html">ItemControllerTest</a>.
+<a href="classes/com.gsitm.intern.controller.ItemControllerTest.html#itemFormTest()">상품 등록 페이지 권한 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.controller.MemberControllerTest.html">MemberControllerTest</a>.
+<a href="classes/com.gsitm.intern.controller.MemberControllerTest.html#loginFailTest()">로그인 실패 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.controller.MemberControllerTest.html">MemberControllerTest</a>.
+<a href="classes/com.gsitm.intern.controller.MemberControllerTest.html#loginSuccessTest()">로그인 성공 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.entity.CartTest.html">CartTest</a>.
+<a href="classes/com.gsitm.intern.entity.CartTest.html#findCartAndMemberTest()">장바구니 회원 엔티티 매핑 조회 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.entity.MemberTest.html">MemberTest</a>.
+<a href="classes/com.gsitm.intern.entity.MemberTest.html#auditingTest()">Auditing 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.entity.OrderTest.html">OrderTest</a>.
+<a href="classes/com.gsitm.intern.entity.OrderTest.html#cascadeTest()">영속성 전이 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.entity.OrderTest.html">OrderTest</a>.
+<a href="classes/com.gsitm.intern.entity.OrderTest.html#lazyLoadingTest()">지연로딩테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.entity.OrderTest.html">OrderTest</a>.
+<a href="classes/com.gsitm.intern.entity.OrderTest.html#orphanRemovalTest()">고아 객체 제거 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html">ItemMapperTest</a>.
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html#createItemTest()">상품 저장 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html">ItemMapperTest</a>.
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html#findByItemDetailByNative()">nativeQuery 속성을 이용한 상품 조회 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html">ItemMapperTest</a>.
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html#findByItemDetailTest()">@Query를 이용한 상품 조회 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html">ItemMapperTest</a>.
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html#findByItemNmOrItemDetailTest()">상품명, 상품상세설명 or 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html">ItemMapperTest</a>.
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html#findByItemNmTest()">상품명 조회 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html">ItemMapperTest</a>.
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html#findByPriceLessThanOrderByPriceDesc()">가격 내림차순 조회 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html">ItemMapperTest</a>.
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html#findByPriceLessThanTest()">가격 LessThan 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html">ItemRepositoryTest</a>.
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html#createItemTest()">상품 저장 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html">ItemRepositoryTest</a>.
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html#findByItemDetailTest()">@Query를 이용한 상품 조회 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html">ItemRepositoryTest</a>.
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html#findByItemNmOrItemDetailTest()">상품명, 상품상세설명 or 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html">ItemRepositoryTest</a>.
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html#findByItemNmTest()">상품명 조회 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html">ItemRepositoryTest</a>.
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html#findByPriceLessThanOrderByPriceDesc()">가격 내림차순 조회 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html">ItemRepositoryTest</a>.
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html#findByPriceLessThanTest()">가격 LessThan 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html">ItemRepositoryTest</a>.
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html#queryDslTest()">Querydsl 조회 테스트1</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html">ItemRepositoryTest</a>.
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html#queryDslTest2()">상품 Querydsl 조회 테스트 2</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.service.ItemServiceTest.html">ItemServiceTest</a>.
+<a href="classes/com.gsitm.intern.service.ItemServiceTest.html#saveItem()">상품 등록 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.service.MemberServiceTest.html">MemberServiceTest</a>.
+<a href="classes/com.gsitm.intern.service.MemberServiceTest.html#saveDuplicateMemberTest()">중복 회원 가입 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.service.MemberServiceTest.html">MemberServiceTest</a>.
+<a href="classes/com.gsitm.intern.service.MemberServiceTest.html#saveMemberTest()">회원가입 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.test.jpa.JpaRepositoryTestDemo.html">JpaRepositoryTestDemo</a>.
+<a href="classes/com.gsitm.intern.test.jpa.JpaRepositoryTestDemo.html#queryDslTest()">Query Dsl 테스트</a>
+</li>
+<li>
+<a href="classes/com.gsitm.intern.test.jpa.JpaRepositoryTestDemo.html">JpaRepositoryTestDemo</a>.
+<a href="classes/com.gsitm.intern.test.jpa.JpaRepositoryTestDemo.html#save()">JPA 저장 테스트</a>
+</li>
+</ul>
+</div>
+<div id="tab1" class="tab">
 <h2>Packages</h2>
 <table>
 <thead>
@@ -79,19 +207,79 @@
 </thead>
 <tbody>
 <tr>
-<td class="success">
-<a href="packages/com.gsitm.intern.repository.html">com.gsitm.intern.repository</a>
+<td class="failures">
+<a href="packages/com.gsitm.intern.html">com.gsitm.intern</a>
 </td>
 <td>1</td>
+<td>1</td>
 <td>0</td>
+<td>0s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="packages/com.gsitm.intern.controller.html">com.gsitm.intern.controller</a>
+</td>
+<td>4</td>
+<td>4</td>
 <td>0</td>
-<td>0.356s</td>
-<td class="success">100%</td>
+<td>0.006s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="packages/com.gsitm.intern.entity.html">com.gsitm.intern.entity</a>
+</td>
+<td>5</td>
+<td>5</td>
+<td>0</td>
+<td>0.004s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="packages/com.gsitm.intern.mapper.html">com.gsitm.intern.mapper</a>
+</td>
+<td>7</td>
+<td>7</td>
+<td>0</td>
+<td>0.006s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="packages/com.gsitm.intern.repository.html">com.gsitm.intern.repository</a>
+</td>
+<td>8</td>
+<td>8</td>
+<td>0</td>
+<td>0.010s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="packages/com.gsitm.intern.service.html">com.gsitm.intern.service</a>
+</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>0.001s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="packages/com.gsitm.intern.test.jpa.html">com.gsitm.intern.test.jpa</a>
+</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>0.001s</td>
+<td class="failures">0%</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="tab1" class="tab">
+<div id="tab2" class="tab">
 <h2>Classes</h2>
 <table>
 <thead>
@@ -106,14 +294,114 @@
 </thead>
 <tbody>
 <tr>
-<td class="success">
-<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html">com.gsitm.intern.repository.ItemRepositoryTest</a>
+<td class="failures">
+<a href="classes/com.gsitm.intern.InternApplicationTests.html">com.gsitm.intern.InternApplicationTests</a>
 </td>
 <td>1</td>
+<td>1</td>
 <td>0</td>
+<td>0s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/com.gsitm.intern.controller.ItemControllerTest.html">com.gsitm.intern.controller.ItemControllerTest</a>
+</td>
+<td>2</td>
+<td>2</td>
 <td>0</td>
-<td>0.356s</td>
-<td class="success">100%</td>
+<td>0.005s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/com.gsitm.intern.controller.MemberControllerTest.html">com.gsitm.intern.controller.MemberControllerTest</a>
+</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>0.001s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/com.gsitm.intern.entity.CartTest.html">com.gsitm.intern.entity.CartTest</a>
+</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0.001s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/com.gsitm.intern.entity.MemberTest.html">com.gsitm.intern.entity.MemberTest</a>
+</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0.001s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/com.gsitm.intern.entity.OrderTest.html">com.gsitm.intern.entity.OrderTest</a>
+</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>0.002s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/com.gsitm.intern.mapper.ItemMapperTest.html">com.gsitm.intern.mapper.ItemMapperTest</a>
+</td>
+<td>7</td>
+<td>7</td>
+<td>0</td>
+<td>0.006s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/com.gsitm.intern.repository.ItemRepositoryTest.html">com.gsitm.intern.repository.ItemRepositoryTest</a>
+</td>
+<td>8</td>
+<td>8</td>
+<td>0</td>
+<td>0.010s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/com.gsitm.intern.service.ItemServiceTest.html">com.gsitm.intern.service.ItemServiceTest</a>
+</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0.001s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/com.gsitm.intern.service.MemberServiceTest.html">com.gsitm.intern.service.MemberServiceTest</a>
+</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>0s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/com.gsitm.intern.test.jpa.JpaRepositoryTestDemo.html">com.gsitm.intern.test.jpa.JpaRepositoryTestDemo</a>
+</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>0.001s</td>
+<td class="failures">0%</td>
 </tr>
 </tbody>
 </table>
@@ -126,7 +414,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.2</a> at 2021. 11. 6. 오후 8:25:04</p>
+<a href="http://www.gradle.org">Gradle 7.2</a> at 2021. 11. 17. 오후 3:08:38</p>
 </div>
 </div>
 </body>

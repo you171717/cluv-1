@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.validation.BindingResult;
+
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @RequestMapping("/members")
@@ -53,7 +55,7 @@ public class MemberController {
     }
 
     @GetMapping(value = "/login/error")
-    public String loginError(Model model){
+    public String loginError(Model model) {
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
         return "/member/memberLoginForm";
     }

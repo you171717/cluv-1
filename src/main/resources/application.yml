@@ -1,5 +1,14 @@
 server:
   port: 8080
+  #오류 응답에 exception의 내용을 포함할지 여부
+#  error:
+#    include-exception: true
+#    #오류 응답에 stacktrace 내용을 포함할지 여부 (ALWAYS, NEVER, ON_TRACE_PARAM)
+#    include-stacktrace: always
+#    #브라우저 요청에 대해 서버 오류시 기본으로 노출할 페이지를 사용할지 여부
+#    whitelabel:
+#      enabled: false
+
 
 spring:
   datasource:
@@ -8,11 +17,16 @@ spring:
       jdbc-url: jdbc:log4jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1668 # 사번 기입
       username: it1668 # 사번 기입
       password: it1668 # 사번 기입
-
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
   #    driver-class-name: org.mariadb.jdbc.Driver
   #    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/intern
   #    username: admin
   #    password: itm6700!
+  profiles:
+    include: oauth
 
   devtools:
     livereload:
@@ -58,4 +72,8 @@ logging.level:
     audit: off
     resultset: off
     connection: off
-  org.hibernate.SQL: debug
+  org.hibernate.SQL: trace
+
+itemImgLocation: C:/shop/item
+
+uploadPath: file:///C:/shop/

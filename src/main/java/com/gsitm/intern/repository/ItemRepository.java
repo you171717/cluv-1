@@ -5,7 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-public interface ItemRepository extends JpaRepository<Item, Long>{
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+public interface ItemRepository extends JpaRepository<Item, Long>,QuerydslPredicateExecutor<Item>, ItemRepositoryCustom{
 
     List<Item> findByItemNm(String itemNm); // find 뒤 엔티티 이름 생략 가능
 
@@ -22,7 +23,7 @@ public interface ItemRepository extends JpaRepository<Item, Long>{
     // 파라미터에 @Param 어노테이션을 이용하여 파라미터로 넘어온 값을 JPQL에 들어갈 변수로 지정
     // 현재는 itemDetail 변수를 "like % %" 사이에 ".itemDetail"로 값이 들어가도록 작성하였다.
 
-//    @Query(value = "select * from item i where i.item_detail like %:itemDetail% order by i.price desc", nativeQuery = true)
-//    List<Item> findByItemDetailByNative(@Param("itemDetail") String itemDetail);
+    @Query(value = "select * from item i where i.item_detail like %:itemDetail% order by i.price desc", nativeQuery = true)
+    List<Item> findByItemDetailByNative(@Param("itemDetail") String itemDetail);
 
 }

@@ -1,5 +1,7 @@
-package com.gsitm.intern.config;
+package com.gsitm.intern.config.auth;
 
+import com.gsitm.intern.config.CustomAuthenticationEntryPoint;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,15 +16,20 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 
+@RequiredArgsConstructor
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final CustomOAuth2UserService customOAuth2UserService;
 
     @Autowired
     MemberService memberService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.formLogin()
                 .loginPage("/members/login")
                 .defaultSuccessUrl("/")
@@ -32,6 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
                 .logoutSuccessUrl("/")
+                .and()
+                .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
         ;
 
         http.authorizeRequests()

@@ -1,4 +1,4 @@
-package com.gsitm.intern.serivce;
+package com.gsitm.intern.service;
 
 import com.gsitm.intern.dto.MemberFormDto;
 import com.gsitm.intern.entity.Member;
