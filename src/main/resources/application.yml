@@ -11,6 +11,18 @@ spring:
     username: it1662
     password: it1662
 
+  servlet:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 100MB
+
+
+  logging:
+    level:
+      org:
+        springframework:
+          nodeValue: debug
+          web: debug
 
   devtools:
     livereload:
@@ -33,26 +45,20 @@ spring:
         show_sql: true
         format_sql: true
 
-  mybatis:
-    mapper-locations: sqlmap/mappers/*.xml
-    configuration:
-      map-underscore-to-camel-case: true
-      multiple-result-sets-enabled: false
-      call-setters-on-nulls: true
-      jdbc-type-for-null: varchar
-      default-fetch-size: 500
-    type-aliases-package: com.gsitm.career
+uploadPath: file:///C:/shop/
+itemImgLocation: C:/shop/item
 
-  servlet:
-    multipart:
-      #파일 한 개당 최대 사이즈
-      max-file-size: 20MB
-      #요청당 최대 파일 크기
-      max-request-size: 100MB
-  # 상품 이미지 업로드 경로
-  itemImgLocation: C:/shop/item
-  # 리소스 업로드 경로
-  uploadPath: file:///C:/shop/
+#  mybatis:
+#    mapper-locations: sqlmap/mappers/*.xml
+#    configuration:
+#      map-underscore-to-camel-case: true
+#      multiple-result-sets-enabled: false
+#      call-setters-on-nulls: true
+#      jdbc-type-for-null: varchar
+#      default-fetch-size: 500
+#    type-aliases-package: com.gsitm.career
+
+
 
 #  logging.level:
 #    jdbc:

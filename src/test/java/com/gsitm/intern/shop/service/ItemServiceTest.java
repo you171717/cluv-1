@@ -36,7 +36,7 @@ class ItemServiceTest {
     @Autowired
     ItemImgRepository itemImgRepository;
 
-    List<MultipartFile> createMultipartFiles() throws Exception {
+    List<MultipartFile> createMultipartFiles() throws Exception{
 
         List<MultipartFile> multipartFileList = new ArrayList<>();
 
