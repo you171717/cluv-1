@@ -10,6 +10,8 @@ spring:
       hibernate:
         format_sql: true
     show-sql: true
+    hibernate:
+      ddl-auto: create
 
 mybatis:
   mapper-locations: sqlmap/mappers/*.xml
@@ -20,3 +22,8 @@ mybatis:
     jdbc-type-for-null: varchar
     default-fetch-size: 500
   type-aliases-package: com.gsitm.career
+
+#상품 이미지 업로드 경로
+itemImgLocation: C:/shop/item
+#리소스 업로드 경로
+uploadPath: file://C:/shop/

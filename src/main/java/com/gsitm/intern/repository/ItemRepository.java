@@ -8,7 +8,7 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import java.util.List;
 
-public interface ItemRepository extends JpaRepository<Item, Long>, QuerydslPredicateExecutor<Item> {
+public interface ItemRepository extends JpaRepository<Item, Long>, QuerydslPredicateExecutor<Item>, ItemRepositoryCustom {
     List<Item> findByItemNm(String itemNm); //매개변수로 검색할 때 쓸 상품명 변수 넘겨줌
     List<Item> findByItemNmOrItemDetail(String itemNm, String itemDetail);
     List<Item> findByPriceLessThan(Integer price);
