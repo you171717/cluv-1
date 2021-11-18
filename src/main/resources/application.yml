@@ -37,6 +37,8 @@ spring:
       ddl-auto: validate
     properties:
       hibernate:
+        # 쿼리 성능 향상
+        default_batch_fetch_size: 1000
       format_sql: true
     show-sql: true
     generate-ddl: true
