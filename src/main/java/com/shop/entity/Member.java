@@ -33,6 +33,9 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "member")
+    private OAuth2Member oAuth2Member;
+
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
         member.setName(memberFormDto.getName());
@@ -40,7 +43,7 @@ public class Member extends BaseEntity {
         member.setAddress(memberFormDto.getAddress());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
-        member.setRole(Role.ADMIN);
+        member.setRole(Role.USER);
         return member;
     }
 
