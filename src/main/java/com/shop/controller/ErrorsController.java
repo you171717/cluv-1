@@ -24,7 +24,7 @@ public class ErrorsController implements ErrorController {
         HttpStatus httpStatus = HttpStatus.valueOf(Integer.valueOf(statusMsg));
 
         model.addAttribute("msg", statusMsg + " " + httpStatus.getReasonPhrase());
-        model.addAttribute("src", IMAGE_PATH + "error1.png");
+        model.addAttribute("src", IMAGE_PATH + "images/error/error1.png");
 
         return "errors/error";
     }
