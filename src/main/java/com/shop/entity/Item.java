@@ -1,6 +1,8 @@
 package com.shop.entity;
 
 import com.shop.constant.ItemSellStatus;
+import com.shop.dto.ItemFormDto;
+import com.shop.exception.OutOfStockException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,12 +16,16 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 //@IdClass(ItemID.class)
-public class Item {
+public class Item extends BaseEntity{
 
     @Id   // 기본키 지정
     @Column(name="item_id")
     @GeneratedValue(strategy = GenerationType.AUTO)   // 기본키 생성 전략 자동으로 설정
     private Long id;      // 상품 코드
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cateCode")
+    private Category category;       // 카테고리 코드
 
     @Column(nullable = false, length = 50)          // not null 설정
     private String itemNm;    // 상품명
@@ -37,8 +43,22 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus;    // 상품 판매 상태
 
-    private LocalDateTime regTime;      // 등록 시간
+    public void updateItem(ItemFormDto itemFormDto){
+        this.itemNm = itemFormDto.getItemNm();
+        this.price = itemFormDto.getPrice();
+        this.stockNumber = itemFormDto.getStockNumber();
+        this.itemDetail = itemFormDto.getItemDetail();
+        this.itemSellStatus = itemFormDto.getItemSellStatus();
+    }
 
-    private LocalDateTime updateTime;   // 수정시간
+    // 상품 재고 감소 로직
+    public void removeStock(int stockNumber){
+        int restStock = this.stockNumber - stockNumber;
+        if(restStock<0){
+            throw new OutOfStockException("상품의 재고가 부족 합니다. " +
+                    "(현재 재고 수량 : "+ this.stockNumber+")");
+        }
+        this.stockNumber = restStock;
+    }
 
 }

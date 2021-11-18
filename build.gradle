@@ -27,6 +27,10 @@ dependencies {
 	implementation('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.5.4'
 
+	// OAuth2
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+
 	// validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
@@ -38,6 +42,9 @@ dependencies {
 	implementation 'junit:junit:4.12'
 
 	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
+
+	// modelmapper
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
 
 	// lombok
 	compileOnly 'org.projectlombok:lombok'

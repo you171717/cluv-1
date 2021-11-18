@@ -1,5 +1,6 @@
 package com.shop.config;
 
+import com.shop.config.auth.CustomOAuth2UserService;
 import com.shop.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     MemberService memberService;
 
+    @Autowired
+    CustomOAuth2UserService customOAuth2UserService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
@@ -32,7 +36,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/")
+                .and()
+
+                // oauth2 연동
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService);
 
         http.authorizeRequests()
                 .mvcMatchers("/", "/members/**",
@@ -45,12 +55,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception{
-        web.ignoring().antMatchers("/css/**","/js/**","/img/**");
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -60,6 +70,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(memberService)
                 .passwordEncoder(passwordEncoder());
     }
+
+
 }
 
 

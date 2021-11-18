@@ -36,3 +36,18 @@ out/
 ### VS Code ###
 .vscode/
 /src/main/resources/templates/fragments/footer.html
+/src/main/generated/com/shop/entity/QMember.java
+/src/main/generated/com/shop/entity/QBaseEntity.java
+/src/main/generated/com/shop/entity/QBaseTimeEntity.java
+/src/main/generated/com/shop/entity/QCart.java
+/src/main/generated/com/shop/entity/QCartItem.java
+/src/main/generated/com/shop/entity/QOrder.java
+/src/main/generated/com/shop/entity/QOrderItem.java
+/src/main/generated/com/shop/entity/QItemImg.java
+/src/main/generated/com/shop/dto/QMainItemDto.java
+/src/main/generated/com/shop/entity/QCategory.java
+/src/main/generated/com/shop/entity/QMessage.java
+/src/main/generated/com/shop/entity/QUser.java
+
+# ignore properties file
+application-oauth.properties

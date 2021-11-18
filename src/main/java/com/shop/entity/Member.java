@@ -2,18 +2,17 @@ package com.shop.entity;
 
 import com.shop.constant.Role;
 import com.shop.dto.MemberFormDto;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="member")
+@NoArgsConstructor          // oauth2
 @Getter @Setter
 @ToString
-public class Member {
+public class Member extends BaseEntity{
 
     @Id
     @Column(name="member_id")
@@ -32,6 +31,27 @@ public class Member {
     @Enumerated(EnumType.STRING)     // enum 속성 string 저장 권장
     private Role role;
 
+    // oauth2
+//    @Column
+//    private String picture;
+
+//    // oauth2
+//    public Member update(String name, String picture) {
+//        this.name = name;
+//        this.picture = picture;
+//        return this;
+//    }
+//    @Builder
+//    public Member(String name, String email, String picture, Role role) {
+//        this.name = name;
+//        this.email = email;
+//        this.picture = picture;
+//        this.role = role;
+//    }
+
+//    public String getRoleKey() {
+//        return this.role.getKey();
+//    }
 
     // Member 엔티티 생성 메소드, password 암호화
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
