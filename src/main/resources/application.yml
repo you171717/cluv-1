@@ -1,15 +1,28 @@
 server:
-  port: 8080
+  port: 9090
+  error:
+    whitelabel:
+      enabled: false
+    include-exception: false
+    include-stacktrace: never
 
 spring:
-  thymeleaf:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
     prefix: classpath:/templates/
     cache: false
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1661
-    username: it1661
-    password: it1661
+    hikari:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1661
+      username: it1661
+      password: it1661
+#    driver-class-name: org.mariadb.jdbc.Driver
+#    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/intern
+#    username: admin
+#    password: itm6700!
   devtools:
     livereload:
       enabled: true
@@ -22,13 +35,38 @@ spring:
         show_sql: 'true'
         format_sql: 'true'
     hibernate:
-      ddl-auto: update
+#      ddl-auto: validate
+      ddl-auto: create
+    generate-ddl: true
   #    driver-class-name: org.h2.Driver     # [ h2 설정 ]
 
-# [ h2 설정 ]
-#  h2:
-#    console:
-#      enabled: true
+# Oauth2
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: '231221485706-rds7s84p0h8o9a3oa3kq7qe8dv70a7d6.apps.googleusercontent.com'
+            clientSecret: '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'
+            scope:
+              - email
+
+# 상품 이미지 업로드 경로
+itemImgLocation: C:/shop/item
+
+# 리소스 업로드 경로
+uploadPath: file:///c:/shop/
+
+
+logging.level:
+  jdbc:
+    sqlonly: debug
+    sqltiming: info
+    resultsettable: info
+    audit: off
+    resultset: off
+    connection: off
+  org.hibernate.SQL: debug
 
 
 #mybatis:

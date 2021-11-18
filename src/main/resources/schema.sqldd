@@ -2,6 +2,7 @@
 DROP TABLE IF EXISTS mybatis2;
 
 DROP TABLE IF EXISTS member;
+
 CREATE TABLE member
 (
 --     id       INT PRIMARY KEY DEFAULT AUTO_INCREMENT,
@@ -14,6 +15,10 @@ CREATE TABLE member
 );
 
 
+-- CREATE TABLE item
+-- (
+--
+-- );
 
 -- CREATE TABLE mybatis
 -- (

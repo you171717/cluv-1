@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class ErrorsController implements ErrorController {
 
-    private static String IMAGE_PATH = "images/error/";
+    private static String IMAGE_PATH = "static/images/error/";
 
     @ExceptionHandler(Throwable.class)
     @GetMapping("/error")
@@ -26,7 +26,7 @@ public class ErrorsController implements ErrorController {
         model.addAttribute("msg", statusMsg + " " + httpStatus.getReasonPhrase());
         model.addAttribute("src", IMAGE_PATH + "error1.png");
 
-        return "templates/errors/error";
+        return "errors/error";
     }
 
 }

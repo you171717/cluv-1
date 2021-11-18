@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MainController {
-
-    @GetMapping(value = "/")
+//  확인 필요!!
+    @GetMapping(value = "/main")
     public String main(){
         return "main";
     }

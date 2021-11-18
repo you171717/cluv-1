@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "member")
 @Getter @Setter
 @ToString
-public class Member extends BaseEntity{
+public class Member extends BaseTimeEntity{
 
     @Id
     @Column(name = "member_id")
@@ -30,19 +30,6 @@ public class Member extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private Role role;
 
-//    @Builder
-//    public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
-//        Member member = new Member();
-//        member.setName(memberFormDto.getName());
-//        member.setEmail(memberFormDto.getEmail());
-//        member.setAddress(memberFormDto.getAddress());
-//        String password = passwordEncoder.encode(memberFormDto.getPassword());
-//        member.setPassword(password);
-//        member.setRole(Role.USER);
-//        return member;
-//    }
-
-//  ADMIN 계정 테스트용. 테스트 후 반드시 원상복귀(삭제)****
     @Builder
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
@@ -51,8 +38,21 @@ public class Member extends BaseEntity{
         member.setAddress(memberFormDto.getAddress());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
-        member.setRole(Role.ADMIN);
+        member.setRole(Role.USER);
         return member;
     }
+
+//  ADMIN 계정 테스트용. 테스트 후 반드시 원상복귀(삭제)****
+//    @Builder
+//    public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
+//        Member member = new Member();
+//        member.setName(memberFormDto.getName());
+//        member.setEmail(memberFormDto.getEmail());
+//        member.setAddress(memberFormDto.getAddress());
+//        String password = passwordEncoder.encode(memberFormDto.getPassword());
+//        member.setPassword(password);
+//        member.setRole(Role.ADMIN);
+//        return member;
+//    }
 
 }

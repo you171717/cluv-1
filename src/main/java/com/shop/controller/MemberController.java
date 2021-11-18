@@ -41,8 +41,7 @@ public class MemberController {
             model.addAttribute("errorMessage", e.getMessage());
             return "member/memberForm";
         }
-        Member member = Member.createMember(memberFormDto, passwordEncoder);
-        memberService.saveMember(member);
+
         return "redirect:/";
     }
 
@@ -57,5 +56,11 @@ public class MemberController {
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요.");
         return "member/memberLoginForm";
 
+    }
+
+    @GetMapping(value = "/oauthcomplete")
+    public String loginComplete(){
+
+        return null;
     }
 }

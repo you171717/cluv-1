@@ -1,4 +1,4 @@
-package com.shop.entity;
+package com.shop.constant;
 
 public enum OrderStatus {
     ORDER, CANCEL
