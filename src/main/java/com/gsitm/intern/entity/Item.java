@@ -1,6 +1,7 @@
 package com.gsitm.intern.entity;
 
 import com.gsitm.intern.constant.ItemSellStatus;
+import com.gsitm.intern.dto.ItemFormDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class Item {
+public class Item extends BaseEntity{
 
     @Id
     @Column
@@ -36,7 +37,12 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private  ItemSellStatus itemSellStatus; // 상품 판매 상태
 
-    private LocalDateTime regTime; // 등록 시간
+    public void updateItem(ItemFormDto itemFormDto){
+        this.itemNm = itemFormDto.getItemNm();
+        this.price = itemFormDto.getPrice();
+        this.stockNumber = itemFormDto.getStockNumber();
+        this.itemDetail = itemFormDto.getItemDetail();
+        this.itemSellStatus = itemFormDto.getItemSellStatus();
+    }
 
-    private  LocalDateTime updateTime; // 수정 시간
 }
