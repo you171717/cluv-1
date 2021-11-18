@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JpaService {
 
-    private final MemberRepository memberRepository;
+    private final TestMemberRepository memberRepository;
 
     public List<JpaEntity> listAll() {
         return memberRepository.findAll();
