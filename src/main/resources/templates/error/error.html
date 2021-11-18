@@ -3,31 +3,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
 
-<title>Spring Boot Unknown Error PAGE</title>
-
-<body>
-<h1>기본 에러 페이지 입니다.</h1>
-<div>
-    status : <span th:text="${status}"></span>
+<div layout:fragment="content">
+    <h1>오류가 발생하였습니다. 관리자에게 문의하세요.</h1>
+    <p th:text="${message}"></p>
 </div>
-<div>
-    path : <span th:text="${path}"></span>
-</div>
-<div>
-    error : <span th:text="${error}"></span>
-</div>
-<div>
-    timestamp : <span th:text="${timestamp}"></span>
-</div>
-<div>
-    message : <span th:text="${message}"></span>
-</div>
-<div>
-    exception : <span th:text="${exception}"></span>
-</div>
-<div>
-    trace : <span th:text="${trace}"></span>
-</div>
-</body>
 
 </html>

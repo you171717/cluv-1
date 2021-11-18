@@ -30,9 +30,6 @@ public class Member extends BaseEntity{ //Auditing 기능 적용하기 위해 Ba
 
     private String address;
 
-    private String provider;
-    private String providerId;
-
     @Enumerated(EnumType.STRING)    //enum 타입을 엔티티의 속성으로 지정, 순서 바뀔 경우 생길 수 있는
     private Role role;              //문제를 EnumType.STRING 옵션을 써서 String으로 저장
 
@@ -43,7 +40,7 @@ public class Member extends BaseEntity{ //Auditing 기능 적용하기 위해 Ba
         member.setAddress(memberFormDto.getAddress());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
-        member.setRole(Role.ADMIN);
+        member.setRole(Role.USER);
         return member;
     }
 
