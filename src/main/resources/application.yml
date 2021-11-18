@@ -48,7 +48,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
@@ -58,6 +58,9 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 100MB
+
+  profiles:
+    include: oauth
 
 
 mybatis:
