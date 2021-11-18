@@ -1,5 +1,8 @@
 server:
-  port: 8080
+  port: 80
+  error:
+    whitelabel:
+      enabled: false
 
 spring:
   datasource:
@@ -7,12 +10,19 @@ spring:
     url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1662
     username: it1662
     password: it1662
-  #    driver-class-name: org.h2.Driver     # [ h2 설정 ]
 
-# [ h2 설정 ]
-#  h2:
-#    console:
-#      enabled: true
+  servlet:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 100MB
+
+
+  logging:
+    level:
+      org:
+        springframework:
+          nodeValue: debug
+          web: debug
 
   devtools:
     livereload:
@@ -21,29 +31,64 @@ spring:
   sql:
     init:
       mode: always
-  #      schema-locations: schema.sql
-  #      data-locations: data.sql
 
-  # Thymeleaf cache 사용 중지
-
-    thymeleaf:
-      cache: false
-
+  thymeleaf:
+    cache: false
 
   jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-      format_sql: true
+        ddl-auto: validate
+        show_sql: true
+        format_sql: true
 
-mybatis:
-  mapper-locations: sqlmap/mappers/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
-    multiple-result-sets-enabled: false
-    call-setters-on-nulls: true
-    jdbc-type-for-null: varchar
-    default-fetch-size: 500
-  type-aliases-package: com.gsitm.career
+uploadPath: file:///C:/shop/
+itemImgLocation: C:/shop/item
 
+#  mybatis:
+#    mapper-locations: sqlmap/mappers/*.xml
+#    configuration:
+#      map-underscore-to-camel-case: true
+#      multiple-result-sets-enabled: false
+#      call-setters-on-nulls: true
+#      jdbc-type-for-null: varchar
+#      default-fetch-size: 500
+#    type-aliases-package: com.gsitm.career
+
+
+
+#  logging.level:
+#    jdbc:
+#      sqlonly: debug
+#      sqltiming: info
+#      resultsettable: info
+#      audit: off
+#      resultset: off
+#      connection: off
+#    org.hibernate.SQL: debug
+
+#mybatis:
+#  mapper-locations: sqlmap/mappers/*.xml
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    multiple-result-sets-enabled: false
+#    call-setters-on-nulls: true
+#    jdbc-type-for-null: varchar
+#    default-fetch-size: 500
+#  type-aliases-package: com.gsitm.career
+
+#spring:
+#  datasource:
+#    driver-class-name: org.mariadb.jdbc.Driver
+#    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1662
+#    username: it1662
+#    password: it1662
+#    driver-class-name: org.h2.Driver     # [ h2 설정 ]
+
+# [ h2 설정 ]
+#  h2:
+#    console:
+#      enabled: true
