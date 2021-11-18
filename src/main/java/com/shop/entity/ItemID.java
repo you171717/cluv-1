@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 @Data
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @Embeddable
 public class ItemID implements Serializable {
 
+    @Id
     @Column(name = "item_id")
     private Long id;
     private String itemNm;

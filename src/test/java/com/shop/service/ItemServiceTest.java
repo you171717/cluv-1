@@ -55,6 +55,7 @@ class ItemServiceTest {
     @WithMockUser(username = "admin", roles = "ADMIN")
     void saveItem() throws Exception {
         ItemFormDto itemFormDto = new ItemFormDto();
+
         itemFormDto.setItemNm("테스트상품");
         itemFormDto.setItemSellStatus(ItemSellStatus.SELL);
         itemFormDto.setItemDetail("테스트 상품 입니다.");

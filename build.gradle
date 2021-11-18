@@ -32,7 +32,9 @@ dependencies {
     implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
 
+    //oauth2
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    //compile('org.springframework.boot:spring-boot-starter-oauth2-client')
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
