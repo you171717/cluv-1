@@ -1,12 +1,29 @@
 server:
   port: 8080
+#  error:
+#    #오류 응답에 exception의 내용을 포함할지 여부
+#    include-exception: true
+#    #오류 응답에 stacktrace 내용을 포함할지 여부
+#    include-stacktrace: always
+#    #브라우저 요청에 대해 서버 오류시 기본으로 노출할 페이지를 사용할지 여부
+#    whitelabel:
+#      enabled: false
+#    path: /error
 
 spring:
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1663
-    username: it1663
-    password: it1663
+    hikari:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1663 # 사번 기입
+      username: it1663
+      password: it1663
+  #spring:
+  #  datasource:
+  #    driver-class-name: org.mariadb.jdbc.Driver
+  #    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1663
+  #    username: it1663
+  #    password: it1663
+
   #    driver-class-name: org.h2.Driver     # [ h2 설정 ]
 
   # [ h2 설정 ]
@@ -31,10 +48,16 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
-      format_sql: true
+        format_sql: true
+    show-sql: true
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
 
 
 mybatis:
@@ -46,3 +69,18 @@ mybatis:
     jdbc-type-for-null: varchar
     default-fetch-size: 500
   type-aliases-package: com.gsitm.career
+
+logging.level:
+  jdbc:
+    sqlonly: debug
+    sqltiming: info
+    resultsettable: info
+    audit: off
+    resultset: off
+    connection: off
+  org.hibernate.SQL: debug
+
+#상품 이미지 업로드 경로
+itemImgLocation: C:/shop/item
+#리소스 업로드 경로
+uploadPath: file:///C:/shop/

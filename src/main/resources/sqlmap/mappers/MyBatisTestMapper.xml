@@ -53,4 +53,8 @@
         WHERE item_detail LIKE '%' || #{itemDetail} || '%'
         ORDER BY price DESC
     </select>
+    <select id="selectAll" resultType="com.gsitm.intern.test.mybatis.MyBatisTestDto">
+        SELECT *
+        FROM mybatis;
+    </select>
 </mapper>
