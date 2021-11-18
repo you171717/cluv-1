@@ -10,7 +10,11 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 @EnableJpaRepositories
-public interface ItemRepository extends JpaRepository<Item, Long>, QuerydslPredicateExecutor<Item> {
+//ItemRepository 인터페이스에서 ItemRepositotyCustom 인터페이스 상속
+//->ItemRepository에서 Querydsl로 구현한 상품 관리 페이지 목록 불러오는
+// getAdminItemPage() 메소스 사용가능
+public interface ItemRepository extends JpaRepository<Item, Long>,
+        QuerydslPredicateExecutor<Item>, ItemRepositoryCustom {
 
     List<Item> findByItemNm(String itemNm);
 
