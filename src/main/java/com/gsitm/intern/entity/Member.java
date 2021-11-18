@@ -2,10 +2,9 @@ package com.gsitm.intern.entity;
 
 import com.gsitm.intern.constant.Role;
 import com.gsitm.intern.dto.MemberFormDto;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.OAuth2AccessToken;
 
 import javax.persistence.*;
 
@@ -14,7 +13,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class Member {
+@NoArgsConstructor
+public class Member extends BaseEntity {
 
     @Id
     @Column(name="member_id")
@@ -43,7 +43,8 @@ public class Member {
         member.setPoint(memberFormDto.getPoint());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
-        member.setRole(Role.USER);
+        member.setRole(Role.ADMIN);
         return member;
     }
+
 }

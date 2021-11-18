@@ -1,20 +1,33 @@
 server:
   port: 8080
+  #오류 응답에 exception의 내용을 포함할지 여부
+#  error:
+#    include-exception: true
+#    #오류 응답에 stacktrace 내용을 포함할지 여부 (ALWAYS, NEVER, ON_TRACE_PARAM)
+#    include-stacktrace: always
+#    #브라우저 요청에 대해 서버 오류시 기본으로 노출할 페이지를 사용할지 여부
+#    whitelabel:
+#      enabled: false
+
 
 spring:
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1668
-    username: it1668
-    password: it1668
-  #    driver-class-name: org.h2.Driver     # [ h2 설정 ]
+    hikari:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1668 # 사번 기입
+      username: it1668 # 사번 기입
+      password: it1668 # 사번 기입
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
+  #    driver-class-name: org.mariadb.jdbc.Driver
+  #    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/intern
+  #    username: admin
+  #    password: itm6700!
+  profiles:
+    include: oauth
 
-# [ h2 설정 ]
-#  h2:
-#    console:
-#      enabled: true
-
-  #Live Reload
   devtools:
     livereload:
       enabled: true
@@ -22,19 +35,25 @@ spring:
   sql:
     init:
       mode: always
-  #      schema-locations: schema.sql
-  #      data-locations: data.sql
+    #      schema-locations: schema.sql
+    #      data-locations: data.sql
+
+    # Thymeleaf cache 사용 중지
+  thymeleaf:
+    cache: false
+  #    check-template-location: true
+  #    prefix: classpath:/templates/thymeleafEx
+  #    suffix: .html
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+      database-platform: org.hibernate.dialect.MySQL8Dialect // hibernate sql 문
     properties:
       hibernate:
-      format_sql: true
+        show_sql: true
+        format_sql: true
 
-  #thymeleaf cache 사용중지
-  thymeleaf:
-    cache: false
 mybatis:
   mapper-locations: sqlmap/mappers/*.xml
   configuration:
@@ -44,4 +63,17 @@ mybatis:
     jdbc-type-for-null: varchar
     default-fetch-size: 500
   type-aliases-package: com.gsitm.career
-    #type-aliases-package: com.gsitm.intern
+
+logging.level:
+  jdbc:
+    sqlonly: debug
+    sqltiming: info
+    resultsettable: info
+    audit: off
+    resultset: off
+    connection: off
+  org.hibernate.SQL: trace
+
+itemImgLocation: C:/shop/item
+
+uploadPath: file:///C:/shop/
