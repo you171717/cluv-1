@@ -28,39 +28,39 @@
         }
 
         function order(){
-            var token = $("meta[name='_csrf']").attr("content");
+            var token = $("meta[name='_csrf']").attr("content");          // csrf 토큰 값 조회
             var header = $("meta[name='_csrf_header']").attr("content");
 
             var url = "/order";
             var paramData = {
-                itemId : $("#itemId").val(),
-                count : $("#count").val()
+                itemId : $("#itemId").val(),    // 주문할 상품의 아이디
+                count : $("#count").val()       // 주문 수량 데이터
             };
 
-            var param = JSON.stringify(paramData);
+            var param = JSON.stringify(paramData);     // 데이터를 json 형식으로 변경
 
             $.ajax({
                 url      : url,
                 type     : "POST",
-                contentType : "application/json",
+                contentType : "application/json",      // 서버에서 데이터를 보낼 형식을 json으로 지정
                 data     : param,
                 beforeSend : function(xhr){
                     /* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
                     xhr.setRequestHeader(header, token);
                 },
-                dataType : "json",
+                dataType : "json",       // 서버에서 결과값으로 받을 데이터 타입을 json으로 설정
                 cache   : false,
-                success  : function(result, status){
+                success  : function(result, status){        // 주문 로직 호출 성공
                     alert("주문이 완료 되었습니다.");
                     location.href='/';
                 },
                 error : function(jqXHR, status, error){
 
-                    if(jqXHR.status == '401'){
+                    if(jqXHR.status == '401'){       // 로그인 상태가 아닐때
                         alert('로그인 후 이용해주세요');
                         location.href='/members/login';
                     } else{
-                        alert(jqXHR.responseText);
+                        alert(jqXHR.responseText);  // 주문 시 에러 발생하면 해당 메시지 호출
                     }
 
                 }

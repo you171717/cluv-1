@@ -51,3 +51,4 @@ out/
 
 # ignore properties file
 application-oauth.properties
+/src/main/generated/com/shop/entity/QAddress.java
