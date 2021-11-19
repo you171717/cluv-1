@@ -3,6 +3,7 @@ server:
 
 spring:
   datasource:
+    hikari:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1660
     username: it1660
@@ -21,15 +22,15 @@ spring:
   sql:
     init:
       mode: always
-  #      schema-locations: schema.sql
-  #      data-locations: data.sql
+    #      schema-locations: schema.sql
+    #      data-locations: data.sql
 
-   # Thymeleaf cache 사용 중지
+    # Thymeleaf cache 사용 중지
   thymeleaf:
     cache: false
-#    check-template-location: true
-#    prefix: classpath:/templates/thymeleafEx
-#    suffix: .html
+  #    check-template-location: true
+  #    prefix: classpath:/templates/thymeleafEx
+  #    suffix: .html
 
   servlet:
     multipart:
@@ -38,10 +39,13 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      default_batch_fetch_size: '1000'
+      ddl-auto: create
+      database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       hibernate:
-      format_sql: true
+        show_sql: true
+        format_sql: true
 
 mybatis:
   mapper-locations: sqlmap/mappers/*.xml
@@ -52,6 +56,22 @@ mybatis:
     jdbc-type-for-null: varchar
     default-fetch-size: 500
   type-aliases-package: com.gsitm.career
+
+logging.level:
+  jdbc:
+    sqlonly: debug
+    sqltiming: info
+    resultsettable: info
+    audit: off
+    resultset: off
+    connection: off
+  org.hibernate.SQL: trace
+
+
+
+
+
+
 
 itemImgLocation: C:/shop/item
 

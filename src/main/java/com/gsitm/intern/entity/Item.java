@@ -2,12 +2,13 @@ package com.gsitm.intern.entity;
 
 import com.gsitm.intern.constant.ItemSellStatus;
 import com.gsitm.intern.dto.ItemFormDto;
+import com.gsitm.intern.exception.OutOfStockException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "item")
@@ -45,4 +46,15 @@ public class Item extends BaseEntity{
         this.itemSellStatus = itemFormDto.getItemSellStatus();
     }
 
+    public void removeStock(int stockNumber){
+        int restStock = this.stockNumber - stockNumber;
+        if(restStock<0){
+            throw new OutOfStockException("상품의 재고가 부족 합니다. (현재 재고 수량 : " + this.stockNumber + ")");
+        }
+        this.stockNumber = restStock;
+    }
+
+    public void addStock(int stockNumber){
+        this.stockNumber += stockNumber;
+    }
 }
