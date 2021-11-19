@@ -31,7 +31,7 @@ public class ReverseAuction extends BaseEntity {
     @Column(nullable = false)
     private LocalDateTime startTime; // 시작 시간
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
