@@ -2,6 +2,7 @@ package com.shop.entity;
 
 import com.shop.constant.ItemSellStatus;
 import com.shop.dto.ItemFormDto;
+import com.shop.exception.OutOfStockException;
 import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,10 @@ public class Item extends BaseEntity{
     @Column(name = "item_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; //상품코드
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Cate_CodeRef")
+    private CategoryRef categoryRef;
 
     @Column(nullable = false, length = 50)
     private String itemNm; //상품명
@@ -49,6 +54,16 @@ public class Item extends BaseEntity{
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();
         this.itemSellStatus = itemFormDto.getItemSellStatus();
+    }
+
+    //7장 주문 기능 구현하기
+    public void removeStock(int stockNumber){
+        int restStock = this.stockNumber - stockNumber; // 상품의 재고 수량에서 주문 후 남은 재고 수량 구함
+        if(restStock<0){
+            throw new OutOfStockException("상품의 재고가 부족 합니다. (현재 재고 수량: "
+                    + this.stockNumber + ")"); // 상품 재고 < 주문 수량 => 예외 발생
+       }
+        this.stockNumber = restStock; //주문 후 남은 재고 수량 => 상품의 현재 재고 값 할당
     }
 
 }
