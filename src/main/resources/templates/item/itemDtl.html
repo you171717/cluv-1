@@ -4,6 +4,7 @@
       layout:decorate="~{layouts/layout1}">
 
 <head>
+    <title>상세 페이지</title>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
@@ -23,7 +24,7 @@
         function calculateToalPrice(){
             var count = $("#count").val();
             var price = $("#price").val();
-            var totalPrice = price*count;
+            var totalPrice = (price*count).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
             $("#totalPrice").html(totalPrice + '원');
         }
 
@@ -135,6 +136,25 @@
             height:auto;
             width:50%;
         }
+
+        .content-mg{
+            margin-left:30%;
+            margin-right:30%;
+            margin-top:2%;
+            margin-bottom:100px;
+        }
+        .card{
+            width:750px;
+            height:100%;
+            padding:30px;
+            margin-bottom:20px;
+        }
+        .fs18{
+            font-size:18px
+        }
+        .fs24{
+            font-size:24px
+        }
     </style>
 </th:block>
 
@@ -159,7 +179,7 @@
             <div class="text-right">
                 <div class="h4 text-danger text-left">
                     <input type="hidden" th:value="${item.price}" id="price" name="price">
-                    <span th:text="${item.price}"></span>원
+                    <span th:text="${#numbers.formatInteger(item.price,3,'COMMA')}"></span>원
                 </div>
                 <div class="input-group w-50">
                     <div class="input-group-prepend">
@@ -196,14 +216,27 @@
         <img th:if="${not #strings.isEmpty(itemImg.imgUrl)}" th:src="${itemImg.imgUrl}" class="rounded mgb-15" width="800">
     </div>
 
-    <div class="jumbotron jumbotron-fluid mgt-30">
-        <div class="container">
-            <h4 class="display-5">상품 후기 목록</h4>
-            <hr class="my-4">
-<!--             <p class="lead" th:text="${item.itemDetail}"></p> -->
-        </div>
-    </div>
 
+        <div class="container">
+            <hr class="my-4">
+            <h2 class="mb-4"> 상품 리뷰 </h2>
+
+            <div th:each="orderItem : ${orderItemList}">
+                <div class="card d-flex">
+                    <div class="d-flex mb-3">
+<!--                         <div class="repImgDiv"> -->
+<!--                             <img th:src="${item.itemImgDtoList[0].imgUrl}" class = "rounded repImg" th:alt="${item.itemNm}"> -->
+<!--                         </div> -->
+                        <div class="align-self-center w-75">
+                            <span th:text="${orderItem.comment}" class="fs24 font-weight-bold"></span>
+                            <div class="fs18 font-weight-light">
+                                <span th:text="${orderItem.email} +'님'"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 </div>
 

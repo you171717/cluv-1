@@ -4,8 +4,9 @@
       layout:decorate="~{layouts/layout1}">
 
 <head>
-      <meta name="_csrf" th:content="${_csrf.token}"/>
-      <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>리뷰 관리</title>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 
 <!-- 사용자 스크립트 추가 -->
@@ -14,7 +15,7 @@
     <script th:inline="javascript">
 
         function newReviews(){
-            location.href="/reviews/new";
+            location.href="/reviews/";
         }
 
     </script>
@@ -73,16 +74,16 @@
                 <div class="align-self-center w-75">
                     <span th:text="${orderItem.itemNm}" class="fs24 font-weight-bold"></span>
                     <div class="fs18 font-weight-light">
-                        <span th:text="${orderItem.orderPrice} +'원'"></span>
+                        <span th:text="${#numbers.formatInteger(orderItem.orderPrice,3,'COMMA')} +'원'"></span>
                         <span th:text="${orderItem.count} +'개'"></span>
                     </div>
-                    <div class="ml-3">
-                        <div th:if="${orderItem.reviewYn}=='N'">
+                    <div class="ml">
+                        <div th:if="${orderItem.reviewYn} == 'N'">
                             <button type="button" class="btn btn-outline-secondary" th:onclick="'location.href=\''+@{reviews/new/}+@{${orderItem.orderItemId}}+'\''">리뷰 작성</button>
                         </div>
                         <div th:unless="${orderItem.reviewYn} == 'N'">
-                            <button type="button" class="btn btn-outline-secondary" th:onclick="'location.href=\''+@{reviews/update/}+'\''">수정</button>
-                            <button type="button" class="btn btn-outline-secondary">삭제</button>
+                            <button type="button" class="btn btn-outline-secondary" th:onclick="'location.href=\''+@{reviews/update/}+@{${orderItem.orderItemId}}+'\''">수정</button>
+                            <button type="button" class="btn btn-outline-secondary" th:onclick="'location.href=\''+@{reviews/delete/}+@{${orderItem.orderItemId}}+'\''">삭제</button>
 
                         </div>
 <!--                         "'location.href=\''+@{reviews/new/}+@{${orderItem.orderItemId}}+'\'' -->

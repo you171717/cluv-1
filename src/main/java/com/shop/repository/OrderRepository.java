@@ -23,5 +23,4 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     )
     Long countOrder(@Param("email") String email);
 
-//    OrderItem findById(Long orderItemId);
 }

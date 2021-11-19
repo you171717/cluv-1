@@ -3,6 +3,7 @@ package com.shop.service;
 import com.shop.dto.OrderDto;
 import com.shop.dto.OrderHistDto;
 import com.shop.dto.OrderItemDto;
+import com.shop.dto.ReviewFormDto;
 import com.shop.entity.*;
 import com.shop.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -60,7 +61,7 @@ public class OrderService {
 
         List<OrderHistDto> orderHistDtos = new ArrayList<>();
 
-        //주문 리스트ㅡㄹ 순회하면서 구매 이력 페이지에 전달할 DTO 생성
+        //주문 리스트를 순회하면서 구매 이력 페이지에 전달할 DTO 생성
         for (Order order : orders) {
             OrderHistDto orderHistDto = new OrderHistDto(order);
             List<OrderItem> orderItems = order.getOrderItems();
@@ -114,4 +115,5 @@ public class OrderService {
         return order.getId();
 
     }
+    
 }
