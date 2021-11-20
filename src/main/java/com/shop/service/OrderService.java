@@ -50,6 +50,7 @@ public class OrderService {
 
     }
 
+    // 주문 조회
     @Transactional(readOnly = true)
     public Page<OrderHistDto> getOrderList(String email, Pageable pageable){
 
@@ -92,4 +93,24 @@ public class OrderService {
         order.cancelOrder();      // 변경 감지 기능에 의해 트랜잭션이 끝날 때 update 쿼리 실행
     }
 
+    public Long orders(List<OrderDto> orderDtoList, String email){
+
+        Member member = memberRepository.findByEmail(email);
+        List<OrderItem> orderItemList = new ArrayList<>();
+
+        // 주문할 상품 리스트
+        for(OrderDto orderDto : orderDtoList) {
+            Item item = itemRepository.findById(orderDto.getItemId())
+                    .orElseThrow(EntityNotFoundException::new);
+            OrderItem orderItem =
+                    OrderItem.createOrderItem(item, orderDto.getCount());
+            orderItemList.add(orderItem);
+        }
+
+        // 현재 로그인한 회원과 주문 상품 목록을 이용하여 주문 엔티티 생성
+        Order order = Order.createOrder(member, orderItemList);
+        orderRepository.save(order);       // 주문 데이터 저장
+
+        return order.getId();
+    }
 }
