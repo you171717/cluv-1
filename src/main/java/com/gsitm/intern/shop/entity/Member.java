@@ -30,7 +30,6 @@ public class Member extends BaseEntity{
     private String address;
 
     @Enumerated(EnumType.STRING)
-
     private Role role;
 
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
