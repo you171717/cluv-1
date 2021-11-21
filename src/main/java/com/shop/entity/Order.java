@@ -3,7 +3,6 @@ package com.shop.entity;
 import com.shop.constant.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
-import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -52,5 +51,12 @@ public class Order extends BaseEntity{
             totalPrice += orderItem.getTotalPrice();
         }
         return totalPrice;
+    }
+    public void cancelOrder(){ //주문 상태 취소로 변경
+        this.orderStatus = OrderStatus.CANCEL;
+
+        for (OrderItem orderItem : orderItems){
+            orderItem.cancel();
+        }
     }
 }
