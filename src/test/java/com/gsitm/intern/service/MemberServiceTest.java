@@ -2,6 +2,7 @@ package com.gsitm.intern.service;
 
 import com.gsitm.intern.dto.MemberFormDto;
 import com.gsitm.intern.entity.Member;
+import com.gsitm.intern.entity.Point;
 import com.gsitm.intern.service.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,10 +33,12 @@ class MemberServiceTest {
         memberFormDto.setName("홍길동");
         memberFormDto.setAddress("서울시 마포구 합정동");
         memberFormDto.setPassword("1234");
-        memberFormDto.setPoint(0); // 개인프로젝트
+        //memberFormDto.setPoint(0); // 개인프로젝트
         return Member.createMember(memberFormDto, passwordEncoder);
     }
-
+//    public Point createPoint(){
+//
+//    }
     @Test
     @DisplayName("회원가입 테스트")
     public void saveMemberTest(){
@@ -47,7 +50,7 @@ class MemberServiceTest {
         assertEquals(member.getAddress(), savedMember.getAddress());
         assertEquals(member.getPassword(), savedMember.getPassword());
         assertEquals(member.getRole(), savedMember.getRole());
-        assertEquals(member.getPoint(), savedMember.getPoint()); // 개인프로젝트
+        //assertEquals(member.getPoint(), savedMember.getPoint()); // 개인프로젝트
     }
 
     @Test

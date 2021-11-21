@@ -5,48 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ac7031b-2f11-463d-88fb-f3f3769d60f5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/com/gsitm/intern/entity/QItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/com/gsitm/intern/test/jpa/QJpaEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/com.gsitm.intern.repository.ItemRepositoryTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/classes/com.gsitm.intern.repository.ItemRepositoryTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/com.gsitm.intern.repository.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/com.gsitm.intern.repository.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/sqlmap/mappers/MyBatisTestMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/sqlmap/mappers/MyBatisTestMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-com.gsitm.intern.repository.ItemRepositoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/TEST-com.gsitm.intern.repository.ItemRepositoryTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/InternApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/InternApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/config/auth/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/constant/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/constant/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/domain/QBaseTimeEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/domain/user/QUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/dto/QMainItemDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/entity/QBaseEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/entity/QBaseTimeEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/entity/QCart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/entity/QCartItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/entity/QItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/entity/QItemImg.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/entity/QMember.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/entity/QOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/entity/QOrderItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generated/com/gsitm/intern/test/jpa/QJpaEntity.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/ItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/controller/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/dto/MemberFormDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/dto/MemberFormDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/CartItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/CartItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/repository/ItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/repository/ItemRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/repository/MemberRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/entity/OrderItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/repository/CartRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/repository/CartRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/repository/ItemImgRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/repository/ItemImgRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gsitm/intern/repository/OrderRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/item/itemForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/item/itemForm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/repository/ItemRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/repository/ItemRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/serivce/MemberServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/item/itemDtl.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/item/itemDtl.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/entity/OrderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/entity/OrderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/service/MemberServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/gsitm/intern/service/MemberServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,18 +79,17 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="intern" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="intern" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="other" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="intern" type="f1a62948:ProjectNode" />
                 <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="intern" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -108,10 +103,10 @@
       <list>
         <option value="CSS File" />
         <option value="Tag Library Descriptor" />
-        <option value="JUnit5 Test Class" />
-        <option value="HTML File" />
         <option value="Enum" />
         <option value="Interface" />
+        <option value="JUnit5 Test Class" />
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -137,7 +132,7 @@
     </option>
     <option name="myId2Visible">
       <map>
-        <entry key="JPA Inspector" value="true" />
+        <entry key="JPA Inspector" value="false" />
         <entry key="JPA Palette" value="false" />
         <entry key="JPA Structure" value="false" />
       </map>
@@ -171,7 +166,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
@@ -217,48 +212,6 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="cluv [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="cluv [compileQuerydslJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="compileQuerydslJava" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <configuration name="cluv [compileQuerydsl]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -280,7 +233,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ItemServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CartServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="intern.test" />
       <extension name="coverage">
         <pattern>
@@ -289,8 +242,39 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.gsitm.intern.service" />
-      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.service.ItemServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.service.CartServiceTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="intern.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gsitm.intern.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.service" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.service.OrderServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderServiceTest.cancelOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="intern.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gsitm.intern.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gsitm.intern.service" />
+      <option name="MAIN_CLASS_NAME" value="com.gsitm.intern.service.OrderServiceTest" />
+      <option name="METHOD_NAME" value="cancelOrder" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -305,20 +289,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.cluv [compileQuerydsl]" />
-      <item itemvalue="Gradle.cluv [compileQuerydslJava]" />
-      <item itemvalue="Gradle.cluv [clean]" />
       <item itemvalue="Gradle.cluv [build]" />
-      <item itemvalue="JUnit.ItemServiceTest" />
+      <item itemvalue="Gradle.cluv [compileQuerydsl]" />
+      <item itemvalue="JUnit.OrderServiceTest" />
+      <item itemvalue="JUnit.OrderServiceTest.cancelOrder" />
+      <item itemvalue="JUnit.CartServiceTest" />
       <item itemvalue="Spring Boot.InternApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.cluv [build]" />
-        <item itemvalue="Gradle.cluv [clean]" />
-        <item itemvalue="JUnit.ItemServiceTest" />
         <item itemvalue="Gradle.cluv [compileQuerydsl]" />
-        <item itemvalue="Gradle.cluv [compileQuerydslJava]" />
+        <item itemvalue="JUnit.CartServiceTest" />
+        <item itemvalue="JUnit.OrderServiceTest.cancelOrder" />
+        <item itemvalue="JUnit.OrderServiceTest" />
+        <item itemvalue="Gradle.cluv [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -377,6 +361,18 @@
       <workItem from="1637134691712" duration="1422000" />
       <workItem from="1637140458353" duration="9000" />
       <workItem from="1637140496092" duration="105000" />
+      <workItem from="1637155353634" duration="57000" />
+      <workItem from="1637193488347" duration="25558000" />
+      <workItem from="1637234007747" duration="8566000" />
+      <workItem from="1637248034451" duration="1837000" />
+      <workItem from="1637279532830" duration="2806000" />
+      <workItem from="1637295075754" duration="1064000" />
+      <workItem from="1637299977854" duration="617000" />
+      <workItem from="1637320499286" duration="847000" />
+      <workItem from="1637388530027" duration="2580000" />
+      <workItem from="1637410436402" duration="14582000" />
+      <workItem from="1637481040045" duration="6239000" />
+      <workItem from="1637507294907" duration="3076000" />
     </task>
     <servers />
   </component>

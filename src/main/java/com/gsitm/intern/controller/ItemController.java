@@ -1,16 +1,17 @@
 package com.gsitm.intern.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import com.gsitm.intern.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import com.gsitm.intern.dto.ItemFormDto;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import javax.persistence.EntityNotFoundException;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -114,5 +115,4 @@ public class ItemController {
         model.addAttribute("item", itemFormDto);
         return "item/itemDtl";
     }
-
 }

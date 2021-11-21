@@ -24,5 +24,4 @@ public class MemberFormDto {
     @NotEmpty(message = "주소는 필수 입력 값입니다.")
     private String address;
 
-    private int point;
 }
