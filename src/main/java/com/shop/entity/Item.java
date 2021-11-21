@@ -3,18 +3,16 @@ package com.shop.entity;
 import com.shop.constant.ItemSellStatus;
 import com.shop.dto.ItemFormDto;
 import com.shop.exception.OutOfStockException;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name="item")
 @Getter
 @Setter
 @ToString
+@Builder @NoArgsConstructor @AllArgsConstructor
 //@IdClass(ItemID.class)
 public class Item extends BaseEntity{
 

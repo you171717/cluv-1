@@ -13,12 +13,16 @@
     <script th:inline="javascript">
         $(document).ready(function(){
 
-            calculateToalPrice();
-
-            $("#count").change( function(){
+            // api 호출
+            api(function() {
                 calculateToalPrice();
+
+                $("#count").change( function(){
+                    calculateToalPrice();
+                });
             });
         });
+
 
         function calculateToalPrice(){
             var count = $("#count").val();
@@ -107,6 +111,49 @@
             });
         }
 
+        // API 함수
+        function api(callback) {
+            var url = "/item/[[${item.id}]]/api";
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                cache: false,
+                success: function(result, status) {
+                    // 받아온 상품 데이터를 화면에 표시
+                    $("#itemId").val(result.id);
+                    $("#itemRepImg").attr({ src: result.itemImgDtoList[0].imgUrl, alt: result.itemNm });
+                    $("#itemNm").text(result.itemNm);
+                    $("#price").val(result.price);
+                    $("#itemPrice").text(result.price);
+                    $("#itemDetail").text(result.itemDetail);
+
+                    if(result.itemSellStatus == "SELL") {
+                        $("#itemSellStatus").text("판매중").addClass("badge-primary");
+                        $("#itemSoldOut").remove();
+                    } else {
+                        $("#itemSellStatus").text("품절").addClass("badge-danger");
+                        $("#itemSell").remove();
+                    }
+
+                    for(var i in result.itemImgDtoList) {
+                        var $target = $("#itemImg");
+                        var img = result.itemImgDtoList[i];
+
+                        if(img.imgUrl != "") {
+                            $("<img class='rounded mgb-15' width='800' />").attr("src", img.imgUrl).appendTo($target);
+                            $("<br />").appendTo($target);
+                        }
+                    }
+
+                    // 콜백 함수 호출
+                    callback();
+                }
+            });
+        }
+    </script>
+
     </script>
 </th:block>
 
@@ -139,27 +186,22 @@
 </th:block>
 
 <div layout:fragment="content" style="margin-left:25%;margin-right:25%">
-
-    <input type="hidden" id="itemId" th:value="${item.id}">
-
+    <input type="hidden" id="itemId" >
     <div class="d-flex">
         <div class="repImgDiv">
-            <img th:src="${item.itemImgDtoList[0].imgUrl}" class = "rounded repImg" th:alt="${item.itemNm}">
+            <img class = "rounded repImg" id="itemRepImg">
         </div>
         <div class="wd50">
-            <span th:if="${item.itemSellStatus == T(com.shop.constant.ItemSellStatus).SELL}" class="badge badge-primary mgb-15">
-                판매중
+            <span id="itemSellStatus" class="badge badge-primary mgb-15">
             </span>
-            <span th:unless="${item.itemSellStatus == T(com.shop.constant.ItemSellStatus).SELL}" class="badge btn-danger mgb-15" >
-                품절
-            </span>
-            <div class="h4" th:text="${item.itemNm}"></div>
+
+            <div class="h4" id="itemNm"></div>
             <hr class="my-4">
 
             <div class="text-right">
                 <div class="h4 text-danger text-left">
-                    <input type="hidden" th:value="${item.price}" id="price" name="price">
-                    <span th:text="${item.price}"></span>원
+                    <input type="hidden" id="price" name="price">
+                    <span id="itemPrice"></span>원
                 </div>
                 <div class="input-group w-50">
                     <div class="input-group-prepend">
@@ -174,11 +216,11 @@
                 <h5>결제 금액</h5>
                 <h3 name="totalPrice" id="totalPrice" class="font-weight-bold"></h3>
             </div>
-            <div th:if="${item.itemSellStatus == T(com.shop.constant.ItemSellStatus).SELL}" class="text-right">
+            <div id="itemSell" class="text-right">
                 <button type="button" class="btn btn-light border border-primary btn-lg" onclick="addCart()">장바구니 담기</button>
                 <button type="button" class="btn btn-primary btn-lg" onclick="order()">주문하기</button>
             </div>
-            <div th:unless="${item.itemSellStatus == T(com.shop.constant.ItemSellStatus).SELL}" class="text-right">
+            <div id="itemSoldOut" class="text-right">
                 <button type="button" class="btn btn-danger btn-lg">품절</button>
             </div>
         </div>
@@ -188,12 +230,11 @@
         <div class="container">
             <h4 class="display-5">상품 상세 설명</h4>
             <hr class="my-4">
-            <p class="lead" th:text="${item.itemDetail}"></p>
+            <p class="lead" id="itemDetail"></p>
         </div>
     </div>
 
-    <div th:each="itemImg : ${item.itemImgDtoList}" class="text-center">
-        <img th:if="${not #strings.isEmpty(itemImg.imgUrl)}" th:src="${itemImg.imgUrl}" class="rounded mgb-15" width="800">
+    <div id="itemImg" class="text-center">
     </div>
 
 </div>
