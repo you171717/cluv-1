@@ -40,6 +40,12 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'
 
+    /* MapStruct */
+    implementation 'org.mapstruct:mapstruct:1.4.1.Final'
+    /* MapStruct */
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
+
+
     // Querydsl
     implementation group: 'com.querydsl', name: 'querydsl-jpa', version: querydslVersion
     implementation group: 'com.querydsl', name: 'querydsl-apt', version: querydslVersion
