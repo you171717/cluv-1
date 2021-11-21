@@ -32,4 +32,39 @@ public class Order extends BaseEntity {
    private List<OrderItem> orderItems = new ArrayList<>();
     //하나의 주문이 여러 개의 주문 상품을 가지니까 List 자료형 사용해서 매핑
 
+    //orderItem 객체를 order 객체의 orderItems에 추가
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public static Order createOrder(Member member, List<OrderItem> orderItemList){
+        Order order = new Order();
+        order.setMember(member);  //상품 주문한 회원 정보 set
+        //장바구니에서는 한 번에 여러 개의 상품을 주문 가능, 여러 주문 상품을 담을 수 있도록 리스트 형태로 파라미터 값을
+        //받고 주문 객체에 orderItem 객체를 추가
+        for(OrderItem orderItem : orderItemList){
+            order.addOrderItem(orderItem);
+        }
+        order.setOrderStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
+
+    public int getTotalPrice(){
+        int totalPrice = 0;
+        for(OrderItem orderItem :  orderItems){
+            totalPrice += orderItem.getTotalPrice();
+        }
+        return totalPrice;
+    }
+
+    //주문 취소 시 주문 상태 취소로 바꾸고, 주문 수량을 상품 재고에 더해주는 메소드
+    public void cancelOrder(){
+        this.orderStatus = OrderStatus.CANCEL;
+
+        for(OrderItem orderItem : orderItems){
+            orderItem.cancel();
+        }
+    }
 }

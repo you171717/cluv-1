@@ -48,10 +48,12 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
+        #기본 batch size 설정
+        default_batch_fetch_size: 1000
     show-sql: true
 
   servlet:

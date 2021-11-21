@@ -40,7 +40,7 @@ public class Member extends BaseEntity{ //Auditing 기능 적용하기 위해 Ba
         member.setAddress(memberFormDto.getAddress());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
-        member.setRole(Role.USER);
+        member.setRole(Role.ADMIN);
         return member;
     }
 
