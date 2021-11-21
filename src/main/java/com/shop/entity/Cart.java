@@ -8,7 +8,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "cart")
-@Data // get set 인거 data로 통합함
+//@Data // get set 인거 data로 통합함
+@Setter
+@Getter
 @ToString
 public class Cart extends BaseEntity{
 
