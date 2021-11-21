@@ -3,6 +3,8 @@
 package com.shop.dto;
 
 import com.shop.entity.ItemImg;
+import com.shop.mapstruct.ItemImgMapStruct;
+import com.shop.mapstruct.ItemImgMapStructImpl;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -22,7 +24,12 @@ public class ItemImgDto {
 
     private static ModelMapper modelMapper = new ModelMapper();
 
+    //private static ItemImgMapStruct itemImgMapStruct = new ItemImgMapStructImpl();
+
     public static ItemImgDto of(ItemImg itemImg){
         return modelMapper.map(itemImg, ItemImgDto.class);
     }
+//    public static ItemImgDto of(ItemImg itemImg){
+//        return itemImgMapStruct.toDto(itemImg);
+//    }
 }

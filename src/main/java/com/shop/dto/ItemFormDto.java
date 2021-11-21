@@ -4,6 +4,8 @@ package com.shop.dto;
 
 import com.shop.constant.ItemSellStatus;
 import com.shop.entity.Item;
+import com.shop.mapstruct.ItemFormMapStruct;
+import com.shop.mapstruct.ItemFormMapStructImpl;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -38,12 +40,19 @@ public class ItemFormDto {
     private  List<Long> itemImgIds = new ArrayList<>();
 
     private  static ModelMapper modelMapper = new ModelMapper();
+//    private static ItemFormMapStruct itemFormMapStruct = new ItemFormMapStructImpl();
 
     public Item createItem(){
         return modelMapper.map(this, Item.class);
     }
+//    public Item createItem(){
+//        return itemFormMapStruct.toEntity(this);
+//    }
 
     public static ItemFormDto of(Item item){
         return modelMapper.map(item,ItemFormDto.class);
     }
+//    public static ItemFormDto of(Item item){
+//        return itemFormMapStruct.toDto(item);
+//    }
 }
