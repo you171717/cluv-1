@@ -51,6 +51,13 @@
             <p th:if="${#fields.hasErrors('address')}"
                th:errors="*{address}" class="fieldError">Incorrect data</p>
         </div>
+        <div class="form-group">
+            <label th:for="role">권한</label>
+            <select th:field="*{role}" class="custom-select">
+                <option value="USER">사용자</option>
+                <option value="ADMIN">관리자</option>
+            </select>
+        </div>
         <div style="text-align: center">
         <button type="submit" class="btn btn-danger" style="">회원가입</button>
         </div>
