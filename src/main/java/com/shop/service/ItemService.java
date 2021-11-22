@@ -19,21 +19,30 @@ import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+
 @Transactional
 @RequiredArgsConstructor
+@Service
 public class ItemService {
 
     private final ItemRepository itemRepository;
     private final ItemImgService itemImgService;
     private final ItemImgRepository itemImgRepository;
 
+//    @Autowired
+//    ItemFormMapStruct itemFormMapStruct;
+
     public Long saveItem(ItemFormDto itemFormDto,
-                         List<MultipartFile> itemImgFileList) throws Exception{
+                         List<MultipartFile> itemImgFileList) throws Exception {
 
         // 상품 등록
-        Item item = itemFormDto.createItem();               // fom으로 부터 item 객체 생성
+        Item item = itemFormDto.createItem();               // form으로 부터 item 객체 생성
         itemRepository.save(item);                          // 상품 데이터 저장
+
+//        Item item = itemFormMapStruct.toEntity(itemFormDto); // DTO -> Entity
+//        System.out.println(item.toString());
+//        itemRepository.save(item); // Entity를 저장
+
 
         // 이미지 등록
         for(int i=0; i<itemImgFileList.size(); i++){
@@ -63,6 +72,9 @@ public class ItemService {
         Item item = itemRepository.findById(itemId)               // 상품의 아이디를 통해 엔티티 조회
                 .orElseThrow(EntityNotFoundException::new);
         ItemFormDto itemFormDto = ItemFormDto.of(item);
+
+//        ItemFormDto itemFormDto = itemMapStruct.toDto(item); // Entity -> DTO
+
         itemFormDto.setItemImgDtoList(itemImgDtoList);
         return itemFormDto;
     }

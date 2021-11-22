@@ -46,6 +46,13 @@ dependencies {
 	// modelmapper
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
 
+	/* MapStruct */
+	implementation 'org.mapstruct:mapstruct:1.4.1.Final'
+
+	/* MapStruct */
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
+
+
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
