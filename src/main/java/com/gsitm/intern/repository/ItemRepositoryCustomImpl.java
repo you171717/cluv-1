@@ -100,7 +100,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                         item.price)
                 )
                 .from(itemImg)
-                .join(itemImg.item, item)
+                .join(itemImg.item, item)  //itemImg랑 item 내부 조인
                 .where(itemImg.repImgYn.eq("Y"))
                 .where(itemNmLike(itemSearchDto.getSearchQuery()))
                 .orderBy(item.id.desc())

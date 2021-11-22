@@ -20,6 +20,7 @@
       });
     });
 
+    //결제 금액 구하는 함수 (수량*한 개당 가격)
     function calculateToalPrice(){
       var count = $("#count").val();
       var price = $("#price").val();
@@ -28,16 +29,17 @@
     }
 
     function order(){
+      //POST방식 데이터 전송에 필요한 CSRF 토큰 값 조회
       var token = $("meta[name='_csrf']").attr("content");
       var header = $("meta[name='_csrf_header']").attr("content");
 
       var url = "/order";
-      var paramData = {
+      var paramData = { //주문할 상품의 아이디와 주문 수량 데이터를 전달할 객체 생성
         itemId : $("#itemId").val(),
         count : $("#count").val()
       };
 
-      var param = JSON.stringify(paramData);
+      var param = JSON.stringify(paramData);  //서버에 보낼 주문 데이터를 json으로 변경
 
       $.ajax({
         url      : url,
@@ -184,6 +186,7 @@
     </div>
   </div>
 
+  <!--등록된 상품 이미지를 반복문을 통해서 보여줌-->
   <div class="jumbotron jumbotron-fluid mgt-30">
     <div class="container">
       <h4 class="display-5">상품 상세 설명</h4>

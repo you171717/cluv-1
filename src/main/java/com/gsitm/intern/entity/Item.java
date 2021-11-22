@@ -2,6 +2,7 @@ package com.gsitm.intern.entity;
 
 import com.gsitm.intern.constant.ItemSellStatus;
 import com.gsitm.intern.dto.ItemFormDto;
+import com.gsitm.intern.exception.OutOfStockException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -40,5 +41,18 @@ public class Item extends BaseEntity {
         this.price = itemFormDto.getPrice();
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemSellStatus = itemFormDto.getItemSellStatus();
+    }
+
+    public void removeStock(int stockNumber){
+        int restStock = this.stockNumber - stockNumber;
+        if(restStock<0){  //상품의 재고가 주문 수량보다 작을 경우 재고 부족 예외 발생
+            throw new OutOfStockException("상품의 재고가 부족합니다. (현재 재고 수량: "+this.stockNumber + ")");
+        }
+        this.stockNumber = restStock;  //주문 후 남은 재고 수량을 현재 재고 값으로 할당
+    }
+
+    //상품 재고 증가 메소드 (주문 취소시 주문 수량만큼 상품 재고 더해주는 데 응용)
+    public void addStock(int stockNumber){
+        this.stockNumber += stockNumber;
     }
 }
