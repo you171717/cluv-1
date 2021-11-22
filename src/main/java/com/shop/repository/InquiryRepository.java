@@ -11,7 +11,5 @@ import java.util.List;
 public interface InquiryRepository extends JpaRepository<Inquiry,Long> {
 
     @Query("select i from Inquiry i where i.createdBy like %:createdBy% order by i.id desc")
-    List<Inquiry> findbyCreateBy(@Param("createdBy")String createdBy);
-
-
+    List<Inquiry> findByCreateBy(@Param("createdBy")String createdBy);
 }

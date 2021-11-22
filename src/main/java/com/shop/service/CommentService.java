@@ -1,7 +1,6 @@
 package com.shop.service;
 
 import com.shop.dto.CommentFormDto;
-import com.shop.dto.InquiryFormDto;
 import com.shop.entity.*;
 import com.shop.repository.CommentRepository;
 import com.shop.repository.InquiryRepository;
@@ -40,10 +39,16 @@ public class CommentService {
                     .id(comment.getId())
                     .content(comment.getContent())
                     .createdBy(comment.getCreatedBy())
+                    .regTime(comment.getRegTime())
                     .build();
             commentDtoList.add(commentFormDto);
         }
 
         return commentDtoList;
+    }
+
+    @Transactional
+    public void deleteComment(Long id){
+        commentRepository.deleteByInquriyId(id);
     }
 }

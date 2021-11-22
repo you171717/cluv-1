@@ -2,7 +2,10 @@ package com.shop.entity;
 
 import com.shop.dto.CommentFormDto;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -18,11 +21,12 @@ public class Comment extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "inquiry_id")
     private Inquiry inquiry;
 
     private String content;
+
 
     public static Comment createComment(Inquiry inquiry,CommentFormDto commentFormDto){
         Comment comment=new Comment();

@@ -1,19 +1,26 @@
 package com.shop.controller;
 
+import com.google.common.base.Functions;
+import com.google.common.collect.Lists;
+import com.shop.dto.CartOrderDto;
 import com.shop.dto.CommentFormDto;
 import com.shop.dto.FAQSearchDto;
 import com.shop.dto.InquiryFormDto;
 import com.shop.service.CommentService;
 import com.shop.service.InquiryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -87,11 +94,42 @@ public class InquiryController {
     }
 
 
+//    //문의 사항 삭제 기능
+//    @PostMapping(value = "/cscenter/voclist/delete/")
+//    public @ResponseBody ResponseEntity inquiryDelete(@RequestBody List<String> boardIdxArray,BindingResult bindingResult){
+//        if(bindingResult.hasErrors()){
+//            StringBuilder sb=new StringBuilder();
+//            List<FieldError> fieldErrors=bindingResult.getFieldErrors();
+//            for (FieldError fieldError:fieldErrors) {
+//                sb.append(fieldError.getDefaultMessage());
+//            }
+//            return new ResponseEntity<String>(sb.toString(), HttpStatus.BAD_REQUEST);
+//        }
+//        for(long i=0; i<boardIdxArray.size(); i++) {
+//            commentService.deleteComment(i);
+//        }
+//
+//        for(long i=0; i<boardIdxArray.size(); i++) {
+//            inquiryService.deleteInquiry(i);
+//        }
+//
+//        return new ResponseEntity<Long>(HttpStatus.OK);
+//        //return "redirect:/cscenter/voclist/";
+//    }
+
     //문의 사항 삭제 기능
-    @GetMapping(value = "/cscenter/voclist/delete/{id}")
-    public String inquiryDelete(@PathVariable("id") Long id){
-        inquiryService.deleteInquiry(id);
-        return "redirect:/cscenter/voclist/";
+    @ResponseBody
+    @DeleteMapping("/cscenter/voclist")
+    public String inquiryDelete(@RequestBody List<String> inquiryIdxArray){
+        List<Long> newList = inquiryIdxArray.stream().map(s -> Long.parseLong(s)).collect(Collectors.toList());
+        for(int i=0; i<inquiryIdxArray.size(); i++) {
+            commentService.deleteComment(newList.get(i));
+        }
+
+        for(int i=0; i<inquiryIdxArray.size(); i++) {
+            inquiryService.deleteInquiry(newList.get(i));
+        }
+        return "";
     }
 
     //admin에서 모든 문의 사항 리스트를 불러오는 기능
