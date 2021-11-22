@@ -1,10 +1,10 @@
 package com.shop.entity;
 
+import com.shop.constant.GiftStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -26,16 +26,19 @@ public class OrderItem extends BaseEntity{
 
     private int count;                       // 수량
 
+    private GiftStatus giftStatus;          // 구매 선물 상태
+
 //    private LocalDateTime regTime;
 //
 //    private LocalDateTime updateTime;
 
     // OrderItem 객체 생성
-    public static OrderItem createOrderItem(Item item, int count){
+    public static OrderItem createOrderItem(Item item, int count, GiftStatus giftStatus){
         OrderItem orderItem = new OrderItem();
         orderItem.setItem(item);                      // 주문할 상품과 주문 수량 세팅
         orderItem.setCount(count);
         orderItem.setOrderPrice(item.getPrice());     // 현재 시간 기준으로 상품 가격 세팅
+        orderItem.setGiftStatus(giftStatus);
 
         item.removeStock(count);             // 주문한 수량만큼 재고 down
         return orderItem;

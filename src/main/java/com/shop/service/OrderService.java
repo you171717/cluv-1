@@ -39,7 +39,7 @@ public class OrderService {
 
         // 주문할 상품 엔티티와 주문 수량을 이용하여 주문 상품 엔티티 생성
         OrderItem orderItem =
-                OrderItem.createOrderItem(item, orderDto.getCount());
+                OrderItem.createOrderItem(item, orderDto.getCount(), orderDto.getGiftStatus());
         orderItemList.add(orderItem);
 
         // 회원 정보와 주문할 상품 리스트 정보를 이용하여 주문 엔티티 생성
@@ -71,6 +71,7 @@ public class OrderService {
             }
             orderHistDtos.add(orderHistDto);
         }
+
         return new PageImpl<OrderHistDto>(orderHistDtos, pageable, totalCount);
     }
 
@@ -103,7 +104,7 @@ public class OrderService {
             Item item = itemRepository.findById(orderDto.getItemId())
                     .orElseThrow(EntityNotFoundException::new);
             OrderItem orderItem =
-                    OrderItem.createOrderItem(item, orderDto.getCount());
+                    OrderItem.createOrderItem(item, orderDto.getCount(), orderDto.getGiftStatus());
             orderItemList.add(orderItem);
         }
 

@@ -4,7 +4,6 @@ import com.shop.constant.GiftStatus;
 import com.shop.constant.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.ibatis.annotations.Many;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -39,7 +38,7 @@ public class Order extends BaseEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL,  // 일대다 매핑, mappedBy 속성 : 연관 관계 주인 설정
                 orphanRemoval = true, fetch = FetchType.LAZY)
     // 고아 객체 제거 사용
-    private List<OrderItem> orderItems =new ArrayList<>();
+    private List<OrderItem> orderItems = new ArrayList<>();
 
 //    private LocalDateTime regTime;
 //    private LocalDateTime updateTime;

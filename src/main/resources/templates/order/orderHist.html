@@ -87,14 +87,25 @@
         .fs24{
             font-size:24px
         }
+        .right-box {
+
+            float: right;
+        }
     </style>
 </th:block>
 
 <div layout:fragment="content" class="content-mg">
 
     <h2 class="mb-4">
-        구매 이력
+        구매/선물 이력
     </h2>
+
+    <div class="right-box" >
+        <select class="custom-select">
+            <option value="BUY">구매</option>
+            <option value="GIFT">선물</option>
+        </select>
+    </div>
 
     <div th:each="order : ${orders.getContent()}">
 

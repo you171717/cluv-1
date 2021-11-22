@@ -2,9 +2,8 @@ package com.shop.dto;
 
 import com.shop.constant.ItemSellStatus;
 import com.shop.entity.Item;
-import com.shop.mapper.ItemFormMapStruct;
-import com.shop.mapper.ItemFormMapStructImpl;
 import lombok.*;
+import org.modelmapper.ModelMapper;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -40,25 +39,25 @@ public class ItemFormDto {
     // 상품의 이미지 아이디 저장 리스트
     private List<Long> itemImgIds = new ArrayList<>();
 
-//    private static ModelMapper modelMapper = new ModelMapper();
-    private static ItemFormMapStruct itemFormMapStruct = new ItemFormMapStructImpl();
+    private static ModelMapper modelMapper = new ModelMapper();
+//    private static ItemFormMapStruct itemFormMapStruct = new ItemFormMapStructImpl();
 
     // 엔티티 객체와 DTO 객체 간의 데이터 복사, 복사한 개체 반환
-//    public Item createItem(){
-//        return modelMapper.map(this, Item.class);
-//    }
-
     public Item createItem(){
-        return itemFormMapStruct.toEntity(this);
+        return modelMapper.map(this, Item.class);
     }
 
-//    public static ItemFormDto of(Item item){
-//        return modelMapper.map(item, ItemFormDto.class);
+//    public Item createItem(){
+//        return itemFormMapStruct.toEntity(this);
 //    }
 
     public static ItemFormDto of(Item item){
-        return itemFormMapStruct.toDto(item);
+        return modelMapper.map(item, ItemFormDto.class);
     }
+
+//    public static ItemFormDto of(Item item){
+//        return itemFormMapStruct.toDto(item);
+//    }
 
 
 }

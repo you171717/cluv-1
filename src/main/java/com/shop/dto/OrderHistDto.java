@@ -2,7 +2,6 @@ package com.shop.dto;
 
 import com.shop.constant.OrderStatus;
 import com.shop.entity.Order;
-import com.shop.entity.OrderItem;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +25,8 @@ public class OrderHistDto {
     private String orderDate;          // 주문 날짜
 
     private OrderStatus orderStatus;   // 주문 상태
+
+
 
     // 주문 상품 리스트
     private List<OrderItemDto> orderItemDtoList = new ArrayList<>();

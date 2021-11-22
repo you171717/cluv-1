@@ -76,6 +76,8 @@ public class ItemService {
 //        ItemFormDto itemFormDto = itemMapStruct.toDto(item); // Entity -> DTO
 
         itemFormDto.setItemImgDtoList(itemImgDtoList);
+
+
         return itemFormDto;
     }
 
@@ -98,8 +100,8 @@ public class ItemService {
 
     // 상품 관리 페이지 목록 불러옴 (읽기 전용)
     @Transactional(readOnly= true)
-    public Page<Item> getAdminItemPage(ItemSearchDto itemSerachDto, Pageable pageable){
-        return itemRepository.getAdminItemPage(itemSerachDto, pageable);
+    public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getAdminItemPage(itemSearchDto, pageable);
     }
 
     // 메인 페이지 상품 데이터
