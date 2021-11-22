@@ -8,9 +8,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "cart")
-@Data // get set 인거 data로 통합함
+//@Data // get set 인거 data로 통합함
+@Setter
+@Getter
 @ToString
-public class Cart {
+public class Cart extends BaseEntity{
 
     @Id
     @Column(name = "cart_id")
@@ -21,5 +23,10 @@ public class Cart {
     @JoinColumn(name="member_id")
     private Member member;
 
+    public static Cart createCart(Member member){
+        Cart cart = new Cart();
+        cart.setMember(member);
+        return cart;
+    }
 
 }

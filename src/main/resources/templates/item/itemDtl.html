@@ -28,38 +28,44 @@
         }
 
         function order(){
+            //Spring security 사용시 기본적 POST 방식 데이터 전송에는 CSRF 토큰 값 필요 , 해당 값 조회
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
 
             var url = "/order";
+            //주문할 상품 아이디와 주문 수량 데이터 전달할 객체 생성
             var paramData = {
                 itemId : $("#itemId").val(),
                 count : $("#count").val()
             };
 
+            //서버에 보낼 주문 데이터 json 변환
             var param = JSON.stringify(paramData);
 
             $.ajax({
                 url      : url,
                 type     : "POST",
-                contentType : "application/json",
+                contentType : "application/json", // 데이터 전송 형식 json 지정
                 data     : param,
                 beforeSend : function(xhr){
                     /* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
                     xhr.setRequestHeader(header, token);
                 },
-                dataType : "json",
+                dataType : "json", //전송 받을 데이터 타입 json으로 설정
                 cache   : false,
+                //주문 로직 호출 성공 시 alert 출력 후 메인페이지로
                 success  : function(result, status){
                     alert("주문이 완료 되었습니다.");
                     location.href='/';
                 },
                 error : function(jqXHR, status, error){
 
+                    //로그인 상태 X -> alert 출력 후 로그인 페이지로
                     if(jqXHR.status == '401'){
                         alert('로그인 후 이용해주세요');
                         location.href='/members/login';
                     } else{
+                        //주문 에러 발생시 해당 메시지 보여줌
                         alert(jqXHR.responseText);
                     }
 
@@ -195,6 +201,8 @@
     <div th:each="itemImg : ${item.itemImgDtoList}" class="text-center">
         <img th:if="${not #strings.isEmpty(itemImg.imgUrl)}" th:src="${itemImg.imgUrl}" class="rounded mgb-15" width="800">
     </div>
+
+
 
 </div>
 
