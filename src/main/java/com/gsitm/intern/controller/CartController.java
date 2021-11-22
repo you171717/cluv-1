@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -53,6 +56,24 @@ public class CartController {
     @GetMapping(value = "/cart")
     public String orderHist(Principal principal, Model model) {
         List<CartDetailDto> cartDetailList = cartService.getCartList(principal.getName());
+        String discountEndTime = "";
+
+        switch (LocalTime.now().getHour()) {
+            case 0: case 1: case 2: case 3: discountEndTime = "03:59:59"; break;
+            case 4: case 5: case 6: case 7: discountEndTime = "07:59:59"; break;
+            case 8: case 9: case 10: case 11: discountEndTime = "11:59:59"; break;
+            case 12: case 13: case 14: case 15: discountEndTime = "15:59:59"; break;
+            case 16: case 17: case 18: case 19: discountEndTime = "19:59:59"; break;
+            case 20: case 21: case 22: case 23: discountEndTime = "23:59:59"; break;
+        }
+
+        for(CartDetailDto cartDetailDto : cartDetailList) {
+            String cartItemDiscountTime = cartDetailDto.getDiscountDate() + " " + cartDetailDto.getDiscountTime();
+            if(cartItemDiscountTime.contains(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))) && cartItemDiscountTime.contains(discountEndTime)) {
+                cartDetailDto.setPrice(cartDetailDto.getPrice() * (100 - cartDetailDto.getDiscountRate()) / 100);
+            }
+        }
+
         model.addAttribute("cartItems", cartDetailList);
         return "cart/cartList";
     }
@@ -82,6 +103,7 @@ public class CartController {
     @PostMapping(value = "/cart/orders")
     public @ResponseBody ResponseEntity orderCartItem(@RequestBody CartOrderDto cartOrderDto, Principal principal) {
         List<CartOrderDto> cartOrderDtoList = cartOrderDto.getCartOrderDtoList();
+        List<Integer> priceList = cartOrderDto.getPriceList();
 
         if(cartOrderDtoList == null || cartOrderDtoList.size() == 0) {
             return new ResponseEntity<String>("주문할 상품을 선택해주세요", HttpStatus.FORBIDDEN);
@@ -93,8 +115,7 @@ public class CartController {
             }
         }
 
-        Long orderId = cartService.orderCartItem(cartOrderDtoList, principal.getName());
+        Long orderId = cartService.orderCartItem(cartOrderDtoList, priceList, principal.getName());
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }
-
 }

@@ -1,6 +1,7 @@
 package com.gsitm.intern.controller;
 
 import com.gsitm.intern.dto.ItemFormDto;
+import com.gsitm.intern.dto.ItemMngDto;
 import com.gsitm.intern.dto.ItemSearchDto;
 import com.gsitm.intern.entity.Item;
 import com.gsitm.intern.service.ItemService;
@@ -92,8 +93,8 @@ public class ItemController {
 
     @GetMapping(value = {"/admin/items", "/admin/items/{page}"})
     public String itemManage(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model) {
-        Pageable pageable = PageRequest.of(page.isPresent()? page.get() : 0, 3);
-        Page<Item> items = itemService.getAdminItemPage(itemSearchDto, pageable);
+        Pageable pageable = PageRequest.of(page.isPresent()? page.get() : 0, 5);
+        Page<ItemMngDto> items = itemService.getAdminItemPage(itemSearchDto, pageable);
 
         model.addAttribute("items", items);
         model.addAttribute("itemSearchDto", itemSearchDto);

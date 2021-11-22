@@ -58,12 +58,13 @@ class OrderServiceTest {
     public void order() {
         Item item = saveItem();
         Member member = saveMember();
+        int price = 5000;
 
         OrderDto orderDto = new OrderDto();
         orderDto.setCount(10);
         orderDto.setItemId(item.getId());
 
-        Long orderId = orderService.order(orderDto, member.getEmail());
+        Long orderId = orderService.order(orderDto, member.getEmail(), price);
 
         Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
 
@@ -79,11 +80,12 @@ class OrderServiceTest {
     public void cancelOrder() {
         Item item = saveItem();
         Member member = saveMember();
+        int price = 5000;
 
         OrderDto orderDto = new OrderDto();
         orderDto.setCount(10);
         orderDto.setItemId(item.getId());
-        Long orderId = orderService.order(orderDto, member.getEmail());
+        Long orderId = orderService.order(orderDto, member.getEmail(), price);
 
         Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
         orderService.cancelOrder(orderId);

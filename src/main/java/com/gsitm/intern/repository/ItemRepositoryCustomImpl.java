@@ -1,12 +1,9 @@
 package com.gsitm.intern.repository;
 
+import com.gsitm.intern.constant.DiscountTime;
 import com.gsitm.intern.constant.ItemSellStatus;
-import com.gsitm.intern.dto.ItemSearchDto;
-import com.gsitm.intern.dto.MainItemDto;
-import com.gsitm.intern.dto.QMainItemDto;
-import com.gsitm.intern.entity.Item;
-import com.gsitm.intern.entity.QItem;
-import com.gsitm.intern.entity.QItemImg;
+import com.gsitm.intern.dto.*;
+import com.gsitm.intern.entity.*;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -16,7 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.thymeleaf.util.StringUtils;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
@@ -52,27 +51,32 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
     private BooleanExpression searchByLike(String searchBy, String searchQuery) {
 
         if(StringUtils.equals("itemNm", searchBy)) {
-            return QItem.item.itemNm.like("%" + searchBy + "%");
+            return QItem.item.itemNm.like("%" + searchQuery + "%");
         } else if(StringUtils.equals("createdBy", searchBy)) {
-            return QItem.item.createdBy.like("%" + searchBy + "%");
+            return QItem.item.createdBy.like("%" + searchQuery + "%");
         }
 
         return null;
     }
 
     @Override
-    public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+    public Page<ItemMngDto> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
 
-        QueryResults<Item> results = queryFactory.selectFrom(QItem.item)
-                                                 .where(regDtsAfter((itemSearchDto.getSearchDateType())),
-                                                        searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
-                                                        searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery()))
-                                                 .orderBy(QItem.item.id.desc())
-                                                 .offset(pageable.getOffset())
-                                                 .limit(pageable.getPageSize())
-                                                 .fetchResults();
+        QItem item = QItem.item;
+        QItemDiscount itemDiscount = QItemDiscount.itemDiscount;
 
-        List<Item> content = results.getResults();
+        QueryResults<ItemMngDto> results = queryFactory.select(new QItemMngDto(item.id, item.itemNm, item.price, item.itemDetail, item.itemSellStatus, item.stockNumber,item.regTime, item.updateTime, item.createdBy, item.modifiedBy, itemDiscount.id, itemDiscount.discountDate, itemDiscount.discountTime, itemDiscount.discountRate))
+                                                       .from(item)
+                                                       .leftJoin(item.itemDiscount, itemDiscount)
+                                                       .where(regDtsAfter((itemSearchDto.getSearchDateType())),
+                                                              searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
+                                                              searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery()))
+                                                       .orderBy(item.id.desc())
+                                                       .offset(pageable.getOffset())
+                                                       .limit(pageable.getPageSize())
+                                                       .fetchResults();
+
+        List<ItemMngDto> content = results.getResults();
         long total = results.getTotal();
         return new PageImpl<>(content, pageable, total);
     }
@@ -102,5 +106,94 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
         long total = results.getTotal();
 
         return new PageImpl<>(content, pageable, total);
+    }
+
+    @Override
+    public Page<ItemDiscountDto> getDiscountItemPage(Pageable pageable) {
+
+        QItem item = QItem.item;
+        QItemImg itemImg = QItemImg.itemImg;
+        QItemDiscount itemDiscount = QItemDiscount.itemDiscount;
+
+        String discountTime = "";
+        switch (LocalTime.now().getHour()) {
+            case 0: case 1: case 2: case 3: discountTime = "ONE"; break;
+            case 4: case 5: case 6: case 7: discountTime = "TWO"; break;
+            case 8: case 9: case 10: case 11: discountTime = "THREE"; break;
+            case 12: case 13: case 14: case 15: discountTime = "FOUR"; break;
+            case 16: case 17: case 18: case 19: discountTime = "FIVE"; break;
+            case 20: case 21: case 22: case 23: discountTime = "SIX"; break;
+        }
+
+        QueryResults<ItemDiscountDto> results = queryFactory.select(new QItemDiscountDto(item.id, item.itemNm, item.itemDetail, itemImg.imgUrl, item.price, itemDiscount.discountRate))
+                                                        .from(itemDiscount)
+                                                        .innerJoin(itemDiscount.item, item)
+                                                        .innerJoin(itemImg).on(itemDiscount.item.id.eq(itemImg.item.id))
+                                                        .where(itemImg.repImgYn.eq("Y"))
+                                                        .where(itemDiscount.discountDate.eq(LocalDate.now()))
+                                                        .where(itemDiscount.discountTime.eq(DiscountTime.valueOf(discountTime)))
+                                                        .orderBy(item.id.desc())
+                                                        .offset(pageable.getOffset())
+                                                        .limit(pageable.getPageSize())
+                                                        .fetchResults();
+
+        List<ItemDiscountDto> content = results.getResults();
+        long total = results.getTotal();
+
+        return new PageImpl<>(content, pageable, total);
+    }
+
+    @Override
+    public ItemDiscountPopupDto getItemDiscountPopup (Long id) {
+        QItemDiscount itemDiscount = QItemDiscount.itemDiscount;
+
+        QueryResults<ItemDiscountPopupDto> results = queryFactory.select(new QItemDiscountPopupDto(itemDiscount.id, itemDiscount.item.id, itemDiscount.discountDate, itemDiscount.discountTime, itemDiscount.discountRate))
+                .from(itemDiscount)
+                .where(itemDiscount.item.id.eq(id))
+                .fetchResults();
+
+        if(results.getTotal() > 0)
+            return results.getResults().get(0);
+        else
+            return null;
+    }
+
+    @Override
+    public ItemDiscount getItemDiscount(Long id) {
+        QueryResults<ItemDiscount> results = queryFactory.selectFrom(QItemDiscount.itemDiscount)
+                                                         .where(QItemDiscount.itemDiscount.id.eq(id))
+                                                         .fetchResults();
+        if(results.getTotal() > 0)
+            return results.getResults().get(0);
+        else
+            return null;
+    }
+
+    @Override
+    public Item getItem(Long id) {
+        QueryResults<Item> results = queryFactory.selectFrom(QItem.item)
+                                                 .where(QItem.item.id.eq(id))
+                                                 .fetchResults();
+        if(results.getTotal() > 0)
+            return results.getResults().get(0);
+        else
+            return null;
+    }
+
+    @Override
+    public ItemMngDto getDiscountItemDtl(Long id) {
+        QItem item = QItem.item;
+        QItemDiscount itemDiscount = QItemDiscount.itemDiscount;
+
+        QueryResults<ItemMngDto> results = queryFactory.select(new QItemMngDto(item.id, item.itemNm, item.price, item.itemDetail, item.itemSellStatus, item.stockNumber,item.regTime, item.updateTime, item.createdBy, item.modifiedBy, itemDiscount.id, itemDiscount.discountDate, itemDiscount.discountTime, itemDiscount.discountRate))
+                                                       .from(item)
+                                                       .leftJoin(item.itemDiscount, itemDiscount)
+                                                       .where(item.id.eq(id))
+                                                       .fetchResults();
+
+        if(results.getTotal() > 0)
+            return results.getResults().get(0);
+        else
+            return null;
     }
 }

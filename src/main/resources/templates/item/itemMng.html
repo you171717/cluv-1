@@ -12,6 +12,29 @@
                 e.preventDefault();
                 page(0);
             });
+            $(".discount").on("click",function() {
+                var id = $(this).attr('id');
+                popup(id);
+            });
+            $(".discountDelete").on("click",function() {
+                var id = $(this).attr('id');
+                if (confirm("할인정보를 삭제하시겠습니까?") == true){    //확인
+                    location.href="/admin/item/DeleteDiscount?itemId=" + id;
+                } else{   //취소
+                    return false;
+                }
+            });
+
+            var errorMessage = [[${errorMessage}]];
+            if(errorMessage != null){
+                alert(errorMessage);
+            }
+
+            var successMessage = [[${successMessage}]];
+            if(successMessage != null){
+                alert(successMessage);
+                window.location.reload();
+            }
         });
 
         function page(page){
@@ -24,6 +47,17 @@
                 + "&searchSellStatus=" + searchSellStatus
                 + "&searchBy=" + searchBy
                 + "&searchQuery=" + searchQuery;
+        }
+        function popup(id) {
+            if(id === undefined) {
+                var url = "/admin/item/discountPopup";
+            } else {
+                var url = "/admin/item/discountPopup?itemId=" + id;
+            }
+
+            var name = "Discount Popup";
+            var option = "width = 500, height = 300, top = 100, left = 200, location = no"
+            window.open(url, name, option);
         }
 
     </script>
@@ -49,6 +83,7 @@
                 <td>상태</td>
                 <td>등록자</td>
                 <td>등록일</td>
+                <td>할인정보</td>
             </tr>
             </thead>
             <tbody>
@@ -57,9 +92,14 @@
                 <td>
                     <a th:href="'/admin/item/'+${item.id}" th:text="${item.itemNm}"></a>
                 </td>
-                <td th:text="${item.itemSellStatus == T(com.gsitm.intern.constant.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>
+                <td th:text="${item.itemSellStatus == 'SELL'? '판매중' : '품절'}"></td>
                 <td th:text="${item.createdBy}"></td>
-                <td th:text="${item.regTime}"></td>
+                <td th:text="${#temporals.format(item.regTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td>
+                    <span th:text="${item.discountDate} != null ? |${item.discountDate} ${item.discountTime}| : ''"></span>
+                    <input type="button" class="discount" value="할인 등록/수정" th:id="${item.id}">
+                    <input type="button" class="discountDelete" value="할인 삭제" th:id="${item.id}">
+                </td>
             </tr>
             </tbody>
         </table>
@@ -104,7 +144,7 @@
                 <option value="createdBy">등록자</option>
             </select>
             <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색어를 입력해주세요">
-            <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>
+            <input type="button" id="searchBtn" class="btn btn-primary" value="검색">
         </div>
     </form>
 

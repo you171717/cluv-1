@@ -29,6 +29,8 @@
             });
 
             $("#orderTotalPrice").html(orderTotalPrice+'원');
+
+            return orderTotalPrice;
         }
 
         function changeCount(obj){
@@ -114,12 +116,14 @@
         }
 
         function orders(){
+
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
 
-            var url = "/cart/orders";
+            var url = "/cart/orders?price=" + getOrderTotalPrice();
 
             var dataList = new Array();
+            var priceList = new Array();
             var paramData = new Object();
 
             $("input[name=cartChkBox]:checked").each(function() {
@@ -127,9 +131,13 @@
                 var data = new Object();
                 data["cartItemId"] = cartItemId;
                 dataList.push(data);
+                var price = $("#price_" + cartItemId).attr("data-price");
+                var count = $("#count_" + cartItemId).val();
+                priceList.push(price*count);
             });
 
             paramData['cartOrderDtoList'] = dataList;
+            paramData['priceList'] = priceList;
 
             var param = JSON.stringify(paramData);
 
