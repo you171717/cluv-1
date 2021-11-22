@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
-public class OrderItem {
+public class OrderItem extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name = "order_item_id")
@@ -32,7 +32,25 @@ public class OrderItem {
 
     private int count; //수량
 
-//    private LocalDateTime regTime; 삭제
+    private LocalDateTime regTime;
     
-//    private LocalDateTime updateTime; 삭제
+    private LocalDateTime updateTime;
+
+    public static OrderItem createOrderItem(Item item, int count){
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setCount(count);
+        orderItem.setOrderPrice(item.getPrice());
+        item.removeStock(count);
+        return orderItem;
+    }
+
+    public int getTotalPrice(){
+        return orderPrice*count;
+    }
+
+    public void cancel() {
+        this.getItem().addStock(count);
+    } // 주문 취소 시 주문 수량만큼 상품의 재고를 더해줍니다.
+
 }
