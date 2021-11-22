@@ -31,6 +31,6 @@ public class ReverseAuctionFormDto {
     private LocalDateTime startTime;
 
     @NotNull(message = "상품은 필수 입력 값입니다.")
-    private Item item;
+    private Long itemId;
 
 }

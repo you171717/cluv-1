@@ -1,5 +1,6 @@
 package com.shop.entity;
 
+import com.shop.constant.BidDepositType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +19,8 @@ public class Bid extends BaseEntity {
     private Long id; // 역경매 구매 코드
 
     @Column(nullable = false)
-    private String depositType; // 입금 방법
+    @Enumerated(EnumType.STRING)
+    private BidDepositType depositType; // 입금 방법
 
     @Column(nullable = false)
     private String depositName; // 입금자명
@@ -29,7 +31,6 @@ public class Bid extends BaseEntity {
     @Column(nullable = false, length = 1)
     private String approvedYn; // 확인(낙찰) 여부
 
-    @Column(nullable = false)
     private LocalDateTime approvedTime; // 확인(낙찰) 시간
 
     @ManyToOne(fetch = FetchType.LAZY)
