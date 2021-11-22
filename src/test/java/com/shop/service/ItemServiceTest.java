@@ -34,16 +34,15 @@ class ItemServiceTest {
     ItemRepository itemRepository;
 
     @Autowired
-    ItemImgRepository itemImgReposity;
+    ItemImgRepository itemImgRepository;
 
 
     List<MultipartFile> createMultipartFiles() throws Exception{
         List<MultipartFile> multipartFileList = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
-            String path = "c:/shop/item/";
+            String path = "C:/shop/item/";
             String imageName = "image" + i + ".jpg";
-            System.out.println(i+"번째:::" + imageName);
             MockMultipartFile multipartFile =
                     new MockMultipartFile(path, imageName, "image/jpg", new byte[]{1, 2, 3, 4});
             multipartFileList.add(multipartFile);
@@ -65,7 +64,7 @@ class ItemServiceTest {
 
         List<MultipartFile> multipartFileList = createMultipartFiles();
         Long itemId = itemService.saveItem(itemFormDto, multipartFileList);
-        List<ItemImg> itemImgList = itemImgReposity.findByItemIdOrderByIdAsc(itemId);
+        List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
 
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(EntityNotFoundException::new);

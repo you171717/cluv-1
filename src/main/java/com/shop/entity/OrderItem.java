@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "order_item")
 @Getter
 @Setter
-public class OrderItem extends BaseEntity {
+public class OrderItem extends BaseTimeEntity {
 
     @Id
     @GeneratedValue
@@ -29,5 +29,22 @@ public class OrderItem extends BaseEntity {
 
     private int count;  //수량
 
+    public static OrderItem createOrderItem(Item item, int count) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setCount(count);
+        orderItem.setOrderPrice(item.getPrice());
 
+        item.removeStock(count);
+        return orderItem;
+
+    }
+
+    public int getTotalPrice(){
+        return orderPrice * count;
+    }
+
+    public void cancel(){
+        this.getItem().addStock(count);
+    }
 }

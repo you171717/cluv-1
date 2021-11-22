@@ -61,6 +61,6 @@ public class MemberController {
     @GetMapping(value = "/oauthcomplete")
     public String loginComplete(){
 
-        return null;
+        return "main";
     }
 }

@@ -14,15 +14,16 @@ spring:
     prefix: classpath:/templates/
     cache: false
   datasource:
-    hikari:
-      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      jdbc-url: jdbc:log4jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1661
-      username: it1661
-      password: it1661
-#    driver-class-name: org.mariadb.jdbc.Driver
-#    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/intern
-#    username: admin
-#    password: itm6700!
+#    hikari:
+#      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+#      jdbc-url: jdbc:log4jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/it1661
+#      username: it1661
+#      password: it1661
+#      connection-timeout: 60000
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://dev-cluv-maria-database.cnjv9cmqjlxx.ap-northeast-2.rds.amazonaws.com:3306/intern
+    username: admin
+    password: itm6700!
   devtools:
     livereload:
       enabled: true
@@ -30,10 +31,11 @@ spring:
     init:
       mode: always
   jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     properties:
       hibernate:
-        show_sql: 'true'
-        format_sql: 'true'
+        show_sql: true
+        format_sql: true
     hibernate:
 #      ddl-auto: validate
       ddl-auto: create
