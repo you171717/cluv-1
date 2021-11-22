@@ -47,13 +47,13 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update #create
       database-platform: org.hibernate.dialect.MySQL8Dialect // hibernate sql 문
     properties:
       hibernate:
         show_sql: true
         format_sql: true
-
+        default_batch_fetch_size : 1000
 mybatis:
   mapper-locations: sqlmap/mappers/*.xml
   configuration:

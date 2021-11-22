@@ -92,7 +92,7 @@ class OrderTest {
         Member member = new Member();
         memberRepository.save(member);
 
-        order.setMeber(member);
+        order.setMember(member);
         orderRepository.save(order);
         return order;
     }
