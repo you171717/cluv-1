@@ -21,3 +21,17 @@ body{
     margin-left: 200px;
     margin-right: 200px;
 }
+
+.navbar-brand{
+    color:white;
+}
+
+.nav-link{
+    color:white;
+}
+
+.pagination .page-link{
+    color:white;
+    background-color: darkred;
+}
+

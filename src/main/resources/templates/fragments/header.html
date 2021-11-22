@@ -2,7 +2,7 @@
 <html xmlns:th="http://thymeleaf.org"
       xmlns:sec="http//www.thymeleaf.org/extras/spring-security">
 <div th:fragment="header">
-    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <nav class="navbar navbar-expand-sm " style="background-color: #8B0000;">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarTogglerDemo03"
                 aria-controls="#navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -34,22 +34,22 @@
 
             <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="get">
 
-                <!--          oauth 로그인 -->
-                <div  th:if="${not #strings.isEmpty(userName)}">
-                    <img style="width:45px; height:45px" src="/image/unnamed.png" th:src="${userImg}"
-                         class="rounded-circle img-thumbnail img-responsive">
-                    <span id="login-user" th:text="${userName}">사용자</span> 님, 안녕하세요.
-                    <a href="/members/logout" class="btn btn-sm btn-info active" role="button">Logout</a>
-                </div>
-                <div th:if="${#strings.isEmpty(userName)}">
-                    <!-- 스프링 시큐리티에서 기본 제공하는 URL - 별도 컨트롤러 작성 필요 없음 -->
-                    <a href="/oauth2/authorization/google" class="btn btn-sm btn-success active" role="button">Google Login</a>
-                </div>
+<!--                &lt;!&ndash;          oauth 로그인 &ndash;&gt;-->
+<!--                <div  th:if="${not #strings.isEmpty(userName)}">-->
+<!--                    <img style="width:45px; height:45px" src="/image/unnamed.png" th:src="${userImg}"-->
+<!--                         class="rounded-circle img-thumbnail img-responsive">-->
+<!--                    <span id="login-user" th:text="${userName}">사용자</span> 님, 안녕하세요.-->
+<!--                    <a href="/members/logout" class="btn btn-sm btn-info active" role="button">Logout</a>-->
+<!--                </div>-->
+<!--                <div th:if="${#strings.isEmpty(userName)}">-->
+<!--                    &lt;!&ndash; 스프링 시큐리티에서 기본 제공하는 URL - 별도 컨트롤러 작성 필요 없음 &ndash;&gt;-->
+<!--                    <a href="/oauth2/authorization/google" class="btn btn-sm btn-success active" role="button">Google Login</a>-->
+<!--                </div>-->
                 &nbsp;
                 &nbsp;
                 <input name="searchQuery" class="form-control mr-sm-2" type="search" placeholder="Search"
                        aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-danger my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
     </nav>
