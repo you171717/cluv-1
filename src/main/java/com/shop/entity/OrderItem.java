@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -34,8 +33,11 @@ public class OrderItem extends BaseEntity{
         item.removeStock(count);        //주문수량 만큼 재고 수량 감소
         return orderItem;
     }
-
     public int getTotalPrice(){     //총 가격 계산 매소드
         return orderPrice*count;
+    }
+
+    public void cancel(){       //주문 취소 시 주문 수량 만큼의 상품 재고를 더해줌
+        this.getItem().addStock(count);
     }
 }

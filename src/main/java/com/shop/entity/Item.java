@@ -1,13 +1,13 @@
 package com.shop.entity;
 
 import com.shop.constant.ItemSellStatus;
+import com.shop.dto.ItemFormDto;
 import com.shop.exception.OutOfStockException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import com.shop.dto.ItemFormDto;
 
 
 @Entity
@@ -52,5 +52,8 @@ public class Item extends BaseEntity {
                     "(현재 재고 수량: "+this.stockNumber+")");        // 재고가 주문수량보다 작을경우 재고 부족 예외
         }
         this.stockNumber = restStock; //남은 재고 수량을 현재 재고 값으로 할당
+    }
+    public void addStock(int stockNumber){      //상품의 재고를 증가시키는 메소드
+        this.stockNumber +=stockNumber;
     }
 }
