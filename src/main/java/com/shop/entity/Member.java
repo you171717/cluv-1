@@ -30,6 +30,10 @@ public class Member extends BaseEntity {
 
     private String address;
 
+    private String refundBank;
+
+    private String refundAccount;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
