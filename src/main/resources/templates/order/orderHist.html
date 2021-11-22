@@ -4,6 +4,7 @@
       layout:decorate="~{layouts/layout1}">
 
 <head>
+    <title>주문 내역</title>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
@@ -47,10 +48,6 @@
                     }
                 }
             });
-        }
-
-        function reviews(){
-            location.href="/reviews";
         }
 
     </script>
@@ -108,9 +105,6 @@
                     <h4>(취소 완료)</h4>
                 </th:block>
             </div>
-            <div class="ml-3">
-                <button type="button" class="btn btn-outline-secondary" onclick="reviews()">리뷰 작성</button>
-            </div>
         </div>
         <div class="card d-flex">
             <div th:each="orderItem : ${order.orderItemDtoList}" class="d-flex mb-3">
@@ -120,7 +114,7 @@
                 <div class="align-self-center w-75">
                     <span th:text="${orderItem.itemNm}" class="fs24 font-weight-bold"></span>
                     <div class="fs18 font-weight-light">
-                        <span th:text="${orderItem.orderPrice} +'원'"></span>
+                        <span th:text="${#numbers.formatInteger(orderItem.orderPrice,3,'COMMA')} +'원'"></span>
                         <span th:text="${orderItem.count} +'개'"></span>
                     </div>
                 </div>

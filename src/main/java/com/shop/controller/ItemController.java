@@ -2,8 +2,10 @@ package com.shop.controller;
 
 import com.shop.dto.ItemFormDto;
 import com.shop.dto.ItemSearchDto;
+import com.shop.dto.ReviewItemDto;
 import com.shop.entity.Item;
 import com.shop.service.ItemService;
+import com.shop.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,6 +29,7 @@ import java.util.Optional;
 public class ItemController {
 
     private final ItemService itemService;
+    private final ReviewService reviewService;
 
     @GetMapping(value = "/admin/item/new")
     public String itemForm(Model model){
@@ -107,8 +110,13 @@ public class ItemController {
 
     @GetMapping(value = "/item/{itemId}")
     public String itemDtl(Model model, @PathVariable("itemId") Long itemId){
+
         ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
+        List<ReviewItemDto> orderItemDtoList = reviewService.getReviewItem(itemId);
+
         model.addAttribute("item", itemFormDto);
+        model.addAttribute("orderItemList", orderItemDtoList);
+
         return "item/itemDtl";
     }
 }

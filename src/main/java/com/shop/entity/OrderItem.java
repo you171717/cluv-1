@@ -1,6 +1,6 @@
 package com.shop.entity;
 
-import com.shop.dto.OrderItemDto;
+import com.shop.dto.ReviewFormDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -48,7 +48,15 @@ public class OrderItem extends BaseEntity{
         this.getItem().addStock(count);
     }
 
-    public void createComment(OrderItemDto orderItemDto){
-        this.comment = orderItemDto.getComment();
+    public void createReview(ReviewFormDto reviewFormDto){
+        this.comment = reviewFormDto.getComment();
+    }
+
+    public void updateReview(ReviewFormDto reviewFormDto){
+        this.comment = reviewFormDto.getComment();
+    }
+
+    public void deleteReview(ReviewFormDto reviewFormDto){
+        this.comment = null;
     }
 }

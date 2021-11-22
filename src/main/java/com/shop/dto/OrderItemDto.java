@@ -4,6 +4,8 @@ import com.shop.entity.OrderItem;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter @Setter
 public class OrderItemDto {
 
@@ -14,6 +16,7 @@ public class OrderItemDto {
         this.orderPrice = orderItem.getOrderPrice();
         this.reviewYn = orderItem.getReviewYn();
         this.imgUrl = imgUrl;
+        this.comment = orderItem.getComment();
     }
 
     private Long orderItemId;
