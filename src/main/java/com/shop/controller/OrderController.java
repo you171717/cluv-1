@@ -3,7 +3,6 @@ package com.shop.controller;
 import com.shop.dto.OrderDto;
 import com.shop.dto.OrderHistDto;
 import com.shop.service.OrderService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,6 +26,7 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    // 주문
     @PostMapping(value = "/order")
     public @ResponseBody ResponseEntity order (@RequestBody @Valid OrderDto orderDto,
                                                BindingResult bindingResult, Principal principal) {
@@ -54,6 +54,7 @@ public class OrderController {
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);    // HTTP 응답 상태 코드 반환
     }
 
+    // 구매 이력
     @GetMapping(value = {"/orders", "/orders/{page}"})
     public String orderHist(@PathVariable("page") Optional<Integer> page,
                             Principal principal, Model model){

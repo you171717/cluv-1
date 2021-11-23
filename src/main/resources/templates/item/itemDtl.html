@@ -12,7 +12,6 @@
 <th:block layout:fragment="script">
     <script th:inline="javascript">
         $(document).ready(function () {
-
             calculateToalPrice();
 
             $("#count").change(function () {
@@ -106,10 +105,49 @@
                 }
             });
         }
-        function sendSMS(pageName) {
+        function gift() {
             console.log("문자를 전송합니다.");
-            $("#smsForm").attr("action", pageName + ".do"); //위에 있는 폼태그를 컨트롤러로 전송한다.
-            $("#smsForm").submit();
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+
+            var url = "/gift";
+            var paramData = {
+                itemId: $("#itemId").val(),
+                count: $("#count").val(),
+                from : $("#from").val(),
+                text: $("#text").val()
+            };
+
+            var param = JSON.stringify(paramData);
+            console.log(param);
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                contentType: "application/json",
+                data: param,
+                beforeSend: function (xhr) {
+                    /* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
+                    xhr.setRequestHeader(header, token);
+                },
+                dataType: "json",
+                cache: false,
+                success: function (result, status) {
+                    console.log(param);
+                    alert("선물이 완료 되었습니다.");
+                    location.href = '/';
+                },
+                error: function (jqXHR, status, error) {
+
+                    if (jqXHR.status == '401') {
+                        alert('로그인 후 이용해주세요');
+                        location.href = '/members/login';
+                    } else {
+                        alert(jqXHR.responseText);
+                    }
+
+                }
+            });
         }
     </script>
 
@@ -208,7 +246,6 @@
 
             <!-- 문자보내는 폼 -->
             <div class="sms">
-            <form method="post" id="smsForm">
                 <table border="1" align="right" width="320" height="150"  >
                     <tr>
                         <td>
@@ -218,12 +255,12 @@
                             </center>
                             <br>
                             <ul>
-                                <li>보낼사람 &nbsp<input type="text" name="from" placeholder=" 전화번호 입력 ( '-' 포함 )"/></li>
+                                <li>보낼사람 &nbsp<input type="text" id="from" name="from" placeholder=" 전화번호 입력 ( '-' 포함 )"/></li>
                                 <br><li>내용</li>
-                                <textarea name="text" placeholder=" 보낼 내용 입력 " rows="3" cols="30"></textarea>
+                                <textarea name="text" id="text" placeholder="보낼 내용 입력 " rows="3" cols="30"></textarea>
                                 <br>
                                 <center>
-                                    <input type="button" onclick="sendSMS('sendSms')" value="전송하기"/>
+                                    <input type="button" onclick="gift()" value="전송하기"/>
                                     <br>
                                 </center>
                             </ul>
@@ -231,7 +268,6 @@
                         </td>
                     </tr>
                 </table>
-            </form>
             </div>
 
         </div>

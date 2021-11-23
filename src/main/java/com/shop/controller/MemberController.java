@@ -45,7 +45,7 @@ public class MemberController {
 
         }catch (IllegalStateException e){
             model.addAttribute("errorMessage", e.getMessage());
-            return "member/memberForm";
+            return "member/memberForm";         // html
         }
         return "redirect:/";
     }

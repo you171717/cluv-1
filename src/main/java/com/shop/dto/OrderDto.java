@@ -20,4 +20,7 @@ public class OrderDto {
     private int count;
 
     private GiftStatus giftStatus;         // 구매 선물 상태
+
+    private String from;
+    private String text;
 }
