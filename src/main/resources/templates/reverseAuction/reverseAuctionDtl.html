@@ -77,7 +77,7 @@
                         <small>(현재 <span th:text="${#numbers.formatCurrency(reverseAuctionDto.discountDto.currentDiscountPrice)}"></span> 할인)</small>
                     </span>
                 </div>
-                <button class="btn btn-primary">입찰하기</button>
+                <a th:href="@{/bid/__${reverseAuctionDto.id}__}" class="btn btn-primary" style="width: 100%">입찰하기</a>
             </div>
         </div>
         <div class="jumbotron jumbotron-fluid mgt-30">

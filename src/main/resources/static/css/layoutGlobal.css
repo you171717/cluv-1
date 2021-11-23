@@ -337,3 +337,62 @@ a, a:hover {
 .rauction-previous-toggle.active + .rauction-previous {
 	display: block;
 }
+
+.bid-table {
+    border-bottom: 2px solid #777;
+    font-size: 18px;
+}
+.bid-table th {
+    border-top: 2px solid #777;
+    border-bottom: 1px solid #777 !important;
+}
+.bid-table td {
+    vertical-align: middle;
+}
+.bid-table td:nth-child(2) {
+    font-size: 22px;
+    font-weight: 600;
+}
+.bid-table-img {
+	display: inline-block;
+	margin: 0 20px 0 0;
+	width: 75px;
+	height: 75px;
+	background-size: cover;
+	background-position: center;
+	vertical-align: middle;
+}
+.bid-payment {
+    margin: 50px 0 0;
+    text-align: center;
+}
+.bid-payment h4 {
+    font-weight: 600;
+}
+.bid-payment label {
+    margin: 20px;
+}
+.bid-payment button {
+    margin: 40px 0 0;
+}
+.bid-complete {
+    padding: 40px 0;
+    text-align: center;
+    line-height: 1.4;
+}
+.bid-complete h2 {
+    margin: 0 0 10px;
+    font-weight: 600;
+}
+.bid-complete p {
+    margin: 0 0 40px;
+}
+.bid-complete ul {
+    margin: 0 auto 40px;
+    width: 320px;
+    text-align: left;
+}
+.bid-complete ul b {
+    display: inline-block;
+    width: 100px;
+}

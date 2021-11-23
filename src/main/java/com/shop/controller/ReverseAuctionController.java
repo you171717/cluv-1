@@ -30,8 +30,6 @@ public class ReverseAuctionController {
 
     private final ItemService itemService;
 
-    private final ItemRepository itemRepository;
-
     private final ReverseAuctionService reverseAuctionService;
 
     private final ReverseAuctionRepository reverseAuctionRepository;
