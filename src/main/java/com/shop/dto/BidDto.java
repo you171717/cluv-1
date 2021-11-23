@@ -4,11 +4,13 @@ import com.querydsl.core.annotations.QueryProjection;
 import com.shop.constant.BidDepositType;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@ToString
 public class BidDto {
 
     private String imgUrl;

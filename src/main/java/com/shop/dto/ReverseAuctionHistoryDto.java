@@ -3,16 +3,12 @@ package com.shop.dto;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-import org.apache.tomcat.jni.Local;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 @Getter
 @Setter
-@ToString
-public class ReverseAuctionDto {
+public class ReverseAuctionHistoryDto {
 
     private Long id;
 
@@ -32,10 +28,16 @@ public class ReverseAuctionDto {
 
     private String approvedYn;
 
+    private LocalDateTime approvedTime;
+
+    private String memberEmail;
+
+    private Integer depositAmount;
+
     private DiscountDto discountDto;
 
     @QueryProjection
-    public ReverseAuctionDto(Long id, String imgUrl, String itemNm, Integer startPrice, LocalDateTime startTime, Integer priceUnit, Integer timeUnit, Integer maxRate, String approvedYn) {
+    public ReverseAuctionHistoryDto(Long id, String imgUrl, String itemNm, Integer startPrice, LocalDateTime startTime, Integer priceUnit, Integer timeUnit, Integer maxRate, String approvedYn, LocalDateTime approvedTime, String memberEmail, Integer depositAmount) {
         this.id = id;
         this.imgUrl = imgUrl;
         this.itemNm = itemNm;
@@ -45,7 +47,9 @@ public class ReverseAuctionDto {
         this.timeUnit = timeUnit;
         this.maxRate = maxRate;
         this.approvedYn = approvedYn;
+        this.approvedTime = approvedTime;
+        this.memberEmail = memberEmail;
+        this.depositAmount = depositAmount;
         this.discountDto = new DiscountDto(startTime, startPrice, priceUnit);
     }
-
 }

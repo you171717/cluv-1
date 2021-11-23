@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap">
+    <link th:href="@{/css/normalize.css}" rel="stylesheet">
     <link th:href="@{/css/layoutGlobal.css}" rel="stylesheet">
     <th:block layout:fragment="css"></th:block>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -68,6 +69,15 @@
                     $('.header-submenu').removeClass('active');
                 }
             });
+
+            $('.btn-delete').on('click', function(e) {
+                e.preventDefault();
+
+                var $this = $(this);
+
+                if(confirm("정말 삭제하시겠습니까?") === true)
+                    location.href = $this.attr('href');
+            });
         });
     </script>
     <th:block layout:fragment="script"></th:block>
@@ -87,7 +97,7 @@
                 <ul class="header-menu">
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/cart}">장바구니</a></li>
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/orders}">구매이력</a></li>
-                    <li><a th:href="@{/}">역경매</a></li>
+                    <li><a th:href="@{/rauctions}">역경매</a></li>
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/}">역경매 참여 내역</a></li>
                     <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><a href="#admin">관리자</a></li>
                 </ul>
@@ -100,9 +110,9 @@
                 <div class="header-submenu-inner">
                     <a th:href="@{/admin/item/new}">상품 등록</a>
                     <a th:href="@{/admin/items}">상품 관리</a>
-                    <a th:href="@{/}">역경매 관리</a>
+                    <a th:href="@{/admin/rauctions}">역경매 관리</a>
                     <a th:href="@{/}">역경매 결제 관리</a>
-                    <a href="#">채널톡 관리</a>
+                    <a href="https://desk.channel.io/" target="_blank">채널톡 관리</a>
                 </div>
             </div>
         </div>

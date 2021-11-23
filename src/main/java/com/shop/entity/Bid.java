@@ -29,7 +29,7 @@ public class Bid extends BaseEntity {
     private Integer depositAmount; // 입금해야 될 금액
 
     @Column(nullable = false, length = 1)
-    private String approvedYn; // 확인(낙찰) 여부
+    private String approvedYn = "N"; // 확인(낙찰) 여부
 
     private LocalDateTime approvedTime; // 확인(낙찰) 시간
 

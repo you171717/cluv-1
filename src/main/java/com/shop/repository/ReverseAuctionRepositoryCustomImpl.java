@@ -1,14 +1,14 @@
 package com.shop.repository;
 
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Ops;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.*;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shop.constant.ReverseAuctionSearchSortColumn;
-import com.shop.dto.QReverseAuctionDto;
-import com.shop.dto.ReverseAuctionDto;
-import com.shop.dto.ReverseAuctionSearchDto;
+import com.shop.dto.*;
 import com.shop.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -66,10 +66,10 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
         QItem item = QItem.item;
         QBid bid = QBid.bid;
 
-
         QueryResults<ReverseAuctionDto> results = queryFactory
                 .select(
                         new QReverseAuctionDto(
+                                reverseAuction.id,
                                 itemImg.imgUrl,
                                 item.itemNm,
                                 item.price,
@@ -77,15 +77,23 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
                                 reverseAuction.priceUnit,
                                 reverseAuction.timeUnit,
                                 reverseAuction.maxRate,
-                                bid.approvedYn.coalesce("N")
+                                new CaseBuilder()
+                                        .when(outOfDate().not())
+                                        .then("F")
+                                        .otherwise(
+                                            new Coalesce<String>(String.class).add(
+                                                JPAExpressions.select(bid.approvedYn)
+                                                        .from(bid)
+                                                        .where(bid.reverseAuction.eq(reverseAuction))
+                                                        .where(bid.approvedYn.eq("Y"))
+                                            ).add("N")
+                                        )
                         )
                 )
                 .from(reverseAuction)
-                .leftJoin(reverseAuction.bids, bid)
                 .join(reverseAuction.item, item)
                 .join(itemImg).on(itemImg.item.eq(reverseAuction.item).and(itemImg.repImgYn.eq("Y")))
                 .where(searchByLike(reverseAuctionSearchDto.getSearchQuery()))
-                .where(outOfDate())
                 .orderBy(this.orderBy(reverseAuctionSearchDto))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -108,6 +116,7 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
         QueryResults<ReverseAuctionDto> results = queryFactory
                 .select(
                         new QReverseAuctionDto(
+                                reverseAuction.id,
                                 itemImg.imgUrl,
                                 item.itemNm,
                                 item.price,
@@ -115,10 +124,21 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
                                 reverseAuction.priceUnit,
                                 reverseAuction.timeUnit,
                                 reverseAuction.maxRate,
-                                bid.approvedYn.coalesce("N")
+                                Expressions.constant("N")
                         )
                 )
+                .from(reverseAuction)
+                .join(reverseAuction.item, item)
+                .join(itemImg).on(itemImg.item.eq(reverseAuction.item).and(itemImg.repImgYn.eq("Y")))
                 .where(searchByLike(reverseAuctionSearchDto.getSearchQuery()))
+                .where(outOfDate())
+                .where(
+                    JPAExpressions.select(bid.approvedYn)
+                            .from(bid)
+                            .where(bid.reverseAuction.eq(reverseAuction))
+                            .where(bid.approvedYn.eq("Y"))
+                            .isNull()
+                )
                 .orderBy(this.orderBy(reverseAuctionSearchDto))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -129,6 +149,73 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
         long total = results.getTotal();
 
         return new PageImpl<>(content, pageable, total);
+    }
+
+    @Override
+    public List<ReverseAuctionHistoryDto> getPreviousReverseAuctionPage() {
+        QReverseAuction reverseAuction = QReverseAuction.reverseAuction;
+        QItemImg itemImg = QItemImg.itemImg;
+        QItem item = QItem.item;
+        QBid bid = QBid.bid;
+        QMember member = QMember.member;
+
+        QueryResults<ReverseAuctionHistoryDto> results = queryFactory
+                .select(
+                        new QReverseAuctionHistoryDto(
+                                reverseAuction.id,
+                                itemImg.imgUrl,
+                                item.itemNm,
+                                item.price,
+                                reverseAuction.startTime,
+                                reverseAuction.priceUnit,
+                                reverseAuction.timeUnit,
+                                reverseAuction.maxRate,
+                                bid.approvedYn,
+                                bid.approvedTime,
+                                member.email,
+                                bid.depositAmount
+                        )
+                )
+                .from(reverseAuction)
+                .join(reverseAuction.bids, bid).on(bid.approvedYn.eq("Y"))
+                .join(bid.member, member)
+                .join(reverseAuction.item, item)
+                .join(itemImg).on(itemImg.item.eq(reverseAuction.item).and(itemImg.repImgYn.eq("Y")))
+                .where(outOfDate().not().or(bid.approvedYn.isNotNull()))
+                .orderBy(bid.approvedTime.desc())
+                .limit(6)
+                .fetchResults();
+
+        return results.getResults();
+    }
+
+    @Override
+    public ReverseAuctionDto getUserReverseAuctionDetailPage(Long id) {
+        QReverseAuction reverseAuction = QReverseAuction.reverseAuction;
+        QItemImg itemImg = QItemImg.itemImg;
+        QItem item = QItem.item;
+
+        ReverseAuctionDto result = queryFactory
+                .select(
+                        new QReverseAuctionDto(
+                                reverseAuction.id,
+                                itemImg.imgUrl,
+                                item.itemNm,
+                                item.price,
+                                reverseAuction.startTime,
+                                reverseAuction.priceUnit,
+                                reverseAuction.timeUnit,
+                                reverseAuction.maxRate,
+                                Expressions.constant("N")
+                        )
+                )
+                .from(reverseAuction)
+                .join(reverseAuction.item, item)
+                .join(itemImg).on(itemImg.item.eq(reverseAuction.item).and(itemImg.repImgYn.eq("Y")))
+                .where(reverseAuction.id.eq(id))
+                .fetchOne();
+
+        return result;
     }
 
 }
