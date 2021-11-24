@@ -1,6 +1,7 @@
 package com.shop.repository;
 
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.types.Constant;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Ops;
 import com.querydsl.core.types.OrderSpecifier;
@@ -173,7 +174,10 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
                                 bid.approvedYn,
                                 bid.approvedTime,
                                 member.email,
-                                bid.depositAmount
+                                new CaseBuilder()
+                                        .when(bid.approvedTime.loe(LocalDateTime.now().minusHours(24)))
+                                        .then(Expressions.constant(-1))
+                                        .otherwise(bid.depositAmount)
                         )
                 )
                 .from(reverseAuction)

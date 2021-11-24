@@ -99,12 +99,13 @@
                                 <li><b>최대 할인율 : </b><span th:text="${reverseAuction.maxRate} + '%'"></span></li>
                             </ul>
                             <div class="rauction-card-finish">
-                                <b>낙찰자 : </b><span th:text="${reverseAuction.memberEmail}"></span><br>
-                                <b>낙찰 시간 : </b><span th:text="${reverseAuction.approvedTime}"></span>
+                                <b>낙찰자 : </b><span th:text="${#strings.substring(reverseAuction.memberEmail, 0, 3) + '***'}"></span><br>
+                                <b>낙찰 시간 : </b><span th:text="${#temporals.format(reverseAuction.approvedTime, 'yyyy-MM-dd HH:mm')}"></span>
                             </div>
                             <div class="rauction-card-price">
                                 <span>낙찰 가격</span>
-                                <b th:text="${#numbers.formatCurrency(reverseAuction.depositAmount)}"></b>
+                                <b th:if="${reverseAuction.depositAmount < 0}">₩****</b>
+                                <b th:if="${reverseAuction.depositAmount >= 0}" th:text="${#numbers.formatCurrency(reverseAuction.depositAmount)}"></b>
                             </div>
                         </div>
                     </div>

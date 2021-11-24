@@ -13,7 +13,7 @@
                 IMP.request_pay({
                     pg: "html5_inicis",
                     pay_method: "card",
-                    merchant_uid: "ORD" + [[${reverseAuctionDto.id}]]-[[${member.id}]] + Math.random(),
+                    merchant_uid: "ORD" + [[${reverseAuctionDto.id}]] + "-" + [[${member.id}]],
                     name: [[${reverseAuctionDto.itemNm}]],
                     amount: [[${reverseAuctionDto.discountDto.currentPrice}]],
                     buyer_email: [[${member.email}]],
@@ -23,7 +23,6 @@
                         var $form = $('.bid-payment');
 
                         $('<input type="hidden" name="tid">').val(response.pg_tid).appendTo($form);
-                        $('<input type="hidden" name="paid_amount">').val(response.paid_amount).appendTo($form);
 
                         $form.submit();
                     }

@@ -10,12 +10,16 @@ import com.shop.repository.BidRepository;
 import com.shop.repository.MemberRepository;
 import com.shop.repository.ReverseAuctionRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,7 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BidService {
 
-    private final BidFormMapper bidFormMapper;
+    private static Logger logger = LoggerFactory.getLogger(BidService.class);
 
     private final BidRepository bidRepository;
 
@@ -32,7 +36,27 @@ public class BidService {
 
     private final ReverseAuctionRepository reverseAuctionRepository;
 
-    public Bid saveBid(String email, Long reverseAuctionId, BidDepositType bidDepositType) {
+    private final KakaoPaymentService kakaoPaymentService;
+
+    public String getUniqueDepositName(Member member) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update((member.getName() + member.getEmail()).getBytes());
+
+            StringBuilder builder = new StringBuilder();
+
+            for (byte b : md.digest()) {
+                builder.append(String.format("%02x", b));
+            }
+
+            return member.getName() + builder.toString().substring(0, 5);
+        } catch(Exception e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+    }
+
+    public Bid saveBid(String email, Long reverseAuctionId) {
         Member member = memberRepository.findByEmail(email);
 
         ReverseAuction reverseAuction = reverseAuctionRepository.findById(reverseAuctionId).orElseThrow(EntityNotFoundException::new);
@@ -41,17 +65,23 @@ public class BidService {
 
         Bid bid = new Bid();
         bid.setDepositAmount(discountDto.getCurrentPrice());
-        bid.setDepositName(member.getEmail());
+        bid.setDepositName(this.getUniqueDepositName(member));
         bid.setMember(member);
         bid.setReverseAuction(reverseAuction);
-        bid.setDepositType(bidDepositType);
-
-        if(bidDepositType.equals(BidDepositType.KAKAO_PAY)) {
-            bid.setApprovedYn("Y");
-            bid.setApprovedTime(LocalDateTime.now());
-        }
+        bid.setDepositType(BidDepositType.TRANSFER);
 
         return bidRepository.save(bid);
+    }
+
+    public Bid saveBidWithPayment(String email, Long reverseAuctionId, Long payId) {
+        Bid bid = this.saveBid(email, reverseAuctionId);
+        bid.setDepositType(BidDepositType.KAKAO_PAY);
+        bid.setApprovedYn("Y");
+        bid.setApprovedTime(LocalDateTime.now());
+
+        kakaoPaymentService.savePaymentHistory(bid.getId(), payId, bid.getDepositAmount());
+
+        return bid;
     }
 
     public Long approveBid(Long id) {

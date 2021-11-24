@@ -56,6 +56,7 @@ public class BidRepositoryCustomImpl implements BidRepositoryCustom {
         QueryResults<BidDto> results = queryFactory
                 .select(
                         new QBidDto(
+                                bid.id,
                                 itemImg.imgUrl,
                                 item.itemNm,
                                 member.email,
@@ -106,6 +107,7 @@ public class BidRepositoryCustomImpl implements BidRepositoryCustom {
         QueryResults<BidDto> results = queryFactory
                 .select(
                         new QBidDto(
+                                bid.id,
                                 itemImg.imgUrl,
                                 item.itemNm,
                                 member.email,

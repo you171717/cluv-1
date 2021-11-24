@@ -73,6 +73,9 @@
                 padding: 30px;
                 margin-bottom: 20px;
             }
+            .card-title {
+                width: 750px;
+            }
             .fs18{
                 font-size: 18px;
             }
@@ -86,8 +89,8 @@
         <h2 class="mb-4">
             구매 이력
         </h2>
-        <div th:each="order : ${orders.getContent()}">
-            <div class="d-flex mb-3 align-self-center">
+        <div class="d-flex flex-column align-items-center" th:each="order : ${orders.getContent()}">
+            <div class="d-flex mb-3 align-self-center card-title">
                 <h4 th:text="${order.orderDate} + ' 주문'"></h4>
                 <div class="ml-3">
                     <th:block th:if="${order.orderStatus == T(com.shop.constant.OrderStatus).ORDER}">
@@ -105,8 +108,8 @@
                     </div>
                     <div class="align-self-center w-75">
                         <span th:text="${orderItem.itemNm}" class="fs24 font-weight-bold"></span>
-                        <div class="fs18 font-weight-light">
-                            <span th:text="${orderItem.orderPrice} +'원'"></span>
+                        <div class="fs18 font-weight-light" style="margin-top: 10px;">
+                            <span th:text="${#numbers.formatCurrency(orderItem.orderPrice)}"></span>
                             <span th:text="${orderItem.count} +'개'"></span>
                         </div>
                     </div>

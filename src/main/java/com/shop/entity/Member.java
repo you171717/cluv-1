@@ -1,5 +1,6 @@
 package com.shop.entity;
 
+import com.shop.constant.Bank;
 import com.shop.constant.Role;
 import com.shop.dto.MemberFormDto;
 import lombok.Getter;
@@ -30,7 +31,8 @@ public class Member extends BaseEntity {
 
     private String address;
 
-    private String refundBank;
+    @Enumerated(EnumType.STRING)
+    private Bank refundBank;
 
     private String refundAccount;
 
@@ -48,6 +50,8 @@ public class Member extends BaseEntity {
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
         member.setRole(Role.USER);
+        member.setRefundBank(memberFormDto.getRefundBank());
+        member.setRefundAccount(memberFormDto.getRefundAccount());
         return member;
     }
 

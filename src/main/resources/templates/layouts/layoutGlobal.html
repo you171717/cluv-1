@@ -79,6 +79,10 @@
                     location.href = $this.attr('href');
             });
         });
+
+        function numberFormat(num) {
+            return '₩' + Intl.NumberFormat().format(num);
+        }
     </script>
     <th:block layout:fragment="script"></th:block>
 </head>
@@ -86,7 +90,7 @@
     <div id="wrap">
         <div class="nav">
             <div class="nav-inner">
-                <span class="nav-username" sec:authorize="isAuthenticated()"><b>관리자</b>님 환영합니다.</span>
+                <span class="nav-username" sec:authorize="isAuthenticated()"><b th:text="${memberName}"></b>님 환영합니다.</span>
                 <a th:href="@{/members/login}" sec:authorize="isAnonymous()">로그인</a>
                 <a th:href="@{/members/logout}" sec:authorize="isAuthenticated()">로그아웃</a>
             </div>
@@ -95,10 +99,10 @@
             <div class="header-inner">
                 <a th:href="@{/}" class="header-logo"><img th:src="@{/img/logo_white.svg}" alt="GS ITM"> Keyboard</a>
                 <ul class="header-menu">
-                    <li sec:authorize="isAuthenticated()"><a th:href="@{/cart}">장바구니</a></li>
-                    <li sec:authorize="isAuthenticated()"><a th:href="@{/orders}">구매이력</a></li>
                     <li><a th:href="@{/rauctions}">역경매</a></li>
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/bids}">역경매 참여 내역</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/cart}">장바구니</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/orders}">구매이력</a></li>
                     <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><a href="#admin">관리자</a></li>
                 </ul>
                 <form th:action="@{/}" class="header-search">

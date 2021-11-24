@@ -28,7 +28,7 @@
                     orderTotalPrice += price * count;
                 });
 
-                $("#orderTotalPrice").html(orderTotalPrice + "원");
+                $("#orderTotalPrice").html(numberFormat(orderTotalPrice));
             }
 
             function changeCount(obj) {
@@ -37,7 +37,7 @@
                 var price = $("#price_" + cartItemId).data("price");
                 var totalPrice = count * price;
 
-                $("#totalPrice_" + cartItemId).html(totalPrice + "원");
+                $("#totalPrice_" + cartItemId).html(numberFormat(totalPrice));
 
                 getOrderTotalPrice();
 
@@ -225,7 +225,7 @@
                                     <span class="input-group mt-2">
                                         <span th:id="'price_' + ${cartItem.cartItemId}"
                                               th:data-price="${cartItem.price}"
-                                              th:text="${cartItem.price} + '원'" class="align-self-center mr-2">
+                                              th:text="${#numbers.formatCurrency(cartItem.price)}" class="align-self-center mr-2">
                                         </span>
                                         <input type="number" name="count" th:id="'count_' + ${cartItem.cartItemId}" th:value="${cartItem.count}" min="1" onchange="changeCount(this)" class="form-control mr-2" >
                                         <button type="button" class="close" aria-label="Close">
@@ -237,14 +237,14 @@
                         </td>
                         <td class="text-center align-middle">
                             <span th:id="'totalPrice_' + ${cartItem.cartItemId}"
-                                  name="totalPrice" th:text="${cartItem.price * cartItem.count} + '원'">
+                                  name="totalPrice" th:text="${#numbers.formatCurrency(cartItem.price * cartItem.count)}">
                             </span>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <h2 class="text-center">
-                총 주문 금액 : <span id="orderTotalPrice" class="text-danger">0원</span>
+                총 주문 금액 : <span id="orderTotalPrice" class="text-danger">₩0</span>
             </h2>
             <div class="text-center mt-3">
                 <button type="button" class="btn btn-primary btn-lg" onclick="orders()">주문하기</button>

@@ -118,7 +118,7 @@ class ReverseAuctionServiceTest {
 
         ReverseAuction reverseAuction = this.createReverseAuction();
 
-        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId(), BidDepositType.TRANSFER);
+        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId());
 
         return reverseAuction;
     }
@@ -128,7 +128,7 @@ class ReverseAuctionServiceTest {
 
         ReverseAuction reverseAuction = this.createReverseAuction();
 
-        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId(), BidDepositType.TRANSFER);
+        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId());
 
         bidService.approveBid(bid.getId());
 

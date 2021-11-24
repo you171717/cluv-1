@@ -230,6 +230,20 @@ a, a:hover {
 	font-size: 18px;
 	font-weight: 600;
 }
+.rauction-item-price {
+	display: inline-block;
+	margin: 0 0 0 20px;
+	font-size: 16px;
+}
+.rauction-field-inner {
+	display: flex;
+	align-items: center;
+	margin: 0 0 20px;
+}
+.rauction-field-inner input {
+	flex: 1 0 0%;
+	margin: 0 10px 0 0;
+}
 .rauction-form-fields {
 	padding:  20px;
 }
@@ -239,7 +253,6 @@ a, a:hover {
 	font-weight: 600;
 }
 .rauction-form-fields input {
-	margin: 0 0 20px;
 	padding: 10px;
 	width: 100%;
 }
@@ -248,7 +261,6 @@ a, a:hover {
 	margin: 0 0 10px;
 	width: 100%;
 }
-
 .rauction-table td {
 	vertical-align: middle;
 }
@@ -268,7 +280,6 @@ a, a:hover {
 	font-size: 18px;
 	font-weight: 600;
 }
-
 .rauction-cards {
 	display: flex;
 	flex-wrap: wrap;
@@ -322,7 +333,7 @@ a, a:hover {
 }
 .rauction-previous-toggle {
 	display: block;
-	margin: 0 auto;
+	margin: 40px auto 0;
 }
 .rauction-previous-toggle::after {
 	content: '보기 ▼';
@@ -336,6 +347,40 @@ a, a:hover {
 }
 .rauction-previous-toggle.active + .rauction-previous {
 	display: block;
+}
+.rauction-detail-title {
+	font-weight: 600;
+}
+.rauction-detail-box {
+	font-size: 18px;
+	background: #e9ecef;
+}
+.rauction-detail-prop {
+	display: flex;
+	padding: 20px;
+	font-size: 18px;
+}
+.rauction-detail-prop b,
+.rauction-detail-prop span {
+	flex: 1 0 50%;
+}
+.rauction-detail-box > .rauction-detail-prop:last-child {
+	margin-bottom: 0;
+}
+.rauction-detail-sprice {
+	font-size: 20px;
+}
+.rauction-detail-discount {
+	display: block;
+	margin: 10px 0 0;
+	color: #f00;
+	font-size: 24px;
+	font-weight: 600;
+}
+.rauction-detail-cprice {
+	display: block;
+	font-size: 30px;
+	font-weight: 600;
 }
 
 .bid-table {
@@ -395,4 +440,9 @@ a, a:hover {
 .bid-complete ul b {
     display: inline-block;
     width: 100px;
+}
+
+
+.pagination {
+	margin: 20px 0 10px;
 }

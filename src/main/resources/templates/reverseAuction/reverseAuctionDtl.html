@@ -5,6 +5,7 @@
 
     <th:block layout:fragment="script">
         <script th:inline="javascript">
+
         </script>
     </th:block>
 
@@ -55,26 +56,25 @@
                 </div>
             </div>
             <div class="wd50">
-                <div class="h4" th:text="${itemFormDto.itemNm}"></div>
-                <hr class="my-4">
+                <div class="h4 rauction-detail-title" th:text="${itemFormDto.itemNm}"></div>
                 <div class="rauction-detail-box">
-                    <div><b>시작일 : </b><span th:text="${#temporals.format(reverseAuctionDto.startTime, 'yyyy-MM-dd HH:mm')}"></span></div>
-                    <div><b>자동 할인 시간 : </b><span th:text="${reverseAuctionDto.timeUnit} + ' 시간'"></span></div>
-                    <div><b>경매 단위 : </b><span th:text="${#numbers.formatCurrency(reverseAuctionDto.priceUnit)}"></span></div>
-                    <div><b>최대 할인율 : </b><span th:text="${reverseAuctionDto.maxRate} + '%'"></span></div>
+                    <div class="rauction-detail-prop"><b>시작일 : </b><span th:text="${#temporals.format(reverseAuctionDto.startTime, 'yyyy-MM-dd HH:mm')}"></span></div>
+                    <div class="rauction-detail-prop"><b>자동 할인 시간 : </b><span th:text="${reverseAuctionDto.timeUnit} + ' 시간'"></span></div>
+                    <div class="rauction-detail-prop"><b>경매 단위 : </b><span th:text="${#numbers.formatCurrency(reverseAuctionDto.priceUnit)}"></span></div>
+                    <div class="rauction-detail-prop"><b>최대 할인율 : </b><span th:text="${reverseAuctionDto.maxRate} + '%'"></span></div>
                 </div>
-                <div>
+                <div class="rauction-detail-prop">
                     <b>시작 가격</b>
                     <span>
-                        <span th:text="${#numbers.formatCurrency(reverseAuctionDto.startPrice)}"></span><br>
-                        <span th:text="${reverseAuctionDto.discountDto.currentDiscountRate} + '%↓'"></span>
+                        <span class="rauction-detail-sprice" th:text="${#numbers.formatCurrency(reverseAuctionDto.startPrice)}"></span><br>
+                        <span class="rauction-detail-discount" th:text="${reverseAuctionDto.discountDto.currentDiscountRate} + '%↓'"></span>
                     </span>
                 </div>
-                <div>
+                <div class="rauction-detail-prop">
                     <b>현재 가격</b>
                     <span>
-                        <span th:text="${#numbers.formatCurrency(reverseAuctionDto.discountDto.currentPrice)}"></span><br>
-                        <small>(현재 <span th:text="${#numbers.formatCurrency(reverseAuctionDto.discountDto.currentDiscountPrice)}"></span> 할인)</small>
+                        <span class="rauction-detail-cprice" th:text="${#numbers.formatCurrency(reverseAuctionDto.discountDto.currentPrice)}"></span>
+                        <small class="ruaction-detail-dprice">(현재 <span th:text="${#numbers.formatCurrency(reverseAuctionDto.discountDto.currentDiscountPrice)}"></span> 할인)</small>
                     </span>
                 </div>
                 <a th:href="@{/bid/__${reverseAuctionDto.id}__}" class="btn btn-primary" style="width: 100%">입찰하기</a>

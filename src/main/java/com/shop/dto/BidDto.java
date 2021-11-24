@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 @ToString
 public class BidDto {
 
+    private Long id;
+
     private String imgUrl;
 
     private String itemNm;
@@ -32,7 +34,8 @@ public class BidDto {
     private LocalDateTime regTime;
 
     @QueryProjection
-    public BidDto(String imgUrl, String itemNm, String memberEmail, BidDepositType depositType, String depositName, Integer depositAmount, String approvedYn, LocalDateTime approvedTime, LocalDateTime regTime) {
+    public BidDto(Long id, String imgUrl, String itemNm, String memberEmail, BidDepositType depositType, String depositName, Integer depositAmount, String approvedYn, LocalDateTime approvedTime, LocalDateTime regTime) {
+        this.id = id;
         this.imgUrl = imgUrl;
         this.itemNm = itemNm;
         this.memberEmail = memberEmail;

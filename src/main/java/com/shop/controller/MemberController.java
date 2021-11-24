@@ -1,5 +1,6 @@
 package com.shop.controller;
 
+import com.shop.constant.Bank;
 import com.shop.dto.MemberFormDto;
 import com.shop.entity.Member;
 import com.shop.service.MemberService;
@@ -24,6 +25,7 @@ public class MemberController {
 
     @GetMapping(value = "/new")
     public String memberForm(Model model) {
+        model.addAttribute("banks", Bank.values());
         model.addAttribute("memberFormDto", new MemberFormDto());
         return "member/memberForm";
     }
@@ -31,6 +33,8 @@ public class MemberController {
     @PostMapping(value = "/new")
     public String memberForm(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
+            model.addAttribute("banks", Bank.values());
+
             return "member/memberForm";
         }
 
@@ -38,11 +42,13 @@ public class MemberController {
             Member member = Member.createMember(memberFormDto, passwordEncoder);
             memberService.saveMember(member);
         } catch(IllegalStateException e) {
+            model.addAttribute("banks", Bank.values());
             model.addAttribute("errorMessage", e.getMessage());
+
             return "member/memberForm";
         }
 
-        return "redirect:/";
+        return "redirect:/members/login";
     }
 
     @GetMapping(value = "/login")

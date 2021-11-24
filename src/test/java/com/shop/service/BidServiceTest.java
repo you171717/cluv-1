@@ -111,7 +111,7 @@ class BidServiceTest {
 
         ReverseAuction reverseAuction = this.createReverseAuction();
 
-        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId(), BidDepositType.KAKAO_PAY);
+        Bid bid = bidService.saveBidWithPayment(member.getEmail(), reverseAuction.getId(), member.getId() + reverseAuction.getId());
 
         em.flush();
         em.clear();
@@ -128,8 +128,8 @@ class BidServiceTest {
 
         ReverseAuction reverseAuction = this.createReverseAuction();
 
-        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId(), BidDepositType.TRANSFER);
-        Bid bid2 = bidService.saveBid(member.getEmail(), reverseAuction.getId(), BidDepositType.TRANSFER);
+        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId());
+        Bid bid2 = bidService.saveBid(member.getEmail(), reverseAuction.getId());
 
         bidService.approveBid(bid.getId());
 
@@ -151,7 +151,7 @@ class BidServiceTest {
 
         Member member = this.createMember();
         ReverseAuction reverseAuction = this.createReverseAuction();
-        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId(), BidDepositType.TRANSFER);
+        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId());
         bidService.approveBid(bid.getId());
 
         ReverseAuctionSearchDto reverseAuctionSearchDto = new ReverseAuctionSearchDto();
@@ -175,8 +175,8 @@ class BidServiceTest {
 
         ReverseAuction reverseAuction = this.createReverseAuction();
 
-        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId(), BidDepositType.TRANSFER);
-        Bid bid2 = bidService.saveBid(member.getEmail(), reverseAuction.getId(), BidDepositType.TRANSFER);
+        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId());
+        Bid bid2 = bidService.saveBid(member.getEmail(), reverseAuction.getId());
 
         bidService.approveBid(bid.getId());
 
@@ -199,8 +199,8 @@ class BidServiceTest {
 
         ReverseAuction reverseAuction = this.createReverseAuction();
 
-        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId(), BidDepositType.TRANSFER);
-        Bid bid2 = bidService.saveBid(member2.getEmail(), reverseAuction.getId(), BidDepositType.TRANSFER);
+        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId());
+        Bid bid2 = bidService.saveBid(member2.getEmail(), reverseAuction.getId());
 
         bidService.approveBid(bid.getId());
 
