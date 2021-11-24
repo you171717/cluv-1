@@ -1,5 +1,6 @@
 package com.shop.controller;
 
+import com.shop.constant.GiftStatus;
 import com.shop.dto.OrderDto;
 import com.shop.dto.OrderHistDto;
 import com.shop.service.OrderService;
@@ -54,14 +55,26 @@ public class OrderController {
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);    // HTTP 응답 상태 코드 반환
     }
 
-    // 구매 이력
+    // 구매/선물 이력 조회
     @GetMapping(value = {"/orders", "/orders/{page}"})
     public String orderHist(@PathVariable("page") Optional<Integer> page,
-                            Principal principal, Model model){
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 4);
+                            Principal principal, Model model, @RequestParam(required = false, value= "giftStatus") GiftStatus giftStatus){
 
-        Page<OrderHistDto> ordersHistDtoList =
-                orderService.getOrderList(principal.getName(), pageable);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 4);
+        Page<OrderHistDto> ordersHistDtoList;
+
+
+
+        // 넘겨받은 파라미터 값이 null일 때
+        if(giftStatus == null) {
+            System.out.println("giftStatus ====================> " + giftStatus);
+            ordersHistDtoList =
+                    orderService.getOrderList(principal.getName(), pageable);
+        }else{
+            System.out.println("giftStatus ====================> " + giftStatus);
+            ordersHistDtoList =
+                    orderService.getOrderListStatus(principal.getName(), pageable, giftStatus);
+        }
 
         model.addAttribute("orders" , ordersHistDtoList);
         model.addAttribute("page", pageable.getPageNumber());
@@ -69,6 +82,7 @@ public class OrderController {
 
         return "order/orderHist";
     }
+
 
     // 주문 취소
     @PostMapping("/order/{orderId}/cancel")

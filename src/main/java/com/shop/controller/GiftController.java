@@ -29,8 +29,8 @@ public class GiftController {
     public ResponseEntity gift(@RequestBody @Valid OrderDto orderDto,
                              BindingResult bindingResult, Principal principal) throws Exception { // 휴대폰 문자보내기
 
-        String api_key = "api_key";
-        String api_secret = "api_secret";
+        String api_key = "NCSMCDCTEEVBPIN2";
+        String api_secret = "J09RZVDL04D93B4TRE2KGL77JK3T864S";
         Message coolsms = new Message(api_key,api_secret);
 
         HashMap<String, String> params = new HashMap<String, String>();
@@ -56,7 +56,7 @@ public class GiftController {
             }
 
 
-        params.put("to", "내번호"); // 발신번호
+        params.put("to", ""); // 수신번호
         params.put("from", orderDto.getFrom()); // 수신번호
 //        params.put("from", "01053636153"); // 수신번호
         params.put("text", orderDto.getText()); // 문자내용

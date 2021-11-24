@@ -106,7 +106,7 @@ public class ItemService {
 
     // 메인 페이지 상품 데이터
     @Transactional(readOnly = true)
-    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSerachDto, Pageable pageable){
-        return itemRepository.getMainItemPage(itemSerachDto, pageable);
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
 }
