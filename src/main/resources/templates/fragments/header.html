@@ -2,25 +2,46 @@
 <html xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
   <div th:fragment="header">
-    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="/">shop</a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <a class="navbar-brand" href="/" style="text-align: center ; font-size: 15px">GraphicCard Shop</a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+            <!-- 로그인을 해야지만 볼 수 있는 (누구나) 신품 , 중고상품 -->
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+              <a class="nav-link" href="/nitem">신품</a>
+            </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+              <a class="nav-link" href="/uitem">중고상품</a>
+            </li>
+            <!--      관리자 전용 탭      -->
             <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
               <a class="nav-link" href="/admin/item/new">상품등록</a>
             </li>
             <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
               <a class="nav-link" href="/admin/items">상품 관리</a>
             </li>
-            <li class="nav-item" sec:authorize="isAuthenticated()">
+            <!--      회원 전용 탭     -->
+            <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
               <a class="nav-link" href="/cart">장바구니</a>
             </li>
-            <li class="nav-item" sec:authorize="isAuthenticated()">
-              <a class="nav-link" href="/orders">구매이력</a>
+
+            <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ROLE_USER')">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                마이페이지
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/orders">구매이력</a>
+                <a class="dropdown-item" href="#">중고상품관리</a>
+              </div>
             </li>
+<!--            <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">-->
+<!--              <a class="nav-link" href="/orders">구매이력</a>-->
+<!--            </li>-->
+
             <li class="nav-item" sec:authorize="isAnonymous()">
               <a class="nav-link" href="/members/login">로그인</a>
             </li>

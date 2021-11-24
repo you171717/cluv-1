@@ -2,9 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
-<head>
-<title>No.1 그래픽카드 판매점</title>
-</head>
+
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
     <style>
@@ -36,13 +34,13 @@
 
 <div layout:fragment="content">
 
-    <div id="carouselControls" class="carousel slide margin" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active item">
-                <img class="d-block w-100 banner" src="https://img.comprating.com/img/tarjetas-gr-ficas/826/amd-y-nvidia-lanzan-las-tarjetas-gr-ficas-menos-atractivas-de-la-historia.jpg" alt="First slide">
-            </div>
-        </div>
-    </div>
+<!--    <div id="carouselControls" class="carousel slide margin" data-ride="carousel">-->
+<!--        <div class="carousel-inner">-->
+<!--            <div class="carousel-item active item">-->
+<!--                <img class="d-block w-100 banner" src="https://user-images.githubusercontent.com/13268420/112147492-1ab76200-8c20-11eb-8649-3d2f282c3c02.png" alt="First slide">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
     <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">

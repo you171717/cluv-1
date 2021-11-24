@@ -17,7 +17,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Item extends BaseEntity{
+public class Item extends BaseEntity {
 
     @Id
     @Column(name = "item_id")
@@ -40,9 +40,6 @@ public class Item extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus;          //상품 판매 상태
 
-    private LocalDateTime regTime;                  //등록 시간
-
-    private LocalDateTime updateTime;               //수정 시간
 
     @Enumerated(EnumType.STRING)
     private UseItemStatus useItemStatus;               // 중고 상품 체크
@@ -57,17 +54,20 @@ public class Item extends BaseEntity{
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();
         this.itemSellStatus = itemFormDto.getItemSellStatus();
+        this.useItemStatus = itemFormDto.getUseItemStatus();
+        this.start_day = itemFormDto.getStart_day();
+        this.end_day = itemFormDto.getEnd_day();
     }
 
-    public void removeStock(int stockNumber){
+    public void removeStock(int stockNumber) {
         int restStock = this.stockNumber - stockNumber;
-        if(restStock<0){
+        if (restStock < 0) {
             throw new OutOfStockException("상품의 재고가 부족 합니다. (현재 재고 수량: " + this.stockNumber + ")");
         }
         this.stockNumber = restStock;
     }
 
-    public void addStock(int stockNumber){  // 상품의 재고를 증가시키는 메소드
+    public void addStock(int stockNumber) {  // 상품의 재고를 증가시키는 메소드
         this.stockNumber += stockNumber;
     }
 

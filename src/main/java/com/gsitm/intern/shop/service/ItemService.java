@@ -91,4 +91,20 @@ public class ItemService {
     public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
         return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getNewItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getNewItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getOldItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+        return itemRepository.getOldItemPage(itemSearchDto, pageable);
+    }
+
+//    @Transactional
+//    public void deleteitem(Long id) {
+//        board
+//    }
+    
 }
