@@ -48,13 +48,22 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         format_sql: true
         #기본 batch size 설정
         default_batch_fetch_size: 1000
     show-sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: dnwlswkd17@gmail.com
+    password: dnwls@1663
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
 
   servlet:
     multipart:

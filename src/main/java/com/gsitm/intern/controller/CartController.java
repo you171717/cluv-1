@@ -4,6 +4,7 @@ import com.gsitm.intern.dto.CartDetailDto;
 import com.gsitm.intern.dto.CartItemDto;
 import com.gsitm.intern.dto.CartOrderDto;
 import com.gsitm.intern.service.CartService;
+import com.gsitm.intern.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ import java.util.List;
 public class CartController {
 
     private final CartService cartService;
+    private final EmailService emailService;
 
     @PostMapping(value = "/cart")
     public @ResponseBody
@@ -111,8 +113,11 @@ public class CartController {
                 return new ResponseEntity<String>("주문 권한이 없습니다.", HttpStatus.FORBIDDEN);
             }
         }
-        //주문 로직 호출 결과 생성된 주문 번화 반환
+        //주문 로직 호출 결과 생성된 주문 변화 반환
         Long orderId = cartService.orderCartItem(cartOrderDtoList, principal.getName());
+
+        String email = principal.getName();
+        emailService.sendCartOrderEmail(email, cartOrderDto);
         //생성된 주문 번호와 요청이 성공한 HTTP 응답 상태 코드 반환
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }

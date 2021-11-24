@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -42,4 +42,13 @@ public class MemberService implements UserDetailsService {
                 .roles(member.getRole().toString())
                 .build();
     }
+    public boolean checkEmailAndName(String email, String name) {
+        Member member = memberRepository.findByEmail(email);
+
+        if(member == null || !member.getName().equals(name)) {
+            throw new IllegalStateException("이메일과 이름이 일치하지 않습니다.");
+        }
+
+        return true;
+    }
 }

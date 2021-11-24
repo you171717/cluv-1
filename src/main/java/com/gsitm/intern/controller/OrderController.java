@@ -2,6 +2,7 @@ package com.gsitm.intern.controller;
 
 import com.gsitm.intern.dto.OrderDto;
 import com.gsitm.intern.dto.OrderHistDto;
+import com.gsitm.intern.service.EmailService;
 import com.gsitm.intern.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,6 +26,7 @@ import java.util.Optional;
 public class OrderController {
 
     private final OrderService orderService;
+    private final EmailService emailService;
 
     @PostMapping(value = "/order")
     public @ResponseBody ResponseEntity order (@RequestBody @Valid OrderDto orderDto,
@@ -44,6 +46,8 @@ public class OrderController {
         try {
             //화면에서 넘어오는 주문 정보와 회원의 이메일 정보를 이용해 주문로직 호출
             orderId = orderService.order(orderDto, email);
+            emailService.sendOrderEmail(email, orderDto);
+
         } catch(Exception e){
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
