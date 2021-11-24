@@ -158,9 +158,9 @@ class BidServiceTest {
 
         PageRequest pageRequest = PageRequest.of(0, 6);
 
-        Page<ReverseAuctionDto> reverseAuctionDtoList = reverseAuctionRepository.getAdminReverseAuctionPage(reverseAuctionSearchDto, pageRequest);
+        Page<ReverseAuctionHistoryDto> reverseAuctionDtoList = reverseAuctionRepository.getAdminReverseAuctionPage(reverseAuctionSearchDto, pageRequest);
 
-        for(ReverseAuctionDto reverseAuctionDto : reverseAuctionDtoList) {
+        for(ReverseAuctionHistoryDto reverseAuctionDto : reverseAuctionDtoList) {
             System.out.println(reverseAuctionDto.toString());
             System.out.println(reverseAuctionDto.getDiscountDto().getCurrentPrice());
             System.out.println(reverseAuctionDto.getDiscountDto().getCurrentDiscountPrice());

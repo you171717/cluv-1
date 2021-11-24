@@ -2,7 +2,8 @@ package com.shop.constant;
 
 public enum BidSearchSortColumn {
     REG_TIME("regTime"),
-    APPROVED_YN("approvedYn");
+    NAME("name"),
+    PRICE("price");
 
     private final String columnName;
 

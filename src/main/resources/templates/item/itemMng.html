@@ -50,11 +50,11 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <td>상품아이디</td>
-                        <td>상품명</td>
-                        <td>상태</td>
-                        <td>등록자</td>
-                        <td>등록일</td>
+                        <th>상품아이디</th>
+                        <th>상품명</th>
+                        <th>상태</th>
+                        <th>등록자</th>
+                        <th>등록일</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,7 +66,7 @@
                         <td><a th:href="'/admin/item/'+${item.id}" th:text="${item.itemNm}"></a></td>
                         <td th:text="${item.itemSellStatus == T(com.shop.constant.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>
                         <td th:text="${item.createdBy}"></td>
-                        <td th:text="${item.regTime}"></td>
+                        <td th:text="${#temporals.format(item.regTime, 'yyyy-MM-dd HH:mm')}"></td>
                     </tr>
                 </tbody>
             </table>

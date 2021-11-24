@@ -32,6 +32,21 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
         return QReverseAuction.reverseAuction.item.itemNm.like("%" + searchQuery + "%");
     }
 
+    private BooleanExpression searchByApprovedYn(String searchApprovedYn) {
+        return new CaseBuilder()
+                .when(outOfDate().not())
+                .then("F")
+                .otherwise(
+                    new Coalesce<String>(String.class).add(
+                        JPAExpressions.select(QBid.bid.approvedYn)
+                                .from(QBid.bid)
+                                .where(QBid.bid.reverseAuction.eq(QReverseAuction.reverseAuction))
+                                .where(QBid.bid.approvedYn.eq("Y"))
+                    ).add("N")
+                )
+                .like("%" + searchApprovedYn + "%");
+    }
+
     private OrderSpecifier orderBy(ReverseAuctionSearchDto reverseAuctionSearchDto) {
         ReverseAuctionSearchSortColumn sortColumn = reverseAuctionSearchDto.getSortColumn();
         Sort.Direction sortDirection = reverseAuctionSearchDto.getSortDirection();
@@ -39,7 +54,17 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
         OrderSpecifier orderSpecifier = null;
 
         if(sortColumn.equals(ReverseAuctionSearchSortColumn.REG_TIME)) {
-             orderSpecifier = QReverseAuction.reverseAuction.regTime.desc();
+            if(sortDirection.isAscending()) {
+                orderSpecifier = QReverseAuction.reverseAuction.regTime.asc();
+            } else {
+                orderSpecifier = QReverseAuction.reverseAuction.regTime.desc();
+            }
+        } else if(sortColumn.equals(ReverseAuctionSearchSortColumn.NAME)) {
+            if(sortDirection.isAscending()) {
+                orderSpecifier = QReverseAuction.reverseAuction.item.itemNm.asc();
+            } else {
+                orderSpecifier = QReverseAuction.reverseAuction.item.itemNm.desc();
+            }
         } else if(sortColumn.equals(ReverseAuctionSearchSortColumn.PRICE)) {
             if(sortDirection.isAscending()) {
                 orderSpecifier = QReverseAuction.reverseAuction.item.price.asc();
@@ -61,15 +86,16 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
     }
 
     @Override
-    public Page<ReverseAuctionDto> getAdminReverseAuctionPage(ReverseAuctionSearchDto reverseAuctionSearchDto, Pageable pageable) {
+    public Page<ReverseAuctionHistoryDto> getAdminReverseAuctionPage(ReverseAuctionSearchDto reverseAuctionSearchDto, Pageable pageable) {
         QReverseAuction reverseAuction = QReverseAuction.reverseAuction;
         QItemImg itemImg = QItemImg.itemImg;
         QItem item = QItem.item;
         QBid bid = QBid.bid;
+        QMember member = QMember.member;
 
-        QueryResults<ReverseAuctionDto> results = queryFactory
+        QueryResults<ReverseAuctionHistoryDto> results = queryFactory
                 .select(
-                        new QReverseAuctionDto(
+                        new QReverseAuctionHistoryDto(
                                 reverseAuction.id,
                                 itemImg.imgUrl,
                                 item.itemNm,
@@ -88,19 +114,25 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
                                                         .where(bid.reverseAuction.eq(reverseAuction))
                                                         .where(bid.approvedYn.eq("Y"))
                                             ).add("N")
-                                        )
+                                        ),
+                                bid.approvedTime,
+                                member.email,
+                                bid.depositAmount
                         )
                 )
                 .from(reverseAuction)
+                .leftJoin(reverseAuction.bids, bid).on(bid.approvedYn.eq("Y"))
+                .leftJoin(bid.member, member)
                 .join(reverseAuction.item, item)
                 .join(itemImg).on(itemImg.item.eq(reverseAuction.item).and(itemImg.repImgYn.eq("Y")))
                 .where(searchByLike(reverseAuctionSearchDto.getSearchQuery()))
+                .where(searchByApprovedYn(reverseAuctionSearchDto.getSearchApprovedYn()))
                 .orderBy(this.orderBy(reverseAuctionSearchDto))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetchResults();
 
-        List<ReverseAuctionDto> content = results.getResults();
+        List<ReverseAuctionHistoryDto> content = results.getResults();
 
         long total = results.getTotal();
 

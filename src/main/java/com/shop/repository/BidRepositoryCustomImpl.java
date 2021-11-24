@@ -6,6 +6,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.core.types.dsl.SimpleExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.shop.constant.BidDepositType;
 import com.shop.constant.BidSearchSortColumn;
 import com.shop.dto.BidDto;
 import com.shop.dto.BidSearchDto;
@@ -14,6 +15,7 @@ import com.shop.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -30,15 +32,42 @@ public class BidRepositoryCustomImpl implements BidRepositoryCustom {
         return QBid.bid.reverseAuction.item.itemNm.like("%" + searchQuery + "%");
     }
 
+    private BooleanExpression searchByApprovedYn(String searchApprovedYn, QBid bid2) {
+        return new CaseBuilder()
+                .when(bid2.approvedYn.isNull())
+                .then(QBid.bid.approvedYn)
+                .otherwise("F")
+                .like("%" + searchApprovedYn + "%");
+    }
+
+    private BooleanExpression searchDepositTypeEq(BidDepositType bidDepositType) {
+        return bidDepositType == null ? null : QBid.bid.depositType.eq(bidDepositType);
+    }
+
     private OrderSpecifier orderBy(BidSearchDto bidSearchDto) {
         BidSearchSortColumn sortColumn = bidSearchDto.getSortColumn();
+        Sort.Direction sortDirection = bidSearchDto.getSortDirection();
 
         OrderSpecifier orderSpecifier = null;
 
         if(sortColumn.equals(BidSearchSortColumn.REG_TIME)) {
-            orderSpecifier = QBid.bid.regTime.desc();
-        } else if(sortColumn.equals(BidSearchSortColumn.APPROVED_YN)) {
-            orderSpecifier = QBid.bid.approvedYn.asc();
+            if(sortDirection.isAscending()) {
+                orderSpecifier = QBid.bid.regTime.asc();
+            } else {
+                orderSpecifier = QBid.bid.regTime.desc();
+            }
+        } else if(sortColumn.equals(BidSearchSortColumn.NAME)) {
+            if(sortDirection.isAscending()) {
+                orderSpecifier = QBid.bid.reverseAuction.item.itemNm.asc();
+            } else {
+                orderSpecifier = QBid.bid.reverseAuction.item.itemNm.desc();
+            }
+        } else if(sortColumn.equals(BidSearchSortColumn.PRICE)) {
+            if(sortDirection.isAscending()) {
+                orderSpecifier = QBid.bid.depositAmount.asc();
+            } else {
+                orderSpecifier = QBid.bid.depositAmount.desc();
+            }
         }
 
         return orderSpecifier;
@@ -83,6 +112,8 @@ public class BidRepositoryCustomImpl implements BidRepositoryCustom {
                 .join(bid.reverseAuction.item, item)
                 .join(itemImg).on(itemImg.item.eq(bid.reverseAuction.item).and(itemImg.repImgYn.eq("Y")))
                 .where(searchByLike(bidSearchDto.getSearchQuery()))
+                .where(searchByApprovedYn(bidSearchDto.getSearchApprovedYn(), bid2))
+                .where(searchDepositTypeEq(bidSearchDto.getSearchDepositType()))
                 .orderBy(this.orderBy(bidSearchDto))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -134,6 +165,7 @@ public class BidRepositoryCustomImpl implements BidRepositoryCustom {
                 .join(bid.reverseAuction.item, item)
                 .join(itemImg).on(itemImg.item.eq(bid.reverseAuction.item).and(itemImg.repImgYn.eq("Y")))
                 .where(searchByLike(bidSearchDto.getSearchQuery()))
+                .where(searchByApprovedYn(bidSearchDto.getSearchApprovedYn(), bid2))
                 .where(bid.member.eq(curMember))
                 .orderBy(this.orderBy(bidSearchDto))
                 .offset(pageable.getOffset())

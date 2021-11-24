@@ -15,8 +15,14 @@
 
             function page(page) {
                 var searchQuery = $("#searchQuery").val();
+                var searchApprovedYn = $("#searchApprovedYn").val();
+                var sortColumn = $("#sortColumn").val();
+                var sortDirection = $("#sortDirection").val();
 
-                location.href = "/admin/rauctions/" + page + "?searchQuery=" + searchQuery;
+                location.href = "/admin/rauctions/" + page + "?searchQuery=" + searchQuery
+                    + "&searchApprovedYn=" + searchApprovedYn
+                    + "&sortColumn=" + sortColumn
+                    + "&sortDirection=" + sortDirection;
             }
         </script>
     </th:block>
@@ -45,11 +51,12 @@
                             <span class="rauction-table-name" th:text="${reverseAuction.itemNm}"></span>
                         </td>
                         <td th:text="${#numbers.formatCurrency(reverseAuction.startPrice)}"></td>
-                        <td th:if="${reverseAuction.approvedYn != 'F'}" th:text="${#numbers.formatCurrency(reverseAuction.discountDto.currentPrice)}"></td>
+                        <td th:if="${reverseAuction.approvedYn == 'Y'}" th:text="${#numbers.formatCurrency(reverseAuction.depositAmount)}"></td>
                         <td th:if="${reverseAuction.approvedYn == 'F'}"></td>
-                        <td th:if="${reverseAuction.approvedYn == 'Y'}">낙찰</td>
-                        <td th:if="${reverseAuction.approvedYn == 'F'}">실패</td>
-                        <td th:if="${reverseAuction.approvedYn == 'N'}">진행중</td>
+                        <td th:if="${reverseAuction.approvedYn == 'N'}" th:text="${#numbers.formatCurrency(reverseAuction.discountDto.currentPrice)}"></td>
+                        <td th:if="${reverseAuction.approvedYn == 'Y'}" class="font-weight-bold text-success">낙찰</td>
+                        <td th:if="${reverseAuction.approvedYn == 'F'}" class="font-weight-bold text-danger">실패</td>
+                        <td th:if="${reverseAuction.approvedYn == 'N'}" class="font-weight-bold text-secondary">진행중</td>
                         <td style="width: 150px">
                             <span th:if="${reverseAuction.approvedYn == 'N'}">
                                 <a th:href="@{/admin/rauction/__${reverseAuction.id}__}" class="btn btn-primary">수정</a>
@@ -59,6 +66,10 @@
                     </tr>
                 </tbody>
             </table>
+            <div th:if="${reverseAuctionDtoList.getTotalElements() == 0}" class="table-empty">
+                <i class="fa fa-times-circle"></i>
+                검색 결과가 없습니다
+            </div>
             <div th:with="start=${(reverseAuctionDtoList.number/maxPage) * maxPage + 1}, end=(${(reverseAuctionDtoList.totalPages == 0) ? 1 : (start + (maxPage - 1) < reverseAuctionDtoList.totalPages ? start + (maxPage - 1) : reverseAuctionDtoList.totalPages)})" >
                 <ul class="pagination justify-content-center">
                     <li class="page-item" th:classappend="${reverseAuctionDtoList.first}?'disabled'">
@@ -79,7 +90,24 @@
         </form>
         <form th:action="@{'/admin/rauctions/' + ${reverseAuctionDtoList.number}}" role="form" method="get" th:object="${reverseAuctionDtoList}">
             <div class="form-inline justify-content-center" th:object="${reverseAuctionSearchDto}">
-                <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색어를 입력해주세요">
+                <b style="margin: 0 5px 0 0;">정렬 : </b>
+                <select th:field="*{sortColumn}" class="form-control" style="width: auto; margin: 0 5px 0 0;">
+                    <option value="REG_TIME">등록일</option>
+                    <option value="NAME">상품명</option>
+                    <option value="PRICE">시작 가격</option>
+                </select>
+                <select th:field="*{sortDirection}" class="form-control" style="width: auto;">
+                    <option value="ASC">오름차순</option>
+                    <option value="DESC">내림차순</option>
+                </select>
+                <b style="margin: 0 5px 0 20px;">상태 필터 : </b>
+                <select th:field="*{searchApprovedYn}" class="form-control" style="width: auto; margin: 0 20px 0 0;">
+                    <option value="">모두</option>
+                    <option value="N">진행중</option>
+                    <option value="Y">낙찰</option>
+                    <option value="F">실패</option>
+                </select>
+                <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="상품명을 입력해주세요" style="margin: 0 5px 0 0;">
                 <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>
             </div>
         </form>

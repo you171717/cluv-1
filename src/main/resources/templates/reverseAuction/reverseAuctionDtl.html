@@ -74,10 +74,10 @@
                     <b>현재 가격</b>
                     <span>
                         <span class="rauction-detail-cprice" th:text="${#numbers.formatCurrency(reverseAuctionDto.discountDto.currentPrice)}"></span>
-                        <small class="ruaction-detail-dprice">(현재 <span th:text="${#numbers.formatCurrency(reverseAuctionDto.discountDto.currentDiscountPrice)}"></span> 할인)</small>
+                        <small class="rauction-detail-dprice">(현재 <span th:text="${#numbers.formatCurrency(reverseAuctionDto.discountDto.currentDiscountPrice)}"></span> 할인)</small>
                     </span>
                 </div>
-                <a th:href="@{/bid/__${reverseAuctionDto.id}__}" class="btn btn-primary" style="width: 100%">입찰하기</a>
+                <a th:href="@{/bid/__${reverseAuctionDto.id}__}" class="btn btn-lg btn-primary" style="width: 100%">입찰하기</a>
             </div>
         </div>
         <div class="jumbotron jumbotron-fluid mgt-30">

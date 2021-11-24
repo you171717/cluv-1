@@ -65,7 +65,7 @@ public class ReverseAuctionController {
     @GetMapping(value = {"/admin/rauctions", "/admin/rauctions/{page}"})
     public String reverseAuctionManage(ReverseAuctionSearchDto reverseAuctionSearchDto, @PathVariable("page") Optional<Integer> page, Model model) {
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
-        Page<ReverseAuctionDto> reverseAuctionDtoList = reverseAuctionService.getAdminReverseAuctionPage(reverseAuctionSearchDto, pageable);
+        Page<ReverseAuctionHistoryDto> reverseAuctionDtoList = reverseAuctionService.getAdminReverseAuctionPage(reverseAuctionSearchDto, pageable);
 
         model.addAttribute("reverseAuctionDtoList", reverseAuctionDtoList);
         model.addAttribute("reverseAuctionSearchDto", reverseAuctionSearchDto);

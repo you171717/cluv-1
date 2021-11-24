@@ -77,7 +77,7 @@ public class ReverseAuctionService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ReverseAuctionDto> getAdminReverseAuctionPage(ReverseAuctionSearchDto reverseAuctionSearchDto, Pageable pageable) {
+    public Page<ReverseAuctionHistoryDto> getAdminReverseAuctionPage(ReverseAuctionSearchDto reverseAuctionSearchDto, Pageable pageable) {
         return reverseAuctionRepository.getAdminReverseAuctionPage(reverseAuctionSearchDto, pageable);
     }
 

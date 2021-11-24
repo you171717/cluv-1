@@ -331,6 +331,13 @@ a, a:hover {
 .rauction-card-price b {
 	font-size: 24px;
 }
+.rauction-card-finish {
+    margin: 20px 0;
+}
+.rauction-card-finish b {
+    display: inline-block;
+    margin: 0 10px 0 0;
+}
 .rauction-previous-toggle {
 	display: block;
 	margin: 40px auto 0;
@@ -378,6 +385,7 @@ a, a:hover {
 	font-weight: 600;
 }
 .rauction-detail-cprice {
+    margin: 0 0 10px;
 	display: block;
 	font-size: 30px;
 	font-weight: 600;
@@ -445,4 +453,15 @@ a, a:hover {
 
 .pagination {
 	margin: 20px 0 10px;
+}
+
+.table-empty {
+    font-size: 24px;
+    text-align: center;
+    padding: 150px 0;
+}
+.table-empty .fa {
+    display: block;
+    margin: 0 0 20px;
+    font-size: 40px;
 }

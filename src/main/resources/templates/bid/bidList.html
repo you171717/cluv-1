@@ -15,8 +15,14 @@
 
             function page(page) {
                 var searchQuery = $("#searchQuery").val();
+                var searchApprovedYn = $("#searchApprovedYn").val();
+                var sortColumn = $("#sortColumn").val();
+                var sortDirection = $("#sortDirection").val();
 
-                location.href = "/bids/" + page + "?searchQuery=" + searchQuery;
+                location.href = "/bids/" + page + "?searchQuery=" + searchQuery
+                    + "&searchApprovedYn=" + searchApprovedYn
+                    + "&sortColumn=" + sortColumn
+                    + "&sortDirection=" + sortDirection;
             }
         </script>
     </th:block>
@@ -37,12 +43,16 @@
                             <span class="rauction-table-img" th:style="'background-image: url(' + ${bidDto.imgUrl} + ')'"></span>
                             <span class="rauction-table-name" th:text="${bidDto.itemNm}"></span>
                         </td>
-                        <td th:if="${bidDto.approvedYn == 'Y'}">낙찰</td>
-                        <td th:if="${bidDto.approvedYn == 'F'}">실패</td>
-                        <td th:if="${bidDto.approvedYn == 'N'}">결제 대기 중</td>
+                        <td th:if="${bidDto.approvedYn == 'Y'}" class="font-weight-bold text-success">낙찰</td>
+                        <td th:if="${bidDto.approvedYn == 'F'}" class="font-weight-bold text-danger">실패</td>
+                        <td th:if="${bidDto.approvedYn == 'N'}" class="font-weight-bold text-secondary">결제 대기 중</td>
                     </tr>
                 </tbody>
             </table>
+            <div th:if="${bidDtoList.getTotalElements() == 0}" class="table-empty">
+                <i class="fa fa-times-circle"></i>
+                검색 결과가 없습니다
+            </div>
             <div th:with="start=${(bidDtoList.number/maxPage) * maxPage + 1}, end=(${(bidDtoList.totalPages == 0) ? 1 : (start + (maxPage - 1) < bidDtoList.totalPages ? start + (maxPage - 1) : bidDtoList.totalPages)})" >
                 <ul class="pagination justify-content-center">
                     <li class="page-item" th:classappend="${bidDtoList.first}?'disabled'">
@@ -63,6 +73,22 @@
         </form>
         <form th:action="@{'/bids/' + ${bidDtoList.number}}" role="form" method="get" th:object="${bidDtoList}">
             <div class="form-inline justify-content-center" th:object="${bidSearchDto}">
+                <b style="margin: 0 5px 0 0;">정렬 : </b>
+                <select th:field="*{sortColumn}" class="form-control" style="width: auto; margin: 0 5px 0 0;">
+                    <option value="REG_TIME">신청일</option>
+                    <option value="NAME">상품명</option>
+                </select>
+                <select th:field="*{sortDirection}" class="form-control" style="width: auto;">
+                    <option value="ASC">오름차순</option>
+                    <option value="DESC">내림차순</option>
+                </select>
+                <b style="margin: 0 5px 0 20px;">필터 : </b>
+                <select th:field="*{searchApprovedYn}" class="form-control" style="width: auto; margin: 0 20px 0 0;">
+                    <option value="">모든 상태</option>
+                    <option value="N">결제 대기 중</option>
+                    <option value="Y">낙찰</option>
+                    <option value="F">실패</option>
+                </select>
                 <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색어를 입력해주세요">
                 <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>
             </div>
