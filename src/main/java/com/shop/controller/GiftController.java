@@ -9,9 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -25,36 +23,18 @@ public class GiftController {
     private final OrderService orderService;
 
     @ResponseBody
-    @PostMapping(value = "/gift")
-    public ResponseEntity gift(@RequestBody @Valid OrderDto orderDto,
-                             BindingResult bindingResult, Principal principal) throws Exception { // 휴대폰 문자보내기
+    @PostMapping(value = "/sendSms")
+    public ResponseEntity gift(@RequestBody OrderDto orderDto,
+                               Principal principal) throws Exception { // 휴대폰 문자보내기
 
         String api_key = "NCSMCDCTEEVBPIN2";
         String api_secret = "J09RZVDL04D93B4TRE2KGL77JK3T864S";
-        Message coolsms = new Message(api_key,api_secret);
+        Message coolsms = new Message(api_key, api_secret);
 
         HashMap<String, String> params = new HashMap<String, String>();
 
-            if (bindingResult.hasErrors()) {                // orderDTO 객체에 데이터 바인딩시 에러 검사
-                StringBuilder sb = new StringBuilder();
-                List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-                for (FieldError fieldError : fieldErrors) {
-                    sb.append(fieldError.getDefaultMessage());
-                }
-                return new ResponseEntity<String>(sb.toString(),
-                        HttpStatus.BAD_REQUEST);           // 에러 정보를 ResponseEntity 객체에 담아서 반환
-            }
-
-            String email = principal.getName();           // principal 객체에서 현재 로그인한 회원의 이메일 정보 조회
-            Long orderId;
-
-            try{
-                orderId = orderService.gift(orderDto, email);          // 주문 로직 호출
-            }catch(Exception e){
-                return new ResponseEntity<String>(e.getMessage(),
-                        HttpStatus.BAD_REQUEST);
-            }
-
+        String email = principal.getName();           // principal 객체에서 현재 로그인한 회원의 이메일 정보 조회
+        Long orderId;
 
         params.put("to", ""); // 수신번호
         params.put("from", orderDto.getFrom()); // 수신번호
@@ -74,6 +54,41 @@ public class GiftController {
         System.out.println("result : OK ");
         System.out.println("===============================");
 
+        return new ResponseEntity<Long>(HttpStatus.OK);    // HTTP 응답 상태 코드 반환
+    }
+
+    // 선물
+    @PostMapping(value = "/gift")
+    public @ResponseBody
+    ResponseEntity order(@RequestBody @Valid OrderDto orderDto,
+                         BindingResult bindingResult, Principal principal) {
+
+        if (bindingResult.hasErrors()) {                // orderDTO 객체에 데이터 바인딩시 에러 검사
+            StringBuilder sb = new StringBuilder();
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            for (FieldError fieldError : fieldErrors) {
+                sb.append(fieldError.getDefaultMessage());
+            }
+            return new ResponseEntity<String>(sb.toString(),
+                    HttpStatus.BAD_REQUEST);           // 에러 정보를 ResponseEntity 객체에 담아서 반환
+        }
+
+        String email = principal.getName();           // principal 객체에서 현재 로그인한 회원의 이메일 정보 조회
+        Long orderId;
+
+        try {
+            orderId = orderService.gift(orderDto, email);          // 주문 로직 호출
+        } catch (Exception e) {
+            return new ResponseEntity<String>(e.getMessage(),
+                    HttpStatus.BAD_REQUEST);
+        }
+
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);    // HTTP 응답 상태 코드 반환
+    }
+
+    @GetMapping(value = "/giftForm")
+    public String giftForm() {
+
+        return "order/giftForm";
     }
 }

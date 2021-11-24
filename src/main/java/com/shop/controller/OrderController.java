@@ -63,8 +63,6 @@ public class OrderController {
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 4);
         Page<OrderHistDto> ordersHistDtoList;
 
-
-
         // 넘겨받은 파라미터 값이 null일 때
         if(giftStatus == null) {
             System.out.println("giftStatus ====================> " + giftStatus);
