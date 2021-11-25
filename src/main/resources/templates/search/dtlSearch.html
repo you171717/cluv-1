@@ -175,7 +175,7 @@
 
             <li class="page-item" th:classappend="${items.number eq 0}?'disabled':''">
                 <a th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number-1}}" aria-label='Previous' class="page-link">
-                    <span aria-hidden='true'>Previous</span>
+                    <span aria-hidden='true'>이전페이지</span>
                 </a>
             </li>
 
@@ -185,7 +185,7 @@
 
             <li class="page-item" th:classappend="${items.number+1 ge items.totalPages}?'disabled':''">
                 <a th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number+1}}" aria-label='Next' class="page-link">
-                    <span aria-hidden='true'>Next</span>
+                    <span aria-hidden='true'>다음페이지</span>
                 </a>
             </li>
 
