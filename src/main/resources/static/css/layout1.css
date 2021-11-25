@@ -21,11 +21,50 @@ body {
     margin-left: 200px;
     margin-right: 200px;
 }
+.navbar-dark .navbar-brand {
+    color: black;
+    font-size: 25px;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: black;
+    font-size: 20px;
+}
+.bg-primary {
+    background-color: #FFFF99!important;
+}
+.btn-outline-success {
+    color: #663300;
+    border-color: #663300;
+}
+.navbar {
+    padding: 1.2rem 2rem;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #663300;
+    border-color: #663300;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #663300;
+    border-color: #663300;
+}
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #663300;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
 /*-----추가----------*/
 .tag_filter{
 }
 .filter_button{
-    padding: 9px 12px;
+    padding: 8px 10px;
     border: 1px solid rgb(218, 220, 224);
     border-radius: 4px;
     box-sizing: border-box;

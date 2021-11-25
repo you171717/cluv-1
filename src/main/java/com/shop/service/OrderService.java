@@ -114,8 +114,4 @@ public class OrderService {
         orderReporsitory.save(order);  //주문 데이터 저장
         return order.getId();
     }
-
-    public void tagSellCount(){
-        Tag tag = new Tag();
-    }
 }

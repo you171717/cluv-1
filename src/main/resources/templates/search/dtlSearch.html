@@ -1,6 +1,7 @@
 <!DOCTYPE html>
     <html xmlns:th="http://www.thymeleaf.org"
           xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+          xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
           layout:decorate="~{layouts/layout1}">
 
     <head>
@@ -102,11 +103,11 @@
 
 
 
-<div layout:fragment="content" style="margin-left:25%;margin-right:25%">
-    <h1 style="float: left">상세검색 페이지</h1>
-    <span style="float: right" onclick="location.href='/detailSearch/admin/showTagSell'">태그 판매량 조회</span><br>
+<div layout:fragment="content" >
+    <h1 style="float: left">태그검색 페이지</h1>
+    <span style="float: right" sec:authorize="hasAnyAuthority('ROLE_ADMIN')" onclick="location.href='/detailSearch/admin/showTagSell'">태그 판매량 조회</span><br>
     <div class="tag_filter" style="margin-top: 50px;">
-        <div id="filter_select" style="width: 80%">
+        <div id="filter_select" style="width: 100%">
             <button class="filter_button" name="거실" id="tag_1" onclick="add_Filter(this)">
                 <span>✔  </span>거실
             </button>
@@ -131,12 +132,12 @@
             <button class="filter_button" name="겨울" id="tag_8" onclick="add_Filter(this)">
                 <span>✔  </span>겨울
             </button>
-            <button class="filter_button">
-                <span>✔  </span>빈값
-            </button>
-            <button class="filter_button">
-                <span>✔  </span>빈값
-            </button>
+<!--            <button class="filter_button">-->
+<!--                <span>✔  </span>빈값-->
+<!--            </button>-->
+<!--            <button class="filter_button">-->
+<!--                <span>✔  </span>빈값-->
+<!--            </button>-->
         </div>
         <div style="margin-top: 20px;margin-bottom: 20px;">
             <div class="filter_bar_container" style="align : center;">

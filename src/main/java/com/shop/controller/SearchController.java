@@ -2,8 +2,12 @@ package com.shop.controller;
 
 import com.shop.dto.ItemSearchDto;
 import com.shop.dto.MainItemDto;
+import com.shop.entity.Tag;
 import com.shop.service.ItemService;
+import com.shop.service.TagService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -12,13 +16,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.TreeMap;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class SearchController {
 
+//    @Autowired
+//    private TagDto tagDto;
+
     private final ItemService itemService;
+    private final TagService tagService;
+
 
     @GetMapping(value = "/detailSearch")
     public String detailSearch(ItemSearchDto itemSearchDto, Optional<Integer> page, Model model,
@@ -40,8 +53,32 @@ public class SearchController {
     }
 
     @GetMapping(value = "/detailSearch/admin/showTagSell")
-    public String showTagSell(){
+    public String showTagSell(Model model){
+        Map<String, Integer> graphData = new TreeMap<>();
+        List<Tag> tags = tagService.getTagList();
+
+        for (Tag t : tags) {
+            graphData.put(t.getTagNm(), t.getTotalSell());
+        }
+        convertMapToJson(graphData);
+        log.error(graphData.toString());
+        model.addAttribute("chartData", graphData);
+        System.out.println(tags);
         return "search/showSell";
     }
+    public JSONObject convertMapToJson(Map<String, Integer> map) {
+
+        JSONObject json = new JSONObject();
+        String key = "";
+        Object value = null;
+        for(Map.Entry<String, Integer> entry : map.entrySet()) {
+            key = entry.getKey();
+            value = entry.getValue();
+            json.put(key, value);
+        }
+        return json;
+    }
+
+
 
 }
