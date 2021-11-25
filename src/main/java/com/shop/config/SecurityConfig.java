@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);
 
+
         http.authorizeRequests()
                 .mvcMatchers("/", "/members/**",
                         "/item/**", "/images/**").permitAll()

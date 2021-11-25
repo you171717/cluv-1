@@ -75,7 +75,7 @@
                 <li class="page-item" th:classappend="${items.first}?'disabled'">
 <!--                    이전 페이지로 이동-->
                     <a th:onclick="'javascript:page(' + ${items.number - 1} + ')'" aria-label='Previous' class="page-link">
-                        <span aria-hidden='true'>Previous</span>
+                        <span aria-hidden='true'>이전</span>
                     </a>
                 </li>
 <!--                    현재 페이지 active 클래스 추가-->
@@ -87,7 +87,7 @@
                 <li class="page-item" th:classappend="${items.last}?'disabled'">
 <!--                 next 버튼 클릭 시 다음 페이지로 이동-->
                     <a th:onclick="'javascript:page(' + ${items.number + 1} + ')'" aria-label='Next' class="page-link">
-                        <span aria-hidden='true'>Next</span>
+                        <span aria-hidden='true'>다음</span>
                     </a>
                 </li>
 

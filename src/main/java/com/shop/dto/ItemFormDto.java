@@ -19,6 +19,8 @@ public class ItemFormDto {
 
     private Long id;
 
+    private Long cateCode;
+
     @NotBlank(message = "상품명은 필수 입력 값입니다.")
     private String itemNm;
 
@@ -32,6 +34,7 @@ public class ItemFormDto {
     private Integer stockNumber;
 
     private ItemSellStatus itemSellStatus;
+
 
     // 상품 저장 후 수정할 때 상품 이미지 저장 리스트
     private List<ItemImgDto> itemImgDtoList = new ArrayList<>();
@@ -59,5 +62,18 @@ public class ItemFormDto {
 //        return itemFormMapStruct.toDto(item);
 //    }
 
-
+    @Override
+    public String toString() {
+        return "ItemFormDto{" +
+                "id=" + id +
+                ", cateCode=" + cateCode +
+                ", itemNm='" + itemNm + '\'' +
+                ", price=" + price +
+                ", itemDetail='" + itemDetail + '\'' +
+                ", stockNumber=" + stockNumber +
+                ", itemSellStatus=" + itemSellStatus +
+                ", itemImgDtoList=" + itemImgDtoList +
+                ", itemImgIds=" + itemImgIds +
+                '}';
+    }
 }

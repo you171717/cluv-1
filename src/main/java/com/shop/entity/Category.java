@@ -12,7 +12,6 @@ public class Category{
 
     @Id
     @Column(name="cateCode")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cateCode;
 
     @Column(unique = true)

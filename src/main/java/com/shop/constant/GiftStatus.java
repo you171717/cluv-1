@@ -8,8 +8,8 @@ import lombok.RequiredArgsConstructor;
 // 구매/선물
 public enum GiftStatus {
 
-    BUY("BUY"),
-    GIFT("GIFT");
+    BUY("0"),
+    GIFT("1");
 
     private final String key;
 

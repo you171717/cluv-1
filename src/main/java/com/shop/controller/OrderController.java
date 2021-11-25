@@ -29,8 +29,9 @@ public class OrderController {
 
     // 주문
     @PostMapping(value = "/order")
-    public @ResponseBody ResponseEntity order (@RequestBody @Valid OrderDto orderDto,
-                                               BindingResult bindingResult, Principal principal) {
+    public @ResponseBody
+    ResponseEntity order(@RequestBody @Valid OrderDto orderDto,
+                         BindingResult bindingResult, Principal principal) {
 
         if (bindingResult.hasErrors()) {                // orderDTO 객체에 데이터 바인딩시 에러 검사
             StringBuilder sb = new StringBuilder();
@@ -45,9 +46,9 @@ public class OrderController {
         String email = principal.getName();           // principal 객체에서 현재 로그인한 회원의 이메일 정보 조회
         Long orderId;
 
-        try{
+        try {
             orderId = orderService.order(orderDto, email);          // 주문 로직 호출
-        }catch(Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<String>(e.getMessage(),
                     HttpStatus.BAD_REQUEST);
         }
@@ -55,39 +56,50 @@ public class OrderController {
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);    // HTTP 응답 상태 코드 반환
     }
 
-    // 구매/선물 이력 조회
+    // 전체 조회
     @GetMapping(value = {"/orders", "/orders/{page}"})
     public String orderHist(@PathVariable("page") Optional<Integer> page,
-                            Principal principal, Model model, @RequestParam(required = false, value= "giftStatus") GiftStatus giftStatus){
+                            Principal principal, Model model) {
 
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 4);
         Page<OrderHistDto> ordersHistDtoList;
 
-        // 넘겨받은 파라미터 값이 null일 때
-        if(giftStatus == null) {
-            System.out.println("giftStatus ====================> " + giftStatus);
-            ordersHistDtoList =
-                    orderService.getOrderList(principal.getName(), pageable);
-        }else{
-            System.out.println("giftStatus ====================> " + giftStatus);
-            ordersHistDtoList =
-                    orderService.getOrderListStatus(principal.getName(), pageable, giftStatus);
-        }
+        ordersHistDtoList =
+                orderService.getOrderList(principal.getName(), pageable);
 
-        model.addAttribute("orders" , ordersHistDtoList);
+        model.addAttribute("orders", ordersHistDtoList);
         model.addAttribute("page", pageable.getPageNumber());
         model.addAttribute("maxPage", 5);
 
         return "order/orderHist";
     }
 
+    // 구매/선물 상태 조회
+    @GetMapping(value = {"/ordersStatus/{status}", "/ordersStatus/{page}"})
+    public String orderStatus(@PathVariable("page") Optional<Integer> page,
+                              @PathVariable(required = false, value="status") GiftStatus giftStatus,
+                              Principal principal, Model model){
+
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 4);
+        Page<OrderHistDto> ordersHistDtoList;
+
+        ordersHistDtoList =
+                orderService.getOrderListStatus(principal.getName(), pageable, giftStatus);
+
+        model.addAttribute("orders", ordersHistDtoList);
+        model.addAttribute("page", pageable.getPageNumber());
+        model.addAttribute("maxPage", 5);
+        return "order/orderHist";
+    }
+
 
     // 주문 취소
     @PostMapping("/order/{orderId}/cancel")
-    public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId, Principal principal){
+    public @ResponseBody
+    ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId, Principal principal) {
 
         // 주문 취소 권한 검사
-        if(!orderService.validateOrder(orderId, principal.getName())){
+        if (!orderService.validateOrder(orderId, principal.getName())) {
             return new ResponseEntity<String>("주문 취소 권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
 

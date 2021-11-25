@@ -36,6 +36,7 @@ public class OrderService {
     public Long order(OrderDto orderDto, String email){
         Item item = itemRepository.findById(orderDto.getItemId())              // 주문 상품 조회
                 .orElseThrow(EntityNotFoundException::new);
+
         Member member = memberRepository.findByEmail(email);                  // 이메일 정보를 이용해 회원 정보 조회
 
         List<OrderItem> orderItemList = new ArrayList<>();
@@ -73,11 +74,11 @@ public class OrderService {
 
     }
 
-    // 주문 조회
+    // 전체 주문 조회
     @Transactional(readOnly = true)
     public Page<OrderHistDto> getOrderList(String email, Pageable pageable){
 
-        List<Order> orders = orderRepository.findOrders(email, pageable, BUY);
+        List<Order> orders = orderRepository.findOrders(email, pageable);
         Long totalCount = orderRepository.countOrder(email);
 
         List<OrderHistDto> orderHistDtos = new ArrayList<>();
@@ -98,6 +99,7 @@ public class OrderService {
         return new PageImpl<OrderHistDto>(orderHistDtos, pageable, totalCount);
     }
 
+    // 구매/선물 상태 조회
     @Transactional(readOnly = true)
     public Page<OrderHistDto> getOrderListStatus(String email, Pageable pageable, GiftStatus giftStatus){
 
@@ -162,7 +164,5 @@ public class OrderService {
 
         return order.getId();
     }
-
-
 
 }

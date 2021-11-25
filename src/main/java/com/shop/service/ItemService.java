@@ -1,11 +1,10 @@
 package com.shop.service;
 
-import com.shop.dto.ItemFormDto;
-import com.shop.dto.ItemImgDto;
-import com.shop.dto.ItemSearchDto;
-import com.shop.dto.MainItemDto;
+import com.shop.dto.*;
+import com.shop.entity.Category;
 import com.shop.entity.Item;
 import com.shop.entity.ItemImg;
+import com.shop.repository.CategoryRepository;
 import com.shop.repository.ItemImgRepository;
 import com.shop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,11 +31,18 @@ public class ItemService {
 //    @Autowired
 //    ItemFormMapStruct itemFormMapStruct;
 
+    private final CategoryRepository categoryRepository;
+
     public Long saveItem(ItemFormDto itemFormDto,
                          List<MultipartFile> itemImgFileList) throws Exception {
 
+        Category category = categoryRepository.findByCateCode(itemFormDto.getCateCode());  // 카테고리 조회
+        System.out.println("category =====================> " + itemFormDto.getCateCode());
+        System.out.println("category =====================> " + category);
+
         // 상품 등록
-        Item item = itemFormDto.createItem();               // form으로 부터 item 객체 생성
+        Item item = Item.createItem(itemFormDto, category);               // form으로 부터 item 객체 생성
+        System.out.println(" item ===================>" + item);
         itemRepository.save(item);                          // 상품 데이터 저장
 
 //        Item item = itemFormMapStruct.toEntity(itemFormDto); // DTO -> Entity
@@ -83,10 +89,11 @@ public class ItemService {
 
     public Long updateItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList) throws Exception{
 
+        Category category = categoryRepository.findByCateCode(itemFormDto.getCateCode());  // 카테고리 조회
         //상품 수정
         Item item = itemRepository.findById(itemFormDto.getId())    // 상품 아이디를 이용해 상품 엔티티 조회
                 .orElseThrow(EntityNotFoundException::new);
-        item.updateItem(itemFormDto);                               // itemFormDto를 통해 상품 엔티티 업데이트
+        item.updateItem(itemFormDto ,category);                               // itemFormDto를 통해 상품 엔티티 업데이트
 
         List<Long> itemImgIds = itemFormDto.getItemImgIds();        // 상품 아이디로 리스트 조회
 
@@ -108,5 +115,11 @@ public class ItemService {
     @Transactional(readOnly = true)
     public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
         return itemRepository.getMainItemPage(itemSearchDto, pageable);
+    }
+
+    // 선물하기 상품 데이터
+    @Transactional(readOnly = true)
+    public Page<GiftMainItemDto> getGiftItemPage(ItemSearchDto itemSearchDto, Pageable pageable, Long cateCode){
+        return itemRepository.getGiftItemPage(itemSearchDto, pageable, cateCode);
     }
 }

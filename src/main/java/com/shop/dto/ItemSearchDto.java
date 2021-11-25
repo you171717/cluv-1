@@ -14,5 +14,6 @@ public class ItemSearchDto {
 
     private String searchBy;                     // 상품 유형
 
+
     private String searchQuery = "";             // 조회할 검색어 저장 변수
 }
