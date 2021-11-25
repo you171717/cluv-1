@@ -24,7 +24,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ItemController {
 
-    private final ItemService itemService;
+    private final ItemService  itemService;
 
     @GetMapping(value = "/admin/item/new")
     public String itemForm(Model model){
@@ -89,10 +89,7 @@ model.addAttribute("itemFormDto", new ItemFormDto());
         return "redirect:/";
     }
 
-//    @DeleteMapping(value = "/admin/item/{/admin/item/{itemId}")
-//    public String delete(@PathVariable("item_Id")Long id) {
-//        itemService.deleteitem(id);
-//    }
+
 
     @GetMapping(value = {"/admin/items", "/admin/items/{page}"})
     public String itemManage(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model){

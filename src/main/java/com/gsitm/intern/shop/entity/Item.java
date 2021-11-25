@@ -40,7 +40,6 @@ public class Item extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus;          //상품 판매 상태
 
-
     @Enumerated(EnumType.STRING)
     private UseItemStatus useItemStatus;               // 중고 상품 체크
 

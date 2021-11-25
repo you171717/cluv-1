@@ -102,9 +102,4 @@ public class ItemService {
         return itemRepository.getOldItemPage(itemSearchDto, pageable);
     }
 
-//    @Transactional
-//    public void deleteitem(Long id) {
-//        board
-//    }
-    
 }

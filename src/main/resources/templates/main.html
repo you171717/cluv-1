@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/layout1}">
 <head>
 <title>No.1 그래픽카드 판매점</title>
@@ -39,7 +40,7 @@
     <div id="carouselControls" class="carousel slide margin" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active item">
-                <img class="d-block w-100 banner" src="https://img.comprating.com/img/tarjetas-gr-ficas/826/amd-y-nvidia-lanzan-las-tarjetas-gr-ficas-menos-atractivas-de-la-historia.jpg" alt="First slide">
+                <img class="d-block w-100 banner" src="https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/ampere/rtx-3090/geforce-rtx-3090-product-gallery-full-screen-3840-1.jpg" alt="First slide">
             </div>
         </div>
     </div>
@@ -49,7 +50,7 @@
         <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + ' 검색 결과'"></p>
     </div>
 
-    <div class="row">
+    <div class="row" sec:authorize="isAuthenticated()">
         <th:block th:each="item, status: ${items.getContent()}">
             <div class="col-md-4 margin">
                 <div class="card">
@@ -58,7 +59,7 @@
                         <div class="card-body">
                             <h4 class="card-title">[[${item.itemNm}]]</h4>
                             <p class="card-text">[[${item.itemDetail}]]</p>
-                            <h3 class="card-title text-danger">[[${item.price}]]원</h3>
+                            <h3 class="card-title text-danger" >[[${#numbers.formatInteger(item.price, 0, 'COMMA')}]]원</h3>
                         </div>
                     </a>
                 </div>
@@ -67,11 +68,11 @@
     </div>
 
     <div th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
-        <ul class="pagination justify-content-center">
+        <ul class="pagination justify-content-center" sec:authorize="isAuthenticated()">
 
             <li class="page-item" th:classappend="${items.number eq 0}?'disabled':''">
                 <a th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number-1}}" aria-label='Previous' class="page-link">
-                    <span aria-hidden='true'>Previous</span>
+                    <span aria-hidden='true'>이전</span>
                 </a>
             </li>
 
@@ -81,7 +82,7 @@
 
             <li class="page-item" th:classappend="${items.number+1 ge items.totalPages}?'disabled':''">
                 <a th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number+1}}" aria-label='Next' class="page-link">
-                    <span aria-hidden='true'>Next</span>
+                    <span aria-hidden='true'>다음</span>
                 </a>
             </li>
         </ul>

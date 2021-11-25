@@ -19,7 +19,9 @@ import org.thymeleaf.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
@@ -132,6 +134,8 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                 .join(itemImg.item, item)
                 .where(itemImg.repimgYn.eq("Y"))
                 .where(item.useItemStatus.eq(UseItemStatus.valueOf("NEW")))
+                .where(item.start_day.loe(new Date()))
+                .where(item.end_day.goe(new Date()))
                 .where(itemNmLike(itemSearchDto.getSearchQuery()))
                 .orderBy(item.id.desc())
                 .offset(pageable.getOffset())
@@ -161,6 +165,10 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                 .join(itemImg.item, item)
                 .where(itemImg.repimgYn.eq("Y"))
                 .where(item.useItemStatus.eq(UseItemStatus.valueOf("OLD")))
+                // now() 에서 Date() 로 변경 / 이유: 시연을 위해서라면 DB에서 가져온 시간의 값이 아닌  로컬에서 가져온 시간의 값이 필요하기 때문이다.
+                // now() : DB의 시간 조회 / Date() : 현재 로컬의 시간을 조회
+                .where(item.start_day.loe(new Date()))
+                .where(item.end_day.goe(new Date()))
                 .where(itemNmLike(itemSearchDto.getSearchQuery()))
                 .orderBy(item.id.desc())
                 .offset(pageable.getOffset())
