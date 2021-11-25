@@ -79,6 +79,7 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
     private BooleanExpression outOfDate() {
         return Expressions.stringTemplate("TIMESTAMPDIFF(HOUR, {0}, {1})", QReverseAuction.reverseAuction.startTime, LocalDateTime.now())
                 .castToNum(Integer.class)
+                .divide(QReverseAuction.reverseAuction.timeUnit)
                 .multiply(QReverseAuction.reverseAuction.priceUnit)
                 .divide(QReverseAuction.reverseAuction.item.price)
                 .multiply(100)
@@ -99,6 +100,7 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
                                 reverseAuction.id,
                                 itemImg.imgUrl,
                                 item.itemNm,
+                                item.shippingFee,
                                 item.price,
                                 reverseAuction.startTime,
                                 reverseAuction.priceUnit,
@@ -152,6 +154,7 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
                                 reverseAuction.id,
                                 itemImg.imgUrl,
                                 item.itemNm,
+                                item.shippingFee,
                                 item.price,
                                 reverseAuction.startTime,
                                 reverseAuction.priceUnit,
@@ -198,6 +201,7 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
                                 reverseAuction.id,
                                 itemImg.imgUrl,
                                 item.itemNm,
+                                item.shippingFee,
                                 item.price,
                                 reverseAuction.startTime,
                                 reverseAuction.priceUnit,
@@ -237,6 +241,7 @@ public class ReverseAuctionRepositoryCustomImpl implements ReverseAuctionReposit
                                 reverseAuction.id,
                                 itemImg.imgUrl,
                                 item.itemNm,
+                                item.shippingFee,
                                 item.price,
                                 reverseAuction.startTime,
                                 reverseAuction.priceUnit,

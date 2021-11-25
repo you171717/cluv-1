@@ -24,8 +24,9 @@
                     var cartItemId = $(this).val();
                     var price = $("#price_" + cartItemId).attr("data-price");
                     var count = $("#count_" + cartItemId).val();
+                    var shippingFee = $("#shipping_" + cartItemId).attr("data-shipping");
 
-                    orderTotalPrice += price * count;
+                    orderTotalPrice += price * count + parseInt(shippingFee);
                 });
 
                 $("#orderTotalPrice").html(numberFormat(orderTotalPrice));
@@ -35,7 +36,8 @@
                 var count = obj.value;
                 var cartItemId = obj.id.split("_")[1];
                 var price = $("#price_" + cartItemId).data("price");
-                var totalPrice = count * price;
+                var shippingFee = $("#shipping_" + cartItemId).attr("data-shipping");
+                var totalPrice = count * price + parseInt(shippingFee);
 
                 $("#totalPrice_" + cartItemId).html(numberFormat(totalPrice));
 
@@ -231,13 +233,14 @@
                                         <button type="button" class="close" aria-label="Close">
                                             <span aria-hidden="true" th:data-id="${cartItem.cartItemId}" onclick="deleteCartItem(this)">&times;</span>
                                         </button>
+                                        <small class="text-danger" th:id="'shipping_' + ${cartItem.cartItemId}" th:data-shipping="${cartItem.shippingFee}" style="padding: 13px 0 0 20px;">(배송비 : <th:block th:text="${#numbers.formatCurrency(cartItem.shippingFee)}"></th:block>)</small>
                                     </span>
                                 </div>
                             </div>
                         </td>
                         <td class="text-center align-middle">
                             <span th:id="'totalPrice_' + ${cartItem.cartItemId}"
-                                  name="totalPrice" th:text="${#numbers.formatCurrency(cartItem.price * cartItem.count)}">
+                                  name="totalPrice" th:text="${#numbers.formatCurrency(cartItem.price * cartItem.count + cartItem.shippingFee)}">
                             </span>
                         </td>
                     </tr>

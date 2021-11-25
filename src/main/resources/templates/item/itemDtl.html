@@ -25,7 +25,8 @@
             function calculateToalPrice(){
                 var count = $("#count").val();
                 var price = $("#price").val();
-                var totalPrice = price*count;
+                var shippingFee = $("#shippingFee").val();
+                var totalPrice = price*count+parseInt(shippingFee);
                 $("#totalPrice").html(numberFormat(totalPrice));
             }
 
@@ -122,13 +123,14 @@
                 margin-top: 50px;
             }
             .repImgDiv{
+                text-align: center;
                 margin-right: 15px;
                 height: auto;
                 width: 50%;
             }
             .repImg{
-                width: 100%;
-                height: 400px;
+                max-width: 100%;
+                max-height: 400px;
             }
             .wd50{
                 height: auto;
@@ -155,7 +157,9 @@
                 <div class="text-right">
                     <div class="h4 text-danger text-left">
                         <input type="hidden" th:value="${item.price}" id="price" name="price">
+                        <input type="hidden" th:value="${item.shippingFee}" id="shippingFee" name="shippingFee">
                         <span th:text="${#numbers.formatCurrency(item.price)}"></span>
+                        <small style="font-size: 16px;">(배송비 : <th:block th:text="${#numbers.formatCurrency(item.shippingFee)}"></th:block>)</small>
                     </div>
                     <div class="input-group w-50">
                         <div class="input-group-prepend">

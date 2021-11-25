@@ -3,6 +3,11 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layoutGlobal}">
 
+    <head>
+        <meta name="_csrf" th:content="${_csrf.token}"/>
+        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    </head>
+
     <th:block layout:fragment="script">
         <script th:inline="javascript">
             $(document).ready(function() {
@@ -10,6 +15,32 @@
                     e.preventDefault();
 
                     page(0);
+                });
+
+                $('.rauction-refund').on('click', function() {
+                    var token = $("meta[name='_csrf']").attr("content");
+                    var header = $("meta[name='_csrf_header']").attr("content");
+
+                    $.ajax({
+                        url: '/admin/bid/' + $(this).data('id') + '/refund',
+                        beforeSend: function(xhr) {
+                            xhr.setRequestHeader(header, token);
+                        },
+                        dataType: "json",
+                        cache: false,
+                        success: function(result) {
+                            alert(result);
+                        },
+                        error: function(jqXHR, status, error) {
+                            if(jqXHR.status == "401") {
+                                alert("로그인 후 이용해주세요");
+
+                                location.href = "/members/login";
+                            } else {
+                                alert(jqXHR.responseText);
+                            }
+                        }
+                    });
                 });
             });
 
@@ -60,7 +91,10 @@
                         <td th:if="${bidDto.approvedYn == 'Y'}" class="font-weight-bold text-success">완료</td>
                         <td th:if="${bidDto.approvedYn == 'F'}" class="font-weight-bold text-danger">환불</td>
                         <td th:if="${bidDto.approvedYn == 'N'}" class="font-weight-bold text-secondary">확인 필요</td>
-                        <td><a th:href="@{/admin/bid/__${bidDto.id}__/approve}" class="btn btn-primary" th:if="${bidDto.approvedYn == 'N'}">확인</a></td>
+                        <td>
+                            <a class="btn btn-danger rauction-refund" th:data-id="${bidDto.id}" th:if="${bidDto.approvedYn == 'F'}">환불 정보</a>
+                            <a th:href="@{/admin/bid/__${bidDto.id}__/approve}" class="btn btn-primary" th:if="${bidDto.approvedYn == 'N'}">확인</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

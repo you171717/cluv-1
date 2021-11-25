@@ -19,9 +19,7 @@ public class CustomErrorController implements ErrorController {
         if(statusCodeObj != null) {
             int statusCode = Integer.valueOf(statusCodeObj.toString());
 
-            if(statusCode == HttpStatus.UNAUTHORIZED.value()) {
-                model.addAttribute("message", "로그인 후 이용해 주십시오.");
-            }
+            model.addAttribute("statusCode", statusCode);
         }
 
         return "error";

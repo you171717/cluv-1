@@ -43,7 +43,7 @@
                 <label th:for="refundBank">환불 은행</label>
                 <select th:field="*{refundBank}" class="form-control">
                     <th:block th:each="bank, status: ${banks}">
-                        <option th:value="${bank}" th:text="${bank}"></option>
+                        <option th:value="${bank.name()}" th:text="${bank}"></option>
                     </th:block>
                 </select>
                 <p th:if="${#fields.hasErrors('refundBank')}" th:errors="*{refundBank}" class="fieldError">Incorrect data</p>

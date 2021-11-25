@@ -16,6 +16,8 @@ public class ItemDto {
 
     private int stockNumber; // 재고수량
 
+    private int shippingFee;
+
     private String itemDetail; // 상품 상세 설명
 
     private ItemSellStatus itemSellStatus; // 상품 판매 상태

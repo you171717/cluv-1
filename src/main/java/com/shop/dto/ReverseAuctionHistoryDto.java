@@ -16,6 +16,8 @@ public class ReverseAuctionHistoryDto {
 
     private String itemNm;
 
+    private Integer itemShippingFee;
+
     private Integer startPrice;
 
     private LocalDateTime startTime;
@@ -37,10 +39,11 @@ public class ReverseAuctionHistoryDto {
     private DiscountDto discountDto;
 
     @QueryProjection
-    public ReverseAuctionHistoryDto(Long id, String imgUrl, String itemNm, Integer startPrice, LocalDateTime startTime, Integer priceUnit, Integer timeUnit, Integer maxRate, String approvedYn, LocalDateTime approvedTime, String memberEmail, Integer depositAmount) {
+    public ReverseAuctionHistoryDto(Long id, String imgUrl, String itemNm, Integer itemShippingFee, Integer startPrice, LocalDateTime startTime, Integer priceUnit, Integer timeUnit, Integer maxRate, String approvedYn, LocalDateTime approvedTime, String memberEmail, Integer depositAmount) {
         this.id = id;
         this.imgUrl = imgUrl;
         this.itemNm = itemNm;
+        this.itemShippingFee = itemShippingFee;
         this.startPrice = startPrice;
         this.startTime = startTime;
         this.priceUnit = priceUnit;
@@ -50,6 +53,6 @@ public class ReverseAuctionHistoryDto {
         this.approvedTime = approvedTime;
         this.memberEmail = memberEmail;
         this.depositAmount = depositAmount;
-        this.discountDto = new DiscountDto(startTime, startPrice, priceUnit);
+        this.discountDto = new DiscountDto(startTime, startPrice, timeUnit, priceUnit);
     }
 }

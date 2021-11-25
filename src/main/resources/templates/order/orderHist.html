@@ -111,6 +111,7 @@
                         <div class="fs18 font-weight-light" style="margin-top: 10px;">
                             <span th:text="${#numbers.formatCurrency(orderItem.orderPrice)}"></span>
                             <span th:text="${orderItem.count} +'개'"></span>
+                            <small class="text-danger">(배송비 : <th:block th:text="${#numbers.formatCurrency(orderItem.orderShippingFee)}"></th:block>)</small>
                         </div>
                     </div>
                 </div>

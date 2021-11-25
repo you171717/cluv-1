@@ -6,6 +6,7 @@ import com.shop.dto.BidSearchDto;
 import com.shop.dto.ReverseAuctionDto;
 import com.shop.entity.Bid;
 import com.shop.entity.Member;
+import com.shop.repository.BidRepository;
 import com.shop.repository.KakaoPaymentRepository;
 import com.shop.repository.MemberRepository;
 import com.shop.service.*;
@@ -13,14 +14,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.security.Principal;
+import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
@@ -36,6 +38,8 @@ public class BidController {
     private final KakaoPaymentService kakaoPaymentService;
 
     private final BidService bidService;
+
+    private final BidRepository bidRepository;
 
     @GetMapping(value = "/bid/{reverseAuctionId}")
     public String bidPayment(@PathVariable("reverseAuctionId") Long reverseAuctionId, Principal principal, Model model) {
@@ -71,12 +75,15 @@ public class BidController {
 
     @GetMapping(value = {"/bids","/bids/{page}"})
     public String bidList(BidSearchDto bidSearchDto, @PathVariable("page") Optional<Integer> page, Principal principal, Model model) {
+        Member member = memberRepository.findByEmail(principal.getName());
+
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
         Page<BidDto> bidDtoList = bidService.getUserBidPage(principal.getName(), bidSearchDto, pageable);
 
         model.addAttribute("bidDtoList", bidDtoList);
         model.addAttribute("bidSearchDto", bidSearchDto);
         model.addAttribute("maxPage", 5);
+        model.addAttribute("depositName", bidService.getUniqueDepositName(member));
 
         return "bid/bidList";
     }
@@ -98,6 +105,24 @@ public class BidController {
         bidService.approveBid(bidId);
 
         return "redirect:/admin/bids";
+    }
+
+    @GetMapping(value = "/admin/bid/{bidId}/refund")
+    public @ResponseBody ResponseEntity bidRefund(@PathVariable("bidId") Long bidId) {
+        try {
+            Bid bid = bidRepository.findById(bidId).orElseThrow(EntityNotFoundException::new);
+            Member member = bid.getMember();
+
+            DecimalFormat decimalFormat = new DecimalFormat("#,###");
+
+            String result = "계좌 번호 : " + "(" + member.getRefundBank() + ") " + member.getRefundAccount()
+                    + "\n입금자명 : " + bid.getDepositName()
+                    + "\n환불 금액 : ₩" + decimalFormat.format(bid.getDepositAmount());
+
+            return new ResponseEntity<String>(result, HttpStatus.OK);
+        } catch(Exception e) {
+            return new ResponseEntity<String>("환불 정보를 찾을 수 없습니다.", HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

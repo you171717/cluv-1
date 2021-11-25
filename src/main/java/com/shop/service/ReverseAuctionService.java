@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -38,7 +39,7 @@ public class ReverseAuctionService {
         ReverseAuction reverseAuction = reverseAuctionFormMapper.toEntity(reverseAuctionFormDto);
 
         reverseAuction.setItem(item);
-        reverseAuction.setStartTime(LocalDateTime.now());
+        reverseAuction.setStartTime(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
 
         return reverseAuctionRepository.save(reverseAuction);
     }

@@ -61,10 +61,10 @@ public class BidService {
 
         ReverseAuction reverseAuction = reverseAuctionRepository.findById(reverseAuctionId).orElseThrow(EntityNotFoundException::new);
 
-        DiscountDto discountDto = new DiscountDto(reverseAuction.getStartTime(), reverseAuction.getItem().getPrice(), reverseAuction.getPriceUnit());
+        DiscountDto discountDto = new DiscountDto(reverseAuction.getStartTime(), reverseAuction.getItem().getPrice(), reverseAuction.getTimeUnit(), reverseAuction.getPriceUnit());
 
         Bid bid = new Bid();
-        bid.setDepositAmount(discountDto.getCurrentPrice());
+        bid.setDepositAmount(discountDto.getCurrentPrice() + reverseAuction.getItem().getShippingFee());
         bid.setDepositName(this.getUniqueDepositName(member));
         bid.setMember(member);
         bid.setReverseAuction(reverseAuction);

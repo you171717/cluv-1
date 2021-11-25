@@ -49,9 +49,10 @@ a, a:hover {
 .nav-inner {
 	text-align: right;
 }
-.nav-username {
+.nav-inner a {
 	display: inline-block;
-	margin: 0 20px 0 0;
+	margin: 0 0 0 20px;
+	text-decoration: underline;
 }
 
 .header {
@@ -303,6 +304,12 @@ a, a:hover {
 	padding: 20px;
 	line-height: 1.4;
 }
+.rauction-card-counter {
+	display: inline-block;
+	margin: 0 10px 0 0;
+	color: #f00;
+	font-weight: 600;
+}
 .rauction-card h4 {
 	font-weight: 600;
 	margin: 0 0 20px;
@@ -464,4 +471,21 @@ a, a:hover {
     display: block;
     margin: 0 0 20px;
     font-size: 40px;
+}
+
+.imgSelect {
+	display: flex;
+	justify-content: center;
+}
+.imgSelect > div {
+	margin: 0 5px;
+}
+.imgSelect img {
+	cursor: pointer;
+}
+
+.bid-account {
+	margin: 0 0 10px;
+	float: right;
+	font-size: 16px;
 }

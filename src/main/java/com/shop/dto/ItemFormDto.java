@@ -31,6 +31,9 @@ public class ItemFormDto {
     @NotNull(message = "재고는 필수 입력 값입니다.")
     private Integer stockNumber;
 
+    @NotNull(message = "배송비는 필수 입력 값입니다.")
+    private Integer shippingFee;
+
     private ItemSellStatus itemSellStatus;
 
     private List<ItemImgDto> itemImgDtoList = new ArrayList<>();

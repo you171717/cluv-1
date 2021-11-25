@@ -5,7 +5,13 @@
 
     <th:block layout:fragment="script">
         <script th:inline="javascript">
+            $(function() {
+                var $repImg = $('.repImgDiv img');
 
+                $('.imgSelect img').on('click', function() {
+                    $repImg.attr('src', $(this).attr('src'));
+                });
+            });
         </script>
     </th:block>
 
@@ -23,10 +29,11 @@
             .repImgDiv{
                 margin-right: 15px;
                 height: auto;
+                text-align: center;
             }
             .repImg{
-                width: 100%;
-                height: 400px;
+                max-width: 100%;
+                max-height: 400px;
             }
             .wd50{
                 height: auto;
@@ -73,7 +80,10 @@
                 <div class="rauction-detail-prop">
                     <b>현재 가격</b>
                     <span>
-                        <span class="rauction-detail-cprice" th:text="${#numbers.formatCurrency(reverseAuctionDto.discountDto.currentPrice)}"></span>
+                        <span class="rauction-detail-cprice">
+                            <th:block th:text="${#numbers.formatCurrency(reverseAuctionDto.discountDto.currentPrice)}"></th:block>
+                            <small class="text-danger" style="font-size: 16px;">(배송비 : <th:block th:text="${#numbers.formatCurrency(reverseAuctionDto.itemShippingFee)}"></th:block>)</small>
+                        </span>
                         <small class="rauction-detail-dprice">(현재 <span th:text="${#numbers.formatCurrency(reverseAuctionDto.discountDto.currentDiscountPrice)}"></span> 할인)</small>
                     </span>
                 </div>

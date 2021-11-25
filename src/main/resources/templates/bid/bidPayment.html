@@ -15,7 +15,7 @@
                     pay_method: "card",
                     merchant_uid: "ORD" + [[${reverseAuctionDto.id}]] + "-" + [[${member.id}]],
                     name: [[${reverseAuctionDto.itemNm}]],
-                    amount: [[${reverseAuctionDto.discountDto.currentPrice}]],
+                    amount: [[${reverseAuctionDto.discountDto.currentPrice}]] + [[${reverseAuctionDto.itemShippingFee}]],
                     buyer_email: [[${member.email}]],
                     buyer_name: [[${member.name}]]
                 }, function(response) {
@@ -61,7 +61,7 @@
                         <span class="bid-table-img" th:style="'background-image: url(' + ${reverseAuctionDto.imgUrl} + ')'"></span>
                         <span class="bid-table-name" th:text="${reverseAuctionDto.itemNm}"></span>
                     </td>
-                    <td th:text="${#numbers.formatCurrency(reverseAuctionDto.discountDto.currentPrice)}"></td>
+                    <td th:text="${#numbers.formatCurrency(reverseAuctionDto.discountDto.currentPrice + reverseAuctionDto.itemShippingFee)}"></td>
                 </tr>
             </tbody>
         </table>

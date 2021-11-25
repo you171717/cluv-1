@@ -36,14 +36,14 @@ public class ReverseAuctionController {
 
     @GetMapping(value = {"/rauctions", "/rauctions/{page}"})
     public String reverseAuctionList(ReverseAuctionSearchDto reverseAuctionSearchDto, @PathVariable("page") Optional<Integer> page, Model model) {
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 6);
         Page<ReverseAuctionDto> reverseAuctionDtoList = reverseAuctionService.getUserReverseAuctionPage(reverseAuctionSearchDto, pageable);
         List<ReverseAuctionHistoryDto> previousReverseAuctionDtoList = reverseAuctionService.getPreviousReverseAuctionPage();
 
         model.addAttribute("reverseAuctionDtoList", reverseAuctionDtoList);
         model.addAttribute("reverseAuctionSearchDto", reverseAuctionSearchDto);
         model.addAttribute("previousReverseAuctionDtoList", previousReverseAuctionDtoList);
-        model.addAttribute("maxPage", 5);
+        model.addAttribute("maxPage", 6);
 
         return "reverseAuction/reverseAuctionList";
     }

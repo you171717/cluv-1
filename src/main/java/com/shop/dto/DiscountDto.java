@@ -16,10 +16,10 @@ public class DiscountDto {
 
     private Integer currentDiscountPrice;
 
-    public DiscountDto(LocalDateTime startTime, Integer startPrice, Integer priceUnit) {
+    public DiscountDto(LocalDateTime startTime, Integer startPrice, Integer timeUnit, Integer priceUnit) {
         long diffHours = ChronoUnit.HOURS.between(startTime, LocalDateTime.now());
 
-        this.currentPrice = (int) (startPrice - (diffHours * priceUnit));
+        this.currentPrice = (int) (startPrice - ((diffHours / timeUnit) * priceUnit));
         this.currentDiscountPrice = startPrice - this.currentPrice;
         this.currentDiscountRate = (int) Math.round((double) this.currentDiscountPrice / startPrice * 100);
     }

@@ -1,5 +1,6 @@
 package com.shop.controller;
 
+import com.shop.constant.Bank;
 import com.shop.constant.OAuth2ProviderType;
 import com.shop.dto.OAuth2FormDto;
 import com.shop.entity.Member;
@@ -95,6 +96,7 @@ public class OAuth2Controller {
             oAuth2FormDto.setEmail(email);
 
             model.addAttribute("OAuth2FormDto", oAuth2FormDto);
+            model.addAttribute("banks", Bank.values());
             model.addAttribute("code", code);
 
             session.setAttribute("OAuth2FormDto", oAuth2FormDto);
@@ -112,6 +114,7 @@ public class OAuth2Controller {
         OAuth2ProviderType providerType = OAuth2ProviderType.valueOf(code.toUpperCase());
 
         model.addAttribute("code", code);
+        model.addAttribute("banks", Bank.values());
 
         if(bindingResult.hasErrors()) {
             return "member/memberSocialForm";
@@ -121,6 +124,8 @@ public class OAuth2Controller {
             OAuth2FormDto originalFormDto = (OAuth2FormDto) session.getAttribute("OAuth2FormDto");
 
             originalFormDto.setAddress(oAuth2FormDto.getAddress());
+            originalFormDto.setRefundBank(oAuth2FormDto.getRefundBank());
+            originalFormDto.setRefundAccount(oAuth2FormDto.getRefundAccount());
 
             if(providerType.equals(OAuth2ProviderType.GOOGLE)) {
                 originalFormDto.setName(oAuth2FormDto.getName());
