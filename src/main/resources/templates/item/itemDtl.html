@@ -35,44 +35,6 @@
             $("#amountPrice").html(amount_Price + '원');
         }
 
-        // function member_point(){
-        //     var token = $("meta[name='_csrf']").attr("content");
-        //     var header = $("meta[name='_csrf_header']").attr("content");
-        //
-        //     var url = "/member";
-        //     var paramData = {
-        //         point : $("amountPrice").val() * 0.01
-        //     };
-        //     var param = JSON.stringify(paramData);
-        //
-        //     $.ajax({
-        //         url      : url,
-        //         type     : "POST",
-        //         contentType : "application/json",
-        //         data     : param,
-        //         beforeSend : function(xhr){
-        //             /* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
-        //             xhr.setRequestHeader(header, token);
-        //         },
-        //         dataType : "json",
-        //         cache   : false,
-        //         success  : function(result, status){
-        //             alert("적립이 완료 되었습니다.");
-        //             location.href='/';
-        //         },
-        //         error : function(jqXHR, status, error){
-        //
-        //             if(jqXHR.status == '401'){
-        //                 alert('로그인 후 이용해주세요');
-        //                 location.href='/members/login';
-        //             } else{
-        //                 alert(jqXHR.responseText);
-        //             }
-        //
-        //         }
-        //     });
-        // }
-
         function order(){
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
@@ -84,22 +46,6 @@
                 input_point : [[${input_point}]],
                 amount_price : parseInt($("#amountPrice").text().slice(0,-1))
             };
-
-            // var point10 = [[${input_point}]];
-            //     // $("#input_point").val();
-            // var amountPrice = parseInt($("#amountPrice").text().slice(0,-1));
-            //     // $("#amountPrice").val();
-
-            // console.log(point10);
-            // console.log(amountPrice);
-            //
-            // console.log(url + "?point="+point10+"&amountPrice="+amountPrice);
-
-            // var url = "/member";
-            // var paramData = {
-            //     point : $("#point")-[[${input_point}]]
-            //
-            // };
 
             var param = JSON.stringify(paramData);
 
@@ -139,7 +85,6 @@
             var paramData = {
                 itemId : $("#itemId").val(),
                 count : $("#count").val(),
-                // input_point : $("#input_point").val()
             };
 
             var param = JSON.stringify(paramData);
@@ -223,8 +168,8 @@
 
             <div class="text-right">
                 <div class="h4 text-danger text-left">
-                    <input type="hidden" th:value="${item.price}" id="price" name="price">
-                    <span th:text="${item.price}"></span>원
+                     <input type="hidden" th:value="${item.price}" id="price" name="price">
+                    <span th:text="${#numbers.formatInteger(item.price, 0, 'COMMA')}"></span>원
                 </div>
                 <div class="input-group w-50">
                     <div class="input-group-prepend">
@@ -239,7 +184,7 @@
                 <h5>현재 금액</h5>
                 <h3 name="totalPrice" id="totalPrice" class="font-weight-bold"></h3>
                 <h5>사용 포인트</h5>
-                    <h3 name="input_point"id="input_point" class="font-weight-bold" th:text="${input_point}"></h3>
+                    <h3 name="input_point"id="input_point" class="font-weight-bold" th:text="${input_point} + '점'"></h3>
                 <h5>결제 금액</h5>
                 <h3 name="amountPrice" id="amountPrice" class="font-weight-bold"></h3>
             </div>

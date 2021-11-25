@@ -41,15 +41,21 @@ public class OrderService {
 
         Member member = memberRepository.findByEmail(email);
         // 현재 로그인한 회원의 이메일 정보를 이용해서 회원 정보 조회
+
         member.setPoint(member.getPoint() - orderDto.getInput_point() + (int) (orderDto.getAmount_price() * 0.01));
+        // 포인트 갱신 로직
 
         List<OrderItem> orderItemList = new ArrayList<>();
         OrderItem orderItem = OrderItem.createOrderItem(item, orderDto.getCount(), orderDto.getInput_point(), orderDto.getAmount_price());
         // 주문할 상품 엔티티와 주문 수량을 이용하여 주문 상품 엔티티 생성
+
         orderItemList.add(orderItem);
         Order order = Order.createOrder(member, orderItemList);
         // 회원 정보와 주문할 상품 리스트 정보를 이용하여 주문 엔티티 생성
+
         memberRepository.save(member);
+        // 포인트 갱신
+
         orderRepository.save(order);
         // 생성한 주문 엔티티 저장
 

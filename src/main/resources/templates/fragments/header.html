@@ -20,9 +20,9 @@
                     <a class="nav-link" href="/admin/items">상품 관리</a>
                 </li>
 
-                <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-                    <a class="nav-link" href="#">회원 관리</a>
-                </li>
+<!--                <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">-->
+<!--                    <a class="nav-link" href="/admin/member">회원 관리</a>-->
+<!--                </li>-->
 
                 <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
                     <a class="nav-link" href="/cart">장바구니</a>
@@ -42,7 +42,7 @@
             </ul>
 
             <b style="color:white;", sec:authorize="hasAnyAuthority('ROLE_USER')">POINT :</b>
-            <b style="color:white;", class="nav-link" sec:authorize="hasAnyAuthority('ROLE_USER')" th:text="${point}">
+            <b style="color:white;", class="nav-link" sec:authorize="hasAnyAuthority('ROLE_USER')" th:text="${point} + '점'">
             </b>
 
             <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="get">

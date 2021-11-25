@@ -33,7 +33,7 @@ public class CartController {
     private final MemberService memberService;
 
     @PostMapping(value = "/cart")
-    public @ResponseBody ResponseEntity order(@RequestBody @Valid CartItemDto cartItemDto, BindingResult bindingResult, Principal principal){
+    public @ResponseBody ResponseEntity order(@RequestBody @Valid CartItemDto cartItemDto, BindingResult bindingResult, Principal principal, Model model){
 
         if(bindingResult.hasErrors()){
             StringBuilder sb = new StringBuilder();
@@ -49,8 +49,10 @@ public class CartController {
         String email = principal.getName();
         Long cartItemId;
 
+
         try {
             cartItemId = cartService.addCart(cartItemDto, email);
+//            model.addAttribute("input_point", memberService.findpointByEmail(email));
         } catch(Exception e){
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -65,6 +67,7 @@ public class CartController {
 
         List<CartDetailDto> cartDetailList = cartService.getCartList(principal.getName());
         model.addAttribute("cartItems", cartDetailList);
+        model.addAttribute("input_point", memberService.findpointByEmail(email));
         model.addAttribute("point", memberService.findpointByEmail(email));
         return "cart/cartList";
     }
