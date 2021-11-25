@@ -11,7 +11,8 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter @Setter
+@Getter
+@Setter
 public class ItemFormDto {
 
     private Long id;
@@ -34,14 +35,19 @@ public class ItemFormDto {
 
     private List<Long> itemImgIds = new ArrayList<>();
 
-    private static ModelMapper modelMapper = new ModelMapper();
+        private static ModelMapper modelMapper = new ModelMapper();
+//    private static ItemFormMapStruct itemFormMapStruct= new ItemFormMapStructImpl();
 
-    public Item createItem(){
+
+    public Item createItem() {
         return modelMapper.map(this, Item.class);
+//        return itemFormMapStruct.toEntity(this);
     }
 
-    public static ItemFormDto of(Item item){
-        return modelMapper.map(item,ItemFormDto.class);
+    public static ItemFormDto of(Item item) {
+        return modelMapper.map(item, ItemFormDto.class);
+//        return itemFormMapStruct.toDto(item);
     }
 
+    private List<String> tags = new ArrayList<>();
 }

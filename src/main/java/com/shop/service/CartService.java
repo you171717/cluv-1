@@ -4,10 +4,7 @@ import com.shop.dto.CartDetailDto;
 import com.shop.dto.CartItemDto;
 import com.shop.dto.CartOrderDto;
 import com.shop.dto.OrderDto;
-import com.shop.entity.Cart;
-import com.shop.entity.CartItem;
-import com.shop.entity.Item;
-import com.shop.entity.Member;
+import com.shop.entity.*;
 import com.shop.repository.CartItemRepository;
 import com.shop.repository.CartRepository;
 import com.shop.repository.ItemRepository;
@@ -80,7 +77,7 @@ public class CartService {
                 .orElseThrow(EntityNotFoundException::new);
         Member savedMember = cartItem.getCart().getMember();  //장바구니 상품을 저장한 회원을 조회
 
-        //현재 로그인한 회원과 장바구니 상품을 저장한 회우넝이 다를경우 false,같으면 true
+        //현재 로그인한 회원과 장바구니 상품을 저장한 회원이 다를경우 false,같으면 true
         if (!StringUtils.equals(curMember.getEmail(), savedMember.getEmail())) {
             return false;
         }

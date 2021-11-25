@@ -26,8 +26,9 @@ public class Tag {
 
     private int totalSell;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id")
-    private Item item;
+    //태그 누적 판매량을 증가 시키는 메소드
+    public void addTotalSell(){
+        this.totalSell += 1;
+    }
 
 }

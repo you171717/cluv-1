@@ -42,7 +42,7 @@ public class OrderController {
             return new ResponseEntity<String>(sb.toString(),
                     HttpStatus.BAD_REQUEST);        //에러 정보를 ResponseEntity 객체에 데이터 바인딩 시 에러가 있는지 검사
         }
-        String email = principal.getName();     //현재 로그인한 회원의 이메일 정보를 조히
+        String email = principal.getName();     //현재 로그인한 회원의 이메일 정보를 조회
         Long orderId;
 
         try {
@@ -60,7 +60,7 @@ public class OrderController {
 
         Page<OrderHistDto> orderHistDtoList =
                 orderService.getOrderList(principal.getName(), pageable);   //현재 로그인한 회원은 이메일과 페이징 객체를 파라미터로 전달해
-        //화면에 전달한 주문 목룍 데이터를 리턴 삾으로 받음
+        //화면에 전달한 주문 목룍 데이터를 리턴 값으로 받음
         model.addAttribute("orders", orderHistDtoList);
         model.addAttribute("page", pageable.getPageNumber());
         model.addAttribute("maxPage", 5);

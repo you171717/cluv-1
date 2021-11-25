@@ -4,10 +4,7 @@ import com.shop.dto.OrderDto;
 import com.shop.dto.OrderHistDto;
 import com.shop.dto.OrderItemDto;
 import com.shop.entity.*;
-import com.shop.repository.ItemImgRepository;
-import com.shop.repository.ItemRepository;
-import com.shop.repository.MemberRepository;
-import com.shop.repository.OrderRepository;
+import com.shop.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -29,11 +26,21 @@ public class OrderService {
     private final MemberRepository memberRepository;
     private final OrderRepository orderReporsitory;
     private final ItemImgRepository itemImgRepository;
+    private final TagRepository tagRepository;
+    private final ItemTagRepository itemTagRepository;
 
     public Long order(OrderDto orderDto, String email){
-        Item item = itemRepository.findById(orderDto.getItemId())       //주문할 상품 조회
+        Item item = itemRepository.findById(orderDto.getItemId())       // 주문할 상품 조회
                 .orElseThrow(EntityNotFoundException::new);
+
         Member member = memberRepository.findByEmail(email);        //이메일을 통해 정보 조회
+
+        //Tag별 누적 판매 증가
+        List<ItemTag> itemTag = itemTagRepository.findByItem_Id(item.getId());
+
+        for(ItemTag itemtag : itemTag) {
+            itemtag.getTag().addTotalSell();
+        }
 
         List<OrderItem> orderItemList = new ArrayList<>();
         OrderItem orderItem = OrderItem.createOrderItem(item, orderDto.getCount());
@@ -86,7 +93,7 @@ public class OrderService {
     public void cancelOrder(Long orderId){
         Order order = orderReporsitory.findById(orderId)
                 .orElseThrow(EntityNotFoundException::new);
-        order.cancelOrder();        //주문 취소 상태 변경 감지시 트랜잭션이 끝날 때 update 쿼리 실행행
+        order.cancelOrder();        //주문 취소 상태 변경 감지시 트랜잭션이 끝날 때 update 쿼리 실행
     }
 
     public Long orders(List<OrderDto> orderDtoList, String email){
@@ -106,5 +113,9 @@ public class OrderService {
         Order order = Order.createOrder(member, orderItemList);
         orderReporsitory.save(order);  //주문 데이터 저장
         return order.getId();
+    }
+
+    public void tagSellCount(){
+        Tag tag = new Tag();
     }
 }

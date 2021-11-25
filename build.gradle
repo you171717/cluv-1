@@ -31,6 +31,12 @@ dependencies {
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
     implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
     implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
+    /* MapStruct */
+    implementation 'org.mapstruct:mapstruct:1.4.1.Final'
+    /* Lombok */
+    annotationProcessor 'org.projectlombok:lombok'
+    /* MapStruct */
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
 
     //oauth2
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
