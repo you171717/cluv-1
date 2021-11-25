@@ -1,24 +1,21 @@
 package com.gsitm.intern.controller;
 
-import com.gsitm.intern.dto.MailDto;
 import com.gsitm.intern.dto.MemberFormDto;
+import com.gsitm.intern.entity.AuthToken;
 import com.gsitm.intern.entity.Member;
-//import com.gsitm.intern.service.MailSendService;
+import com.gsitm.intern.service.AuthTokenService;
+import com.gsitm.intern.service.EmailService;
 import com.gsitm.intern.service.MemberService;
-import com.gsitm.intern.service.SendEmailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
 
 @RequestMapping("/members")
 @Controller
@@ -26,7 +23,8 @@ import java.util.Map;
 public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
-    private final SendEmailService sendEmailService;
+    private final EmailService emailService;
+    private final AuthTokenService authTokenService;
 
     @GetMapping(value = "/new")
     public String memberForm(Model model) {
@@ -37,6 +35,12 @@ public class MemberController {
     @PostMapping(value = "/new")
     public String newMember(@Valid MemberFormDto memberFormDto, BindingResult bindingResult,
                             Model model) {    //검증하려는 객체 앞에 @Valid 어노테이션 선언 후 파라미터로 bindingResult 객체 추가
+
+        //TODO. 생성한 인증코드와 사용자가 입력한 인증코드 비교확인
+//        String email = memberFormDto.getEmail();
+//        String code = memberFormDto.getCode();
+//        authTokenService.validateExpireToken(email, code);
+
         if (bindingResult.hasErrors()) {       //bindingResult.hasErrors()를 호출해서 에러가 있으면 회원가입 페이지로 이동
             return "member/memberForm";
         }
@@ -62,11 +66,6 @@ public class MemberController {
         return "/member/memberLoginForm";
     }
 
-    @GetMapping(value = "/memberInfo")
-    public String memberInfo() {
-        return "/member/memberInfo";
-    }
-
     @GetMapping(value ="/findPassword")
     public String findPassword(){
         return "member/findPassword";
@@ -79,6 +78,7 @@ public class MemberController {
 
             // TODO. 비밀번호 변경 (URL 링크)
             // TODO. 이메일 보내기
+            emailService.sendPasswordEmail(email);
         } catch(Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
 
@@ -87,4 +87,44 @@ public class MemberController {
 
         return "redirect:/members/login";
     }
+
+    @GetMapping(value = "/updatePassword")
+    public String readMemberInfo(@RequestParam("code") String code, Model model) {
+        // TODO. URL에 포함된 코드 가져오기
+        // TODO. 코드로 일치하는 토큰 가져오기
+        AuthToken authtoken = authTokenService.getTokenByCode(code);
+        // TODO. 토큰에 있는 사용자 정보 중 ID만 가져오기
+        Long memberId = authtoken.getMember().getId();
+        // TODO. ID를 Model에 담아서 View로 보내기
+        model.addAttribute("memberId", memberId );
+        // TODO. View에서 ID를 포함시켜서 PostMapping으로 값을 가져올 수 있게 하기
+        // TODO. PostMapping에서는 받은 ID와 입력한 비밀번호를 확인하여 비밀번호 변경
+        return "member/updatePassword";
+    }
+
+    @PostMapping(value = "/updatePassword")
+    public String updatePassword(Long memberId, String password, Model model) {
+        try {
+            memberService.updatePassword(memberId, password);
+
+            // TODO. 비밀번호 변경
+        } catch(Exception e) {
+            model.addAttribute("errorMessage", e.getMessage());
+
+            return "member/updatePassword";
+        }
+        return "redirect:/";
+    }
+
+    @PostMapping(value = "/signUpEmail")
+    public @ResponseBody ResponseEntity AuthCodeEmail(String email){
+        //TODO. 토큰 생성하기
+        AuthToken authToken = authTokenService.createToken(email);
+
+        //TODO. 인증코드 메일로 전송
+        emailService.sendEmailAuthCode(email);
+
+        return new ResponseEntity<String>("", HttpStatus.OK);
+    }
+
 }

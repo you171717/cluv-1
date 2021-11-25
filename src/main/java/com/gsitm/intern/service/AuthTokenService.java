@@ -56,7 +56,7 @@ public class AuthTokenService {
         authToken.setUseYn("Y");
     }
 
-    private boolean validateExpireToken(String email, String code) {
+    public boolean validateExpireToken(String email, String code) {
         // TODO. Member에 할당된 AuthCode 가져오기
         AuthToken authToken = getToken(email);
         // TODO. AuthCode의 code와 매개변수의 code가 같은 지
@@ -71,5 +71,12 @@ public class AuthTokenService {
             return false;
         }
         return true;
+    }
+
+    public AuthToken getTokenByCode(String code){
+
+        AuthToken authToken = authTokenRepository.findFirstByCodeOrderByRegTimeDesc(code);
+
+        return authToken;
     }
 }

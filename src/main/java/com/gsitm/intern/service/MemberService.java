@@ -1,5 +1,6 @@
 package com.gsitm.intern.service;
 
+import com.gsitm.intern.dto.MemberFormDto;
 import com.gsitm.intern.entity.Member;
 import com.gsitm.intern.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public Member saveMember(Member member){
         validateDuplicateMember(member);
@@ -42,13 +45,17 @@ public class MemberService implements UserDetailsService {
                 .roles(member.getRole().toString())
                 .build();
     }
+    //이메일, 이름 일치 확인 메소드
     public boolean checkEmailAndName(String email, String name) {
         Member member = memberRepository.findByEmail(email);
 
         if(member == null || !member.getName().equals(name)) {
             throw new IllegalStateException("이메일과 이름이 일치하지 않습니다.");
         }
-
         return true;
+    }
+    //비밀번호 변경 메소드
+    public void updatePassword(Long memberId, String password) {
+        memberRepository.updatePassword(memberId, passwordEncoder.encode(password));
     }
 }

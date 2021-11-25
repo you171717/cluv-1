@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AuthTokenRepository extends JpaRepository<AuthToken, Long> {
     AuthToken findByMemberOrderByRegTime(Member member);
-
+    AuthToken findFirstByCodeOrderByRegTimeDesc(String code);
 }
