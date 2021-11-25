@@ -37,13 +37,13 @@
 
                         $counter.text('(' + pad(hours, 2) + ':' + pad(mintues, 2) + ':' + pad(seconds, 2) + ')');
 
-                        if(hours == 0 && mintues == 0 && seconds <= 1) {
+                        if(hours == 0 && mintues == 0 && seconds <= 2) {
                             setTimeout(function() {
                                 location.reload();
-                            }, 1500);
+                            }, 2500);
                         }
 
-                        setTimeout(t, 1000);
+                        setTimeout(t, 500);
                     })();
 
                     function pad(n, width, z) {
