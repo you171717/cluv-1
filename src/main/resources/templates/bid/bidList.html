@@ -66,7 +66,7 @@
                 <ul class="pagination justify-content-center">
                     <li class="page-item" th:classappend="${bidDtoList.first}?'disabled'">
                         <a th:onclick="'javascript:page(' + ${bidDtoList.number - 1} + ')'" aria-label='Previous' class="page-link">
-                            <span aria-hidden='true'>Previous</span>
+                            <span aria-hidden='true'>이전</span>
                         </a>
                     </li>
                     <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${bidDtoList.number eq page-1}?'active':''">
@@ -74,7 +74,7 @@
                     </li>
                     <li class="page-item" th:classappend="${bidDtoList.last}?'disabled'">
                         <a th:onclick="'javascript:page(' + ${bidDtoList.number + 1} + ')'" aria-label='Next' class="page-link">
-                            <span aria-hidden='true'>Next</span>
+                            <span aria-hidden='true'>다음</span>
                         </a>
                     </li>
                 </ul>
@@ -98,7 +98,7 @@
                     <option value="Y">낙찰</option>
                     <option value="F">실패</option>
                 </select>
-                <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색어를 입력해주세요">
+                <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="상품명을 입력해주세요">
                 <button id="searchBtn" type="submit" class="btn btn-primary">검색</button>
             </div>
         </form>

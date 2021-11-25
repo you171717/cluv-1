@@ -104,7 +104,7 @@
                     <li><a th:href="@{/rauctions}">역경매</a></li>
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/bids}">역경매 참여 내역</a></li>
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/cart}">장바구니</a></li>
-                    <li sec:authorize="isAuthenticated()"><a th:href="@{/orders}">구매이력</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/orders}">구매 이력</a></li>
                     <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><a href="#admin">관리자</a></li>
                 </ul>
                 <form th:action="@{/}" class="header-search">
