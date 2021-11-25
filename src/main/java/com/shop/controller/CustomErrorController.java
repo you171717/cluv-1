@@ -22,7 +22,7 @@ public class CustomErrorController implements ErrorController {
     @RequestMapping(value = "/error")
     public String handleError(HttpServletRequest request, Model model) {
 
-        System.out.println("뭘봐");
+//        System.out.println("뭘봐");
         // 에러 코드를 획득한다.
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         //에러 코드에 대한 상태 정보

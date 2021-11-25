@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -40,12 +41,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
                 .logoutSuccessUrl("/")
                 .and()
-                .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
+//                .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
         //여기다 여기
                 ;
 
                 http.authorizeRequests()
-                        .mvcMatchers("/", "/members/**", "/item/**", "/images/**").permitAll()
+                        .mvcMatchers("/", "/members/**", "/item/**", "/images/**" ,"/sellitems").permitAll()
                         .mvcMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 ;
@@ -53,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 http.exceptionHandling()
                         .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                 ;
+
     }
 
 

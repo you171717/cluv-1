@@ -24,8 +24,12 @@ public class Item extends BaseEntity{
     private Long id; //상품코드
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Cate_CodeRef")
-    private CategoryRef categoryRef;
+    @JoinColumn(name = "Cate_First")
+    private Category cateFirst;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Cate_Sec")
+    private Category CateSec;
 
     @Column(nullable = false, length = 50)
     private String itemNm; //상품명
@@ -51,6 +55,7 @@ public class Item extends BaseEntity{
     public void updateItem(ItemFormDto itemFormDto){
         this.itemNm = itemFormDto.getItemNm();
         this.price = itemFormDto.getPrice();
+//        this.categoryRef = itemFormDto.getCate_codeRef();
         this.stockNumber = itemFormDto.getStockNumber();
         this.itemDetail = itemFormDto.getItemDetail();
         this.itemSellStatus = itemFormDto.getItemSellStatus();

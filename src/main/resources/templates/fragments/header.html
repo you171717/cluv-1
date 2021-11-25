@@ -19,6 +19,41 @@
                 <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
                     <a class="nav-link" href="/admin/items">상품 관리</a>
                 </li>
+
+                <li class="nav-item" >
+                    <a class="nav-link" href="/sellitems">상품</a>
+                </li>
+                    <!--카테고리 생성 작업-->
+<!--                <li class="nav-item dropdown" sec:authorize="isAuthenticated()">-->
+<!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">-->
+<!--                        상품-->
+<!--                    </a>-->
+<!--                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">-->
+<!--                        <li class="dropdown-submenu">-->
+<!--                            <a tabindex="-1" href="#" style="color: black">가전기기</a>-->
+<!--                            <ul class="dropdown-menu">-->
+<!--                                <li><a href="#">노트북</a></li>-->
+<!--                                <li><a href="#">모니터</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                        <li class="dropdown-submenu">-->
+<!--                            <a tabindex="-1" href="#">가구</a>-->
+<!--                            <ul class="dropdown-menu">-->
+<!--                                <li><a href="#">침대</a></li>-->
+<!--                                <li><a href="#">책상</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                        <li class="dropdown-submenu">-->
+<!--                            <a tabindex="-1" href="#">식품</a>-->
+<!--                            <ul class="dropdown-menu">-->
+<!--                                <li><a href="#">건강식품</a></li>-->
+<!--                                <li><a href="#">보조식품</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+
+<!--                </li>-->
+
                 <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/cart">장바구니</a>
                 </li>
@@ -38,11 +73,12 @@
                 <span id="login-user" th:text="${userName}">사용자</span> 님, 안녕하세요.
                 <a href="/members/logout" class="btn btn-sm btn-info active" role="button">Logout</a>
             </div>
-            <div th:if="${#strings.isEmpty(userName)}">
-                <!-- 스프링 시큐리티에서 기본 제공하는 URL - 별도 컨트롤러 작성 필요 없음 -->
-                <a href="/oauth2/authorization/google" class="btn btn-sm btn-success active" role="button">Google Login</a>
-            </div>
-            <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="get">
+<!--구글 로그인 버튼 -->
+<!--            <div th:if="${#strings.isEmpty(userName)}">-->
+<!--                &lt;!&ndash; 스프링 시큐리티에서 기본 제공하는 URL - 별도 컨트롤러 작성 필요 없음 &ndash;&gt;-->
+<!--                <a href="/oauth2/authorization/google" class="btn btn-sm btn-success active" role="button">Google Login</a>-->
+<!--            </div>-->
+            <form class="form-inline my-2 my-lg-0" th:action="@{/sellitems}" method="get" >
                 <input name="searchQuery" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>

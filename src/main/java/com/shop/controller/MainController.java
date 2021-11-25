@@ -2,6 +2,7 @@
 package com.shop.controller;
 
 import com.shop.config.auth.dto.SessionUser;
+import com.shop.dto.CategoryDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -24,19 +25,21 @@ import java.util.Optional;
 public class MainController {
 
     private final ItemService itemService;
+//
+//    private final HttpSession httpSession;     // oauth2
 
-    private final HttpSession httpSession;     // oauth2
 
     @GetMapping(value = "/")
-    public String main(ItemSearchDto itemSearchDto, Optional<Integer> page, Model model){
+    public String main(ItemSearchDto itemSearchDto, Optional<Integer> page, Model model) {
 
-        // oauth2
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
 
-        if(user != null) {
-            model.addAttribute("userName", user.getName());
-            model.addAttribute("userImg", user.getPicture());
-        }
+//         oauth2
+//        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+
+//        if(user != null) {
+//            model.addAttribute("userName", user.getName());
+//            model.addAttribute("userImg", user.getPicture());
+//        }
 
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 6);
         Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
@@ -47,5 +50,5 @@ public class MainController {
 
         return "main";
     }
-
 }
+

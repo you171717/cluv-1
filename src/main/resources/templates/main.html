@@ -42,14 +42,16 @@
         </div>
     </div>
 
-    <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
-    <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
-        <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색 결과'"></p>
-    </div>
 
-    <div class="row">
+<!--    <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">-->
+<!--    <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">-->
+<!--        <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색 결과'"></p>-->
+<!--    </div>-->
+
+    <div class="row" sec:authorize="isAuthenticated()">
         <th:block th:each="item, status: ${items.getContent()}">
             <div class="col-md-4 margin">
+<!--등록한 상품 보여지는 내역-->
                 <div class="card">
                     <a th:href="'/item/' +${item.id}" class="text-dark">
                         <img th:src="${item.imgUrl}" class="card-img-top" th:alt="${item.itemNm}" height="400">
@@ -65,11 +67,11 @@
     </div>
 
     <div th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
-        <ul class="pagination justify-content-center">
+        <ul class="pagination justify-content-center" sec:authorize="isAuthenticated()">
 
             <li class="page-item" th:classappend="${items.number eq 0}?'disabled':''">
                 <a th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number-1}}" aria-label='Previous' class="page-link">
-                    <span aria-hidden='true'>Previous</span>
+                    <span aria-hidden='true'>이전</span>
                 </a>
             </li>
 
@@ -79,7 +81,7 @@
 
             <li class="page-item" th:classappend="${items.number+1 ge items.totalPages}?'disabled':''">
                 <a th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number+1}}" aria-label='Next' class="page-link">
-                    <span aria-hidden='true'>Next</span>
+                    <span aria-hidden='true'>다음</span>
                 </a>
             </li>
 
@@ -87,3 +89,4 @@
     </div>
 
 </div>
+</html>
