@@ -40,12 +40,13 @@ spring:
   jpa:
     hibernate:
       default_batch_fetch_size: '1000'
-      ddl-auto: create
+      ddl-auto: update
       database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       hibernate:
         show_sql: true
         format_sql: true
+
 
 mybatis:
   mapper-locations: sqlmap/mappers/*.xml
@@ -57,15 +58,15 @@ mybatis:
     default-fetch-size: 500
   type-aliases-package: com.gsitm.career
 
-logging.level:
-  jdbc:
-    sqlonly: debug
-    sqltiming: info
-    resultsettable: info
-    audit: off
-    resultset: off
-    connection: off
-  org.hibernate.SQL: trace
+#logging.level:
+#  jdbc:
+#    sqlonly: debug
+#    sqltiming: info
+#    resultsettable: info
+#    audit: off
+#    resultset: off
+#    connection: off
+#  org.hibernate.SQL: trace
 
 
 
