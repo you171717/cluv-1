@@ -3,8 +3,8 @@
 package com.shop.dto;
 
 import com.shop.entity.ItemImg;
-import com.shop.mapstruct.ItemImgMapStruct;
-import com.shop.mapstruct.ItemImgMapStructImpl;
+//import com.shop.mapstruct.ItemImgMapStruct;
+//import com.shop.mapstruct.ItemImgMapStructImpl;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;

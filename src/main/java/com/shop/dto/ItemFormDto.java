@@ -3,9 +3,10 @@
 package com.shop.dto;
 
 import com.shop.constant.ItemSellStatus;
+//import com.shop.entity.CategoryRef;
 import com.shop.entity.Item;
-import com.shop.mapstruct.ItemFormMapStruct;
-import com.shop.mapstruct.ItemFormMapStructImpl;
+//import com.shop.mapstruct.ItemFormMapStruct;
+//import com.shop.mapstruct.ItemFormMapStructImpl;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -20,6 +21,10 @@ import java.util.List;
 public class ItemFormDto {
 
     private Long id;
+
+    private Long cate_codeRef;
+
+    private String lprice;
 
     @NotBlank(message = "상품명은 필수 입력 값입니다.")
     private String itemNm;
