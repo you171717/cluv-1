@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+    var slides = document.querySelectorAll("#slides>img");
+
+    var current = 0;
+    $(document).ready(function(){
+        showSlides();
+
+        $("#slides").change( function(){
+            showSlides();
+        });
+    });
+
+    function showSlides(n){
+    for(var i = 0; i<slides.length; i++){
+    slides[i].style.display ="none";
+    }
+    slides[n].style.display = "block";
+    }
+
+    function showSlides() {
+    var slides = document.querySelectorAll("#slides > img");
+    for(let i = 0; i<slides.length; i++){
+    slides[i].style.display = "none";
+    }
+    current++;
+    if(current > slides.length)
+    current = 1;
+    slides[current-1].style.display = "block";
+    setTimeout(showSlides, 1700);
+    }
+    </script>
+</th:block>
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+        .carousel-inner > .item {
+            height: 350px;
+        }
+        .margin{
+            margin-bottom:30px;
+        }
+        .banner{
+            height: 300px;
+            position: absolute; top:0; left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .card-text{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        a:hover{
+            text-decoration:none;
+        }
+        .center{
+            text-align:center;
+        }
+    </style>
+</th:block>
+
+
+<div layout:fragment="content">
+    <div id = "slideShow">
+        <div id = "slides">
+            <img src = "https://ww.namu.la/s/3c37e944ae486477fea075e4bff27a9c696e0ad1016535bbaac3bbd31a8ec55a0f7be21bd6fa7f41b1bc00832e4fba6d2ec14e36bd99ed7f9418c25844393869f317186b7ccd335c66411a0df5ed29ac0b7f89194a61156fc75bf6467e62762b" height="450" width="1180" alt= "사진0" style="margin-bottom: 40px">
+            <img src = "https://img.huffingtonpost.com/asset/5bf24ac824000060045835ff.jpeg?ops=1778_1000" height="450" width="1180" alt= "사진1" style="margin-bottom: 40px">
+            <img src = "https://sjnfzdfjrjgl1655541.cdn.ntruss.com/goods/3/2019/07/182_tmp_f446cff11d4b21639f08a65e0689282e4722view.jpg" height="450" width="1180" alt= "사진2" style="margin-bottom: 40px">
+            <img src = "http://d20aeo683mqd6t.cloudfront.net/ko/articles/title_images/000/039/381/medium/pixta_45067017_M.jpg?2019"  height="450" width="1180" alt= "사진3" style="margin-bottom: 40px">
+            <img src = "https://recipe1.ezmember.co.kr/cache/recipe/2019/02/15/165b6ae1e847cc1ff6e0c0f5880c3cee1.jpg"  height="450" width="1180" alt= "사진4" style="margin-bottom: 40px">
+        </div>
+    </div>
+
+    <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
+    <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
+        <p class="h3 font-weight-bold" th:text="${itemSearchDto.searchQuery} + '검색 결과'"></p>
+    </div>
+
+    <div class="row">
+        <th:block th:each="item, status: ${items.getContent()}">
+            <div class="col-md-4 margin">
+                <div class="card">
+                    <a th:href="'/item/' +${item.id}" class="text-dark">
+                        <img th:src="${item.imgUrl}" class="card-img-top" th:alt="${item.itemNm}" height="400">
+                        <div class="card-body">
+                            <h4 class="card-title">[[${item.itemNm}]]</h4>
+                            <p class="card-text">[[${item.itemDetail}]]</p>
+                            <h3 class="card-title text-danger">[[${#numbers.formatInteger(item.price, 0, 'COMMA')}]]원</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </th:block>
+    </div>
+
+    <div th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
+        <ul class="pagination justify-content-center">
+
+            <li class="page-item" th:classappend="${items.number eq 0}?'disabled':''">
+                <a th:href="@{'/' + '?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number-1}}" aria-label='Previous' class="page-link">
+                    <span aria-hidden='true'>이전 고기</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${items.number eq page-1}?'active':''">
+                <a th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${page-1}}" th:inline="text" class="page-link" style="background-color: black; border-color: black">[[${page}]]</a>
+            </li>
+
+            <li class="page-item" th:classappend="${items.number+1 ge items.totalPages}?'disabled':''">
+                <a th:href="@{'/' +'?searchQuery=' + ${itemSearchDto.searchQuery} + '&page=' + ${items.number+1}}" aria-label='Next' class="page-link">
+                    <span aria-hidden='true'>다음 고기</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+</div>

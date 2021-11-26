@@ -1,4 +1,4 @@
-# 2021 GS ITM Interns Study! 👋
+# 2021 GS ITM Interns Study! 👋.
 
 ## 🌠 2021 Study 목표
 - `Spring boot`, `JPA`, `SQL` 기술 숙련도를 높일 수 있다.
