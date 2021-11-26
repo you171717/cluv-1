@@ -26,7 +26,7 @@
                         <a class="nav-link" href="/orders">구매이력</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <a class="nav-link" href="/members/memberInfo">회원정보</a>
+                        <a class="nav-link" href="/members/updatePassword">회원정보</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAnonymous()">
                         <a class="nav-link" href="/members/login">로그인</a>
@@ -38,7 +38,7 @@
                 <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="get">
                     <input name="searchQuery" class="form-control mr-sm-2" type="search" placeholder="Search"
                            aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><img src="/img/searchIcon.png"></button>
                 </form>
             </div>
         </nav>

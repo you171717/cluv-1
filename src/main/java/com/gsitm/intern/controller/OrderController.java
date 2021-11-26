@@ -1,8 +1,13 @@
 package com.gsitm.intern.controller;
 
+import com.gsitm.intern.dto.MemberFormDto;
 import com.gsitm.intern.dto.OrderDto;
 import com.gsitm.intern.dto.OrderHistDto;
+import com.gsitm.intern.entity.Member;
+import com.gsitm.intern.repository.MemberRepository;
+import com.gsitm.intern.service.EmailService;
 import com.gsitm.intern.service.OrderService;
+import com.gsitm.intern.service.SmsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +31,9 @@ import java.util.Optional;
 public class OrderController {
 
     private final OrderService orderService;
+    private final EmailService emailService;
+    private final SmsService smsService;
+    private final MemberRepository memberRepository;
 
     @PostMapping(value = "/order")
     public @ResponseBody ResponseEntity order (@RequestBody @Valid OrderDto orderDto,
@@ -39,11 +48,15 @@ public class OrderController {
             return new ResponseEntity<String>(sb.toString(), HttpStatus.BAD_REQUEST);
         }
         String email = principal.getName();
+        String phone = memberRepository.findByEmail(email).getPhone();
         Long orderId;
 
         try {
             //화면에서 넘어오는 주문 정보와 회원의 이메일 정보를 이용해 주문로직 호출
             orderId = orderService.order(orderDto, email);
+                smsService.sendOrderSms(phone, orderDto);
+                emailService.sendOrderEmail(email, orderDto);
+
         } catch(Exception e){
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -69,7 +82,7 @@ public class OrderController {
     @PostMapping("/order/{orderId}/cancel")
     public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId, Principal principal){
 
-        //자바스크리트에서 취소할 주문 번호는 조작이 가능, 다른 사람의 주문 취소하지 못하도록 주문 취소 권한 검사
+        //자바스크립트에서 취소할 주문 번호는 조작이 가능, 다른 사람의 주문 취소하지 못하도록 주문 취소 권한 검사
         if(!orderService.validateOrder(orderId, principal.getName())){
             return new ResponseEntity<String>("주문 취소 권한이 없습니다.", HttpStatus.FORBIDDEN);
         }

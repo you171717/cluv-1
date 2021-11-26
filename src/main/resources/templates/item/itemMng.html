@@ -40,6 +40,10 @@
   </style>
 </th:block>
 
+<head>
+  <title>상품관리 페이지</title>
+</head>
+
 <div layout:fragment="content">
 
   <form th:action="@{'/admin/items/' + ${items.number}}" role="form" method="get" th:object="${items}">

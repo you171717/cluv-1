@@ -2,6 +2,8 @@ package com.gsitm.intern.dto;
 
 import com.gsitm.intern.constant.ItemSellStatus;
 import com.gsitm.intern.entity.Item;
+//import com.gsitm.intern.study.dto.ItemFormMapper;
+//import com.gsitm.intern.study.dto.ItemFormMapperImpl;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -35,13 +37,16 @@ public class ItemFormDto {
     private List<Long> itemImgIds = new ArrayList<>();
 
     private static ModelMapper modelMapper = new ModelMapper();
+//    private static ItemFormMapper itemFormMapper = new ItemFormMapperImpl();
 
     public Item createItem(){
         return modelMapper.map(this, Item.class);
+//        return itemFormMapper.toEntity(this);
     }
     //modelMapper를 이용하여 엔티티 객체와 DTO 객체 간의 데이터를 복사하여 복사한 객체를 반환해주는 메소드
     public static ItemFormDto of(Item item){
         return modelMapper.map(item, ItemFormDto.class);
+//        return itemFormMapper.toDto(item);
     }
 
 }
