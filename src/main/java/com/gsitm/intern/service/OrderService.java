@@ -29,13 +29,17 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final ItemImgRepository itemImgRepository;
 
-    public Long order(OrderDto orderDto, String email) {
+    public Long order(OrderDto orderDto, String email, Integer price) {
         Item item = itemRepository.findById(orderDto.getItemId()).orElseThrow(EntityNotFoundException::new);
+        int oriPrice = item.getPrice();
+        item.setPrice(price);
+
         Member member = memberRepository.findByEmail(email);
 
         List<OrderItem> orderItemList = new ArrayList<>();
         OrderItem orderItem = OrderItem.createOrderItem(item, orderDto.getCount());
         orderItemList.add(orderItem);
+        item.setPrice(oriPrice);
 
         Order order = Order.createOrder(member, orderItemList);
         orderRepository.save(order);
@@ -90,8 +94,12 @@ public class OrderService {
 
         for(OrderDto orderDto : orderDtoList) {
             Item item = itemRepository.findById(orderDto.getItemId()).orElseThrow(EntityNotFoundException::new);
+            int oriPrice = item.getPrice();
+            item.setPrice(orderDto.getPrice());
 
             OrderItem orderItem = OrderItem.createOrderItem(item, orderDto.getCount());
+            item.setPrice(oriPrice);
+
             orderItemList.add(orderItem);
         }
 

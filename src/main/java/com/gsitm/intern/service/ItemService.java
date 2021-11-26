@@ -1,9 +1,6 @@
 package com.gsitm.intern.service;
 
-import com.gsitm.intern.dto.ItemFormDto;
-import com.gsitm.intern.dto.ItemImgDto;
-import com.gsitm.intern.dto.ItemSearchDto;
-import com.gsitm.intern.dto.MainItemDto;
+import com.gsitm.intern.dto.*;
 import com.gsitm.intern.entity.Item;
 import com.gsitm.intern.entity.ItemImg;
 import com.gsitm.intern.repository.ItemImgRepository;
@@ -81,7 +78,7 @@ public class ItemService {
     }
 
     @Transactional(readOnly = true)
-    public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+    public Page<ItemMngDto> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
         return itemRepository.getAdminItemPage(itemSearchDto, pageable);
     }
 

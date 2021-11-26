@@ -12,4 +12,6 @@ public class CartOrderDto {
 
     private List<CartOrderDto> cartOrderDtoList;
 
+    private List<Integer> priceList;
+
 }

@@ -95,16 +95,20 @@ public class CartService {
         cartItemRepository.delete(cartItem);
     }
 
-    public Long orderCartItem(List<CartOrderDto> cartOrderDtoList, String email) {
+    public Long orderCartItem(List<CartOrderDto> cartOrderDtoList, List<Integer> priceList, String email) {
         List<OrderDto> orderDtoList = new ArrayList<>();
 
+        int idx = 0;
         for(CartOrderDto cartOrderDto : cartOrderDtoList) {
             CartItem cartItem = cartItemRepository.findById(cartOrderDto.getCartItemId()).orElseThrow(EntityNotFoundException::new);
 
             OrderDto orderDto = new OrderDto();
             orderDto.setItemId(cartItem.getItem().getId());
             orderDto.setCount(cartItem.getCount());
+            orderDto.setPrice(priceList.get(idx));
             orderDtoList.add(orderDto);
+
+            idx++;
         }
 
         Long orderId = orderService.orders(orderDtoList, email);

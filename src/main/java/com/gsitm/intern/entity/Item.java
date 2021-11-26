@@ -37,6 +37,9 @@ public class Item extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus; //상품 판매 상태
 
+    @OneToOne(mappedBy = "item")
+    private ItemDiscount itemDiscount;
+
     public void updateTime(ItemFormDto itemFormDto) {
         this.itemNm = itemFormDto.getItemNm();
         this.price = itemFormDto.getPrice();
