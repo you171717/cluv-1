@@ -27,19 +27,8 @@
 
                  $('#modal').modal("show");
 
-                // const modal = document.querySelector('.modal');
-                // modal.style.display = 'block';
-
                 var token = $("meta[name='_csrf']").attr("content");
                 var header = $("meta[name='_csrf_header']").attr("content");
-
-                var paramData ={
-                    title: $("#title").val()
-                }
-
-                var param = JSON.stringify(paramData);
-
-                console.log($("#title").val());
 
                 var url = "/admin/item/newSearch" + "?title="+encodeURI($("#title").val());
                 $.ajax({
@@ -53,7 +42,7 @@
                     // data: encodeURI(param),
                     cache   : false,
                     success  : function(result){
-                        console.log(result);
+                        //결과 받아서 테이블에 뿌려주기
                         var tblresult = result;
                         var str = "";
                         $.each(tblresult, function(i){
@@ -94,10 +83,6 @@
         $(function() {
             $("#modal #cateList").on("click", "tr", function () {
 
-                var token = $("meta[name='_csrf']").attr("content");
-                var header = $("meta[name='_csrf_header']").attr("content");
-
-                var str = ""
                 var tdArr = new Array();
 
                 var tr = $(this);
@@ -110,7 +95,6 @@
                     var title = td.eq(0).text();
                     var lprice = td.eq(1).text();
 
-
                     $("#title").val(title);
 
                     var selectlprice = parseInt(lprice)
@@ -120,7 +104,10 @@
                     $("#sellPrice").val(mysellprice);
                     $('#modal').modal("hide");
 
-
+                // var token = $("meta[name='_csrf']").attr("content");
+                // var header = $("meta[name='_csrf_header']").attr("content");
+                //
+                // var str = ""
 
             });
 

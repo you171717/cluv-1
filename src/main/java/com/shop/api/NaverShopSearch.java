@@ -42,15 +42,11 @@ public class NaverShopSearch {
             CategoryDto categoryDto = new CategoryDto(itemJson);
             ret.add(categoryDto);
         }
-
-
         for (int i=0; i < ret.size(); i++) {
 
             System.out.println(ret.get(i).getTitle());
             System.out.println(ret.get(i).getLprice());
         }
-
-
         return ret;
     }
 
