@@ -73,6 +73,9 @@
                 padding: 30px;
                 margin-bottom: 20px;
             }
+            .card-title {
+                width: 750px;
+            }
             .fs18{
                 font-size: 18px;
             }
@@ -86,8 +89,8 @@
         <h2 class="mb-4">
             구매 이력
         </h2>
-        <div th:each="order : ${orders.getContent()}">
-            <div class="d-flex mb-3 align-self-center">
+        <div class="d-flex flex-column align-items-center" th:each="order : ${orders.getContent()}">
+            <div class="d-flex mb-3 align-self-center card-title">
                 <h4 th:text="${order.orderDate} + ' 주문'"></h4>
                 <div class="ml-3">
                     <th:block th:if="${order.orderStatus == T(com.shop.constant.OrderStatus).ORDER}">
@@ -105,9 +108,10 @@
                     </div>
                     <div class="align-self-center w-75">
                         <span th:text="${orderItem.itemNm}" class="fs24 font-weight-bold"></span>
-                        <div class="fs18 font-weight-light">
-                            <span th:text="${orderItem.orderPrice} +'원'"></span>
+                        <div class="fs18 font-weight-light" style="margin-top: 10px;">
+                            <span th:text="${#numbers.formatCurrency(orderItem.orderPrice)}"></span>
                             <span th:text="${orderItem.count} +'개'"></span>
+                            <small class="text-danger">(배송비 : <th:block th:text="${#numbers.formatCurrency(orderItem.orderShippingFee)}"></th:block>)</small>
                         </div>
                     </div>
                 </div>
@@ -117,7 +121,7 @@
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${orders.number eq 0}?'disabled':''">
                     <a th:href="@{'/orders/' + ${orders.number-1}}" aria-label='Previous' class="page-link">
-                        <span aria-hidden='true'>Previous</span>
+                        <span aria-hidden='true'>이전</span>
                     </a>
                 </li>
                 <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${orders.number eq page-1}?'active':''">
@@ -125,7 +129,7 @@
                 </li>
                 <li class="page-item" th:classappend="${orders.number+1 ge orders.totalPages}?'disabled':''">
                     <a th:href="@{'/orders/' + ${orders.number+1}}" aria-label='Next' class="page-link">
-                        <span aria-hidden='true'>Next</span>
+                        <span aria-hidden='true'>다음</span>
                     </a>
                 </li>
             </ul>

@@ -44,14 +44,17 @@
 
     <div layout:fragment="content">
         <form th:action="@{'/admin/items/' + ${items.number}}" role="form" method="get" th:object="${items}">
+            <p class="h2">
+                상품 관리
+            </p>
             <table class="table">
                 <thead>
                     <tr>
-                        <td>상품아이디</td>
-                        <td>상품명</td>
-                        <td>상태</td>
-                        <td>등록자</td>
-                        <td>등록일</td>
+                        <th>상품아이디</th>
+                        <th>상품명</th>
+                        <th>상태</th>
+                        <th>등록자</th>
+                        <th>등록일</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,7 +66,7 @@
                         <td><a th:href="'/admin/item/'+${item.id}" th:text="${item.itemNm}"></a></td>
                         <td th:text="${item.itemSellStatus == T(com.shop.constant.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>
                         <td th:text="${item.createdBy}"></td>
-                        <td th:text="${item.regTime}"></td>
+                        <td th:text="${#temporals.format(item.regTime, 'yyyy-MM-dd HH:mm')}"></td>
                     </tr>
                 </tbody>
             </table>
@@ -79,7 +82,7 @@
                     <!-- 첫 페이지라면 Previous 버튼을 보이지 않게 함 -->
                     <li class="page-item" th:classappend="${items.first}?'disabled'">
                         <a th:onclick="'javascript:page(' + ${items.number - 1} + ')'" aria-label='Previous' class="page-link">
-                            <span aria-hidden='true'>Previous</span>
+                            <span aria-hidden='true'>이전</span>
                         </a>
                     </li>
                     <!-- #numbers.sequence(시작, 끝, [단위])를 통해서 단순 반복을 할 수 있음 -->
@@ -90,7 +93,7 @@
                     <!-- 마지막 페이지라면 Next 버튼을 보이지 않게 함 -->
                     <li class="page-item" th:classappend="${items.last}?'disabled'">
                         <a th:onclick="'javascript:page(' + ${items.number + 1} + ')'" aria-label='Next' class="page-link">
-                            <span aria-hidden='true'>Next</span>
+                            <span aria-hidden='true'>다음</span>
                         </a>
                     </li>
                 </ul>

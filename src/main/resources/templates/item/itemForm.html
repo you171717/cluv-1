@@ -58,9 +58,8 @@
     <div layout:fragment="content">
         <!-- 파일을 업로드할 때는 인코딩 타입을 `enctype="multipart/form-data"` 같이 설정하고 사용해야 함 -->
         <form role="form" method="post" enctype="multipart/form-data" th:object="${itemFormDto}">
-            <p class="h2">
-                상품 등록
-            </p>
+            <p class="h2" th:if="${#strings.isEmpty(itemFormDto.id)}">상품 등록</p>
+            <p class="h2" th:unless="${#strings.isEmpty(itemFormDto.id)}">상품 수정</p>
             <!-- 상품 수정할 때 사용할 식별자 -->
             <input type="hidden" th:field="*{id}">
             <!-- 상품의 판매 상태 필드 -->
@@ -92,6 +91,12 @@
                     <span class="input-group-text">재고</span>
                 </div>
                 <input type="number" th:field="*{stockNumber}" class="form-control" placeholder="상품의 재고를 입력해주세요">
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">배송비</span>
+                </div>
+                <input type="number" th:field="*{shippingFee}" class="form-control" placeholder="배송비를 입력해주세요">
             </div>
             <p th:if="${#fields.hasErrors('stockNumber')}" th:errors="*{stockNumber}" class="fieldError">Incorrect data</p>
             <!-- 상품의 상세 내용 필드 -->

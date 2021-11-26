@@ -40,7 +40,7 @@ public class OrderItem extends BaseEntity {
     }
 
     public int getTotalPrice() {
-        return orderPrice * count;
+        return orderPrice * count + item.getShippingFee();
     }
 
     public void cancel() {
