@@ -32,6 +32,7 @@
             });
         }
 
+
     </script>
 
 </th:block>
@@ -106,6 +107,22 @@
                     <input type="file" class="custom-file-input" name="itemImgFile">
                     <label class="custom-file-label" th:text="상품이미지 + ${num}"></label>
                 </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">상품 태그 설정</span>
+            </div>
+            <div class="form-control">
+                <input type="checkbox" name="tags[]" value="1"/>거실
+                <input type="checkbox" name="tags[]" value="2"/>침실
+                <input type="checkbox" name="tags[]" value="3"/>1인
+                <input type="checkbox" name="tags[]" value="4"/>4인
+                <input type="checkbox" name="tags[]" value="5"/>봄
+                <input type="checkbox" name="tags[]" value="6"/>여름
+                <input type="checkbox" name="tags[]" value="7"/>가을
+                <input type="checkbox" name="tags[]" value="8"/>겨울
             </div>
         </div>
 

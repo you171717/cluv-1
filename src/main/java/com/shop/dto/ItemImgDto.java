@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
-@Getter @Setter
+@Getter
+@Setter
 public class ItemImgDto {
 
     private Long id;
@@ -18,10 +19,12 @@ public class ItemImgDto {
 
     private String repImgYn;
 
-    private static ModelMapper modelMapper = new ModelMapper();
+        private static ModelMapper modelMapper = new ModelMapper();
+//    private static ItemImgMapStruct itemImgMapStruct= new ItemImgMapStructImpl();
 
     public static ItemImgDto of(ItemImg itemImg) {
         return modelMapper.map(itemImg,ItemImgDto.class);
+//        return itemImgMapStruct.toDto(itemImg);
     }
 
 }

@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -39,8 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
         ;
 
+        http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
+
         http.authorizeRequests()    //시큐리티 처리에 HttpServleRequest이용
-                .mvcMatchers("/", "/members/**", "/item/**", "/images/**", "/oauth2/**").permitAll()  //모든 사용자가 로그인 없이 해당 경로 접근 가능
+                .mvcMatchers("/", "/members/**", "/item/**", "/images/**", "/oauth2/**","/detailSearch/**").permitAll()  //모든 사용자가 로그인 없이 해당 경로 접근 가능
                 .mvcMatchers("/admin/**").hasRole("ADMIN")      //admin으로 시작하는 경로는 해당 계정이 ADMIN ROLE일 경우만 접근 가능
                 .anyRequest().authenticated()       //설정한 경로 외 접근시 모두 인증 요구
         ;

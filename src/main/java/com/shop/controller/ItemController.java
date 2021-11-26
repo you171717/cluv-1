@@ -36,8 +36,9 @@ public class ItemController {
 
     @PostMapping(value = "/admin/item/new")
     public String itemNew(@Valid ItemFormDto itemFormDto, BindingResult bindingResult,
-                          Model model, @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList){
-
+                          Model model, @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList,
+                          @RequestParam("tags[]") List<String> tags){
+//        System.out.println("=============================>"+tags);
         if(bindingResult.hasErrors()){
             return "item/itemForm";
         }
@@ -48,8 +49,9 @@ public class ItemController {
         }
 
         try {
-            itemService.saveItem(itemFormDto, itemImgFileList);
+            itemService.saveItem(itemFormDto, itemImgFileList,tags);
         } catch (Exception e){
+            System.out.println(e);
             model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
             return "item/itemForm";
         }
@@ -73,7 +75,7 @@ public class ItemController {
 
     @PostMapping(value = "/admin/item/{itemId}")
     public String itemUpdate(@Valid ItemFormDto itemFormDto, BindingResult bindingResult,
-                           @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Model model){
+                           @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Model model,@RequestParam("tags[]") List<String> tags){
 
         if(bindingResult.hasErrors()){
             return "item/itemForm";
@@ -85,7 +87,7 @@ public class ItemController {
         }
 
         try {
-            itemService.saveItem(itemFormDto, itemImgFileList);
+            itemService.saveItem(itemFormDto, itemImgFileList,tags);
         } catch (Exception e){
             model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
             return "item/itemForm";
@@ -110,5 +112,30 @@ public class ItemController {
         ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
         model.addAttribute("item", itemFormDto);
         return "item/itemDtl";
+//        return "item/itemDtlAjax";
     }
+
+//    @GetMapping(value = "/item/{itemId}/api")
+//    public @ResponseBody
+//    ResponseEntity itemDtlAjax(@PathVariable("itemId") Long itemId) {
+//        // Jackson 객체를 생성
+//        ObjectMapper objectMapper = new ObjectMapper();
+//
+//        // DTO 객체를 가져오고 이름과 상세 설명에 `with AJAX` 문자열 추가
+//        ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
+//        itemFormDto.setItemNm(itemFormDto.getItemNm() + " with AJAX");
+//        itemFormDto.setItemDetail(itemFormDto.getItemDetail() + " with AJAX");
+//
+//        // Jackson 객체를 사용하여 DTO 객체를 Json 형식으로 변환
+//        String json;
+//
+//        try {
+//            json = objectMapper.writeValueAsString(itemFormDto);
+//        } catch(Exception e) {
+//            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+//        }
+//
+//        // 성공적으로 변환되면 Json 반환
+//        return new ResponseEntity<String>(json, HttpStatus.OK);
+//    }
 }
