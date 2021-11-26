@@ -54,3 +54,5 @@ application-oauth.properties
 /src/main/generated/com/shop/entity/QAddress.java
 /src/main/generated/com/shop/mapper/ItemFormMapStructImpl.java
 /src/main/generated/com/shop/mapper/ItemImgMapStructImpl.java
+/src/main/resources/static/images/main.jpg
+/src/main/generated/com/shop/dto/QGiftMainItemDto.java

@@ -9,6 +9,8 @@ public class MainItemDto {
 
     private Long id;
 
+    private Long cateCode;
+
     private String itemNm;
 
     private String itemDetail;
@@ -16,6 +18,7 @@ public class MainItemDto {
     private String imgUrl;
 
     private Integer price;
+
 
     // 상품 조회 시 DTO 객체로 결과 값을 받음
     @QueryProjection
@@ -25,6 +28,6 @@ public class MainItemDto {
         this.itemNm = itemNm;
         this.itemDetail = itemDetail;
         this.imgUrl = imgUrl;
-        this.price =price;
+        this.price = price;
     }
 }

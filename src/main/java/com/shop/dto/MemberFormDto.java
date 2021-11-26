@@ -1,5 +1,6 @@
 package com.shop.dto;
 
+import com.shop.constant.Role;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -27,6 +28,8 @@ public class MemberFormDto {
 
     @NotEmpty(message = "주소는 필수 입력 값입니다.")
     private String address;
+
+    private Role role;
 
     @Override
     public String toString() {

@@ -1,5 +1,6 @@
 package com.shop.dto;
 
+import com.shop.constant.GiftStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,4 +18,9 @@ public class OrderDto {
     @Min(value = 1, message = "최소 주문 수량은 1개 입니다.")
     @Max(value = 999, message = "최대 주문 수량은 999개 입니다.")
     private int count;
+
+    private GiftStatus giftStatus;         // 구매 선물 상태
+
+    private String from;
+    private String text;
 }

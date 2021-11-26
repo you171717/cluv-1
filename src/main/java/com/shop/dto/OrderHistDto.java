@@ -1,8 +1,8 @@
 package com.shop.dto;
 
+import com.shop.constant.GiftStatus;
 import com.shop.constant.OrderStatus;
 import com.shop.entity.Order;
-import com.shop.entity.OrderItem;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +19,7 @@ public class OrderHistDto {
         this.orderDate =
                 order.getOrderDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         this.orderStatus = order.getOrderStatus();
+        this.giftStatus = order.getGiftStatus();
     }
 
     private Long orderId;              // 주문 아이디
@@ -27,11 +28,23 @@ public class OrderHistDto {
 
     private OrderStatus orderStatus;   // 주문 상태
 
+    private GiftStatus giftStatus;    //  구매/선물 상태
+
     // 주문 상품 리스트
     private List<OrderItemDto> orderItemDtoList = new ArrayList<>();
 
     // orderItemDto 객체를 주문 상품 리스트에 추가
     public void addOrderItemDto(OrderItemDto orderItemDto){
         orderItemDtoList.add(orderItemDto);
+    }
+
+    @Override
+    public String toString() {
+        return "OrderHistDto{" +
+                "orderId=" + orderId +
+                ", orderDate='" + orderDate + '\'' +
+                ", orderStatus=" + orderStatus +
+                ", orderItemDtoList=" + orderItemDtoList +
+                '}';
     }
 }

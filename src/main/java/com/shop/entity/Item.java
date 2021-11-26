@@ -23,7 +23,7 @@ public class Item extends BaseEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cateCode")
-    private Category category;       // 카테고리 코드
+    private Category category;           // 카테고리 코드
 
     @Column(nullable = false, length = 50)          // not null 설정
     private String itemNm;    // 상품명
@@ -41,7 +41,21 @@ public class Item extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus;    // 상품 판매 상태
 
-    public void updateItem(ItemFormDto itemFormDto){
+
+    public static Item createItem(ItemFormDto itemFormDto, Category category){
+        Item item = new Item();
+        item.setCategory(category);
+        item.itemNm = itemFormDto.getItemNm();
+        item.price = itemFormDto.getPrice();
+        item.stockNumber = itemFormDto.getStockNumber();
+        item.itemDetail = itemFormDto.getItemDetail();
+        item.itemSellStatus = itemFormDto.getItemSellStatus();
+
+        return item;
+    }
+
+    public void updateItem(ItemFormDto itemFormDto, Category category){
+        this.setCategory(category);
         this.itemNm = itemFormDto.getItemNm();
         this.price = itemFormDto.getPrice();
         this.stockNumber = itemFormDto.getStockNumber();

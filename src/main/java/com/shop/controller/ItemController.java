@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shop.dto.ItemFormDto;
 import com.shop.dto.ItemSearchDto;
 import com.shop.entity.Item;
+import com.shop.repository.CategoryRepository;
 import com.shop.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -28,6 +29,7 @@ import java.util.Optional;
 public class ItemController {
 
     private final ItemService itemService;
+    private final CategoryRepository categoryRepository;
 
     @GetMapping(value = "/admin/item/new")
     public String itemForm(Model model){
@@ -52,6 +54,7 @@ public class ItemController {
         }
 
         try{
+            System.out.println("=====================>" + itemFormDto.toString());
             itemService.saveItem(itemFormDto, itemImgFileList);         // 상품 저장 로직 호출
 
         }catch (Exception e){
@@ -116,6 +119,7 @@ public class ItemController {
     // 상품 상세 페이지 이동
     @GetMapping(value ="/item/{itemId}")
     public String itemDtl(Model model, @PathVariable("itemId") Long itemId){
+        System.out.println("====================>" + itemId);
         ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
         model.addAttribute("item", itemFormDto);
 

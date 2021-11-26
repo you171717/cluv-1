@@ -1,5 +1,6 @@
 package com.shop.repository;
 
+import com.shop.dto.GiftMainItemDto;
 import com.shop.dto.ItemSearchDto;
 
 import com.shop.dto.MainItemDto;
@@ -9,7 +10,9 @@ import org.springframework.data.domain.Pageable;
 
 public interface ItemRepositoryCustom {
 
-    Page<Item> getAdminItemPage(ItemSearchDto itemSerachDto, Pageable pageable);
+    Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable);
 
-    Page<MainItemDto> getMainItemPage(ItemSearchDto itemSerachDto, Pageable pageable);
+    Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable);
+
+    Page<GiftMainItemDto> getGiftItemPage(ItemSearchDto itemSearchDto, Pageable pageable, Long cateCode);
 }

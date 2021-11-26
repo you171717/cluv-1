@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -41,6 +40,7 @@ public class OrderItem extends BaseEntity{
         return orderItem;
     }
 
+
     public int getTotalPrice(){                     // 주문 가격 * 주문 수량 = 총 가격
         return orderPrice*count;
     }
@@ -50,4 +50,14 @@ public class OrderItem extends BaseEntity{
         this.getItem().addStock(count);
     }
 
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "id=" + id +
+                ", item=" + item +
+                ", order=" + order +
+                ", orderPrice=" + orderPrice +
+                ", count=" + count +
+                '}';
+    }
 }

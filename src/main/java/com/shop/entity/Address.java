@@ -1,5 +1,6 @@
 package com.shop.entity;
 
+import com.shop.dto.AddressDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,4 +26,16 @@ public class Address {
     private String phone;
 
     private String address;
+
+    public static Address createAddress(Member member, AddressDto addressDto) {
+
+        Address address =new Address();
+        address.setMember(member);
+        address.name = addressDto.getAddress();
+        address.phone = addressDto.getPhone();
+        address.address = addressDto.getName();
+
+        return address;
+    }
+
 }
