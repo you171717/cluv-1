@@ -53,14 +53,12 @@ public class ItemController {
     }
 
     @ResponseBody
-    @GetMapping(value = "/admin/item/naverPrice")
-    public String getPrice(@RequestParam("lprice") String price) {
+    @GetMapping(value = "/item/{itemId}/price")
+    public List<CategoryDto> getPrice(@RequestParam("itemNm") String query) {
 
-        System.out.println("========================>" + price);
-        ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
-        model.addAttribute("item", itemFormDto);
+//        System.out.println("========================>" + lprice);
 
-        return "item/itemDtl";
+        return naverShopSearch.search2(query);
 
     }
 

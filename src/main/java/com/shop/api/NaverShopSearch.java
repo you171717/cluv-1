@@ -22,7 +22,8 @@ public class NaverShopSearch {
 
         HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
         // 넘겨받은 query로 검색 요청
-        ResponseEntity<String> responseEntity = rest.exchange("https://openapi.naver.com/v1/search/shop.json?query=" + query, HttpMethod.GET, requestEntity, String.class);
+        ResponseEntity<String> responseEntity = rest.exchange("https://openapi.naver.com/v1/search/shop.json?query=" + query,
+                HttpMethod.GET, requestEntity, String.class);
         HttpStatus httpStatus = responseEntity.getStatusCode();
         int status = httpStatus.value();
         String response = responseEntity.getBody();
@@ -52,4 +53,49 @@ public class NaverShopSearch {
 
         return ret;
     }
+
+
+    public List<CategoryDto> search2(String query) {
+        RestTemplate rest = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Naver-Client-Id", "KpepXFXCaXQ7GHnE6X3T");
+        headers.add("X-Naver-Client-Secret", "qlcG3q_XkO");
+        String body = "";
+
+        HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
+        // 넘겨받은 query로 검색 요청
+        ResponseEntity<String> responseEntity = rest.exchange("https://openapi.naver.com/v1/search/shop.json?query=" + query,
+                HttpMethod.GET, requestEntity, String.class);
+        HttpStatus httpStatus = responseEntity.getStatusCode();
+        int status = httpStatus.value();
+        String response = responseEntity.getBody();
+//        System.out.println("Response status: " + status);
+//        System.out.println(response);
+
+        return fromJSONtoItems2(response.toString());
+    }
+
+    public List<CategoryDto> fromJSONtoItems2(String result) {
+        JSONObject rjson = new JSONObject(result);
+        JSONArray items = rjson.getJSONArray("items");
+        List<CategoryDto> ret = new ArrayList<>();
+        for (int i = 0; i < 1; i++) {
+            JSONObject itemJson = items.getJSONObject(i);
+            CategoryDto categoryDto = new CategoryDto(itemJson);
+            ret.add(categoryDto);
+        }
+
+
+        for (int i=0; i < ret.size(); i++) {
+
+            System.out.println(ret.get(i).getTitle());
+            System.out.println(ret.get(i).getLprice());
+        }
+
+
+        return ret;
+    }
+
+
+
 }
