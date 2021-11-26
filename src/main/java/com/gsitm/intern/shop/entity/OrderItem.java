@@ -7,10 +7,12 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter @Setter
-public class OrderItem extends BaseEntity{
+@Getter
+@Setter
+public class OrderItem extends BaseEntity {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "order_item_id")
     private Long id;
 
@@ -32,11 +34,7 @@ public class OrderItem extends BaseEntity{
 
     private int count; //수량
 
-    private LocalDateTime regTime;
-    
-    private LocalDateTime updateTime;
-
-    public static OrderItem createOrderItem(Item item, int count){
+    public static OrderItem createOrderItem(Item item, int count) {
         OrderItem orderItem = new OrderItem();
         orderItem.setItem(item);
         orderItem.setCount(count);
@@ -45,8 +43,8 @@ public class OrderItem extends BaseEntity{
         return orderItem;
     }
 
-    public int getTotalPrice(){
-        return orderPrice*count;
+    public int getTotalPrice() {
+        return orderPrice * count;
     }
 
     public void cancel() {

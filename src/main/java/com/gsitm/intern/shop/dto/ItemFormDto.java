@@ -1,6 +1,7 @@
 package com.gsitm.intern.shop.dto;
 
 import com.gsitm.intern.shop.constant.ItemSellStatus;
+import com.gsitm.intern.shop.constant.UseItemStatus;
 import com.gsitm.intern.shop.entity.Item;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter @Setter
@@ -30,6 +32,12 @@ public class ItemFormDto {
     private Integer stockNumber;
 
     private ItemSellStatus itemSellStatus;
+
+    private UseItemStatus useItemStatus;               // 중고 상품 체크
+
+    private Date start_day;                         // 게시글 작성 날
+
+    private Date end_day;                         // 게시글 끝 날
 
     private List<ItemImgDto> itemImgDtoList = new ArrayList<>();
 

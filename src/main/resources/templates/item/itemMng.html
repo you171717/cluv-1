@@ -8,9 +8,11 @@
     <script th:inline="javascript">
 
         $(document).ready(function(){
+
             $("#searchBtn").on("click",function(e) {
                 e.preventDefault();
                 page(0);
+
             });
         });
 
@@ -44,22 +46,26 @@
         <table class="table">
             <thead>
             <tr>
-                <td>상품아이디</td>
-                <td>상품명</td>
-                <td>상태</td>
-                <td>등록자</td>
-                <td>등록일</td>
+                <td class="text-center">상품아이디</td>
+                <td class="text-center">신품 / 중고</td>
+                <td class="text-center">상품명</td>
+                <td class="text-center">상태</td>
+                <td class="text-center">등록자</td>
+                <td class="text-center">등록일</td> <!-- 년,월,일 만 출력이 되게 -->
+                <td class="text-center">판매기간</td>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item, status: ${items.getContent()}">
-                <td th:text="${item.id}"></td>
-                <td>
+            <tr class="text-center" th:each="item, status: ${items.getContent()}">
+                <td class="text-center" th:text="${item.id}"></td>
+                <td class="text-center" th:text="${item.useItemStatus == T(com.gsitm.intern.shop.constant.UseItemStatus).NEW} ? '신품' : '중고'"></td>
+                <td class="text-center">
                     <a th:href="'/admin/item/'+${item.id}" th:text="${item.itemNm}"></a>
                 </td>
-                <td th:text="${item.itemSellStatus == T(com.gsitm.intern.shop.constant.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>
-                <td th:text="${item.createdBy}"></td>
-                <td th:text="${item.regTime}"></td>
+                <td class="text-center" th:text="${item.itemSellStatus == T(com.gsitm.intern.shop.constant.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>
+                <td class="text-center" th:text="${item.createdBy}"></td>
+                <td class="text-center" th:text="${#temporals.format(item.regTime, 'yyyy-MM-dd')}"></td>
+                <td class="text-center" id="interval"><span th:text="${#dates.format(item.start_day, 'yyyy-MM-dd')}"></span> ~ <span th:text="${#dates.format(item.end_day, 'yyyy-MM-dd')}"></span></td>
             </tr>
             </tbody>
         </table>
@@ -69,7 +75,7 @@
 
                 <li class="page-item" th:classappend="${items.first}?'disabled'">
                     <a th:onclick="'javascript:page(' + ${items.number - 1} + ')'" aria-label='Previous' class="page-link">
-                        <span aria-hidden='true'>Previous</span>
+                        <span aria-hidden='true'>이전</span>
                     </a>
                 </li>
 
@@ -79,7 +85,7 @@
 
                 <li class="page-item" th:classappend="${items.last}?'disabled'">
                     <a th:onclick="'javascript:page(' + ${items.number + 1} + ')'" aria-label='Next' class="page-link">
-                        <span aria-hidden='true'>Next</span>
+                        <span aria-hidden='true'>다음</span>
                     </a>
                 </li>
 

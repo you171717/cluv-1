@@ -6,6 +6,7 @@
 <head>
   <meta name="_csrf" th:content="${_csrf.token}"/>
   <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+  <title>No.1 그래픽카드 판매점 - 장바구니</title>
 </head>
 
 <!-- 사용자 스크립트 추가 -->
@@ -230,7 +231,7 @@
                             <span class="input-group mt-2">
                                 <span th:id="'price_' + ${cartItem.cartItemId}"
                                       th:data-price="${cartItem.price}"
-                                      th:text="${cartItem.price} + '원'" class="align-self-center mr-2">
+                                      th:text="${#numbers.formatInteger(cartItem.price, 0, 'COMMA')} + '원'" class="align-self-center mr-2">
                                 </span>
                                 <input type="number" name="count" th:id="'count_' + ${cartItem.cartItemId}"
                                        th:value="${cartItem.count}" min="1"
@@ -239,6 +240,7 @@
                                     <span aria-hidden="true" th:data-id="${cartItem.cartItemId}" onclick="deleteCartItem(this)">&times;</span>
                                 </button>
                             </span>
+<!--              ${cartItem.price}-->
             </div>
           </div>
         </td>
