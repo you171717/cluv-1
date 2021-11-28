@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.mybatis.MyBatisBestItemMapper">
+    <select id="getBestItemInfo" resultType="com.shop.mybatis.MybatisBestItemDto">
+        select i.item_id, i.item_nm, i.item_detail, img.img_url, i.price from (select * from it1661.item where item_sell_status = 'SELL') i
+                                                                                  join it1661.order_item oi on oi.item_id
+                                                                                  join it1661.item_img img on img.item_id
+        where date_format(oi.reg_time,'%Y%m%d') = date_format(now(),'%Y%m%d') and i.item_id=oi.item_id and img.item_id = i.item_id
+        group by i.item_id
+        order by count(oi.count) desc
+            limit 10;
+
+    </select>
+</mapper>
