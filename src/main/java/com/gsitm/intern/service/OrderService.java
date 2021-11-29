@@ -132,7 +132,7 @@ public class OrderService {
             orderItemRepository.save(orderItem);
         }
         order.setReturnReqDate(LocalDateTime.now());
-        //order.setOrderStatus(OrderStatus.RETURN);
+        order.setOrderStatus(OrderStatus.RETURN);
         order.setReturnStatus(ReturnStatus.N);
         orderRepository.save(order);
     }
@@ -175,7 +175,7 @@ public class OrderService {
             orderItemRepository.save(orderItem);
         }
         order.setReturnConfirmDate(LocalDateTime.now());
-     //   order.setOrderStatus(OrderStatus.RETURN);
+        order.setOrderStatus(OrderStatus.RETURN);
         order.setReturnStatus(ReturnStatus.Y);
         orderRepository.save(order);
 
