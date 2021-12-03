@@ -1,11 +1,8 @@
 package com.shop.controller;
 
 import com.shop.dto.*;
-import com.shop.entity.Item;
 import com.shop.entity.ReverseAuction;
-import com.shop.repository.ItemRepository;
 import com.shop.repository.ReverseAuctionRepository;
-import com.shop.service.ItemImgService;
 import com.shop.service.ItemService;
 import com.shop.service.ReverseAuctionService;
 import lombok.RequiredArgsConstructor;

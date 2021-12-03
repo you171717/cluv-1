@@ -4,10 +4,8 @@ import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.tomcat.jni.Local;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 @Getter
 @Setter

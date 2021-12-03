@@ -1,11 +1,12 @@
 package com.shop.service;
 
 import com.shop.constant.BidDepositType;
-import com.shop.dto.*;
+import com.shop.dto.BidDto;
+import com.shop.dto.BidSearchDto;
+import com.shop.dto.DiscountDto;
 import com.shop.entity.Bid;
 import com.shop.entity.Member;
 import com.shop.entity.ReverseAuction;
-import com.shop.mapstruct.BidFormMapper;
 import com.shop.repository.BidRepository;
 import com.shop.repository.MemberRepository;
 import com.shop.repository.ReverseAuctionRepository;
@@ -18,10 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 @Transactional

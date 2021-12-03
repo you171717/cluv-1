@@ -7,9 +7,9 @@ import com.shop.dto.ReverseAuctionDto;
 import com.shop.entity.Bid;
 import com.shop.entity.Member;
 import com.shop.repository.BidRepository;
-import com.shop.repository.KakaoPaymentRepository;
 import com.shop.repository.MemberRepository;
-import com.shop.service.*;
+import com.shop.service.BidService;
+import com.shop.service.ReverseAuctionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
 import java.security.Principal;
 import java.text.DecimalFormat;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
@@ -34,8 +33,6 @@ public class BidController {
     private final MemberRepository memberRepository;
 
     private final ReverseAuctionService reverseAuctionService;
-
-    private final KakaoPaymentService kakaoPaymentService;
 
     private final BidService bidService;
 

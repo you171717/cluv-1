@@ -6,7 +6,6 @@ import com.shop.mapstruct.ItemFormMapper;
 import com.shop.mapstruct.ItemFormMapperImpl;
 import lombok.Getter;
 import lombok.Setter;
-import org.modelmapper.ModelMapper;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

@@ -3,7 +3,6 @@ package com.shop.controller;
 import com.shop.constant.Bank;
 import com.shop.constant.OAuth2ProviderType;
 import com.shop.dto.OAuth2FormDto;
-import com.shop.entity.Member;
 import com.shop.entity.OAuth2Member;
 import com.shop.service.*;
 import lombok.RequiredArgsConstructor;

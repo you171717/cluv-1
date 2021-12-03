@@ -1,10 +1,7 @@
 package com.shop.mapper;
 
 import com.shop.dto.ItemDto;
-import com.shop.entity.Item;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 

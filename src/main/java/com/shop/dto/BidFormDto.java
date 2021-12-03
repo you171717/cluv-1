@@ -1,7 +1,5 @@
 package com.shop.dto;
 
-import com.shop.entity.Member;
-import com.shop.entity.ReverseAuction;
 import lombok.Getter;
 import lombok.Setter;
 

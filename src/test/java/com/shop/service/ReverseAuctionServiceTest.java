@@ -1,29 +1,23 @@
 package com.shop.service;
 
-import com.shop.constant.BidDepositType;
 import com.shop.constant.ItemSellStatus;
+import com.shop.constant.ReverseAuctionSearchSortColumn;
 import com.shop.dto.*;
-import com.shop.entity.*;
+import com.shop.entity.ReverseAuction;
 import com.shop.mapstruct.ReverseAuctionFormMapper;
-import com.shop.repository.BidRepository;
-import com.shop.repository.ItemImgRepository;
-import com.shop.repository.ItemRepository;
-import com.shop.repository.ReverseAuctionRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,198 +29,120 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestPropertySource(locations="classpath:application-test.properties")
 class ReverseAuctionServiceTest {
 
-    @PersistenceContext
-    EntityManager em;
+    @Autowired
+    ItemService itemService;
 
     @Autowired
-    ItemRepository itemRepository;
+    ItemImgService itemImgService;
 
     @Autowired
-    ItemImgRepository itemImgRepository;
-
-    @Autowired
-    ReverseAuctionRepository reverseAuctionRepository;
+    ReverseAuctionService reverseAuctionService;
 
     @Autowired
     ReverseAuctionFormMapper reverseAuctionFormMapper;
 
-    @Autowired
-    BidRepository bidRepository;
+    List<MultipartFile> createMultipartFiles() {
+        List<MultipartFile> multipartFileList = new ArrayList<>();
 
-    @Autowired
-    BidService bidService;
+        for(int i = 0; i < 5; i++) {
+            String path = "C:/shop/item/";
+            String imageName = "image" + i + ".jpg";
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+            MockMultipartFile multipartFile = new MockMultipartFile(path, imageName, "image/png", new byte[] { 1, 2, 3, 4 });
 
-    @Autowired
-    MemberService memberService;
+            multipartFileList.add(multipartFile);
+        }
 
-    public Member createMember() {
-        return this.createMember(null);
+        return multipartFileList;
     }
 
-    public Member createMember(String email) {
-        MemberFormDto memberFormDto = new MemberFormDto();
-        memberFormDto.setEmail(email == null ? "test@email.com" : email);
-        memberFormDto.setName("홍길동");
-        memberFormDto.setAddress("서울시 마포구 합정동");
-        memberFormDto.setPassword("1234");
+    public Long createItem() {
+        ItemFormDto itemFormDto = new ItemFormDto();
+        itemFormDto.setItemNm("테스트 상품");
+        itemFormDto.setPrice(10000);
+        itemFormDto.setShippingFee(1000);
+        itemFormDto.setStockNumber(100);
+        itemFormDto.setItemDetail("테스트 상품 상세 설명");
+        itemFormDto.setItemSellStatus(ItemSellStatus.SELL);
 
-        Member member = Member.createMember(memberFormDto, passwordEncoder);
+        try {
+            List<MultipartFile> multipartFileList = createMultipartFiles();
 
-        return memberService.saveMember(member);
-    }
-
-    public Item createItem() {
-        Item item = new Item();
-        item.setItemNm("테스트 상품");
-        item.setPrice(100000);
-        item.setItemDetail("테스트 상품 상세 설명");
-        item.setItemSellStatus(ItemSellStatus.SELL);
-        item.setStockNumber(100);
-        item.setRegTime(LocalDateTime.now());
-        item.setUpdateTime(LocalDateTime.now());
-
-        Item savedItem = itemRepository.save(item);
-
-        ItemImg itemImg = new ItemImg();
-        itemImg.setItem(item);
-        itemImg.setImgUrl("C:/shop/item/test.png");
-        itemImg.setRepImgYn("Y");
-
-        itemImgRepository.save(itemImg);
-
-        return savedItem;
+            return itemService.saveItem(itemFormDto, multipartFileList);
+        } catch(Exception e) {
+            return null;
+        }
     }
 
     public ReverseAuction createReverseAuction() {
-        Item item = this.createItem();
+        Long itemId = this.createItem();
 
-        ReverseAuction reverseAuction = new ReverseAuction();
-        reverseAuction.setStartTime(LocalDateTime.now().minusHours(51));
-        reverseAuction.setPriceUnit(1000);
-        reverseAuction.setTimeUnit(1);
-        reverseAuction.setMaxRate(50);
-        reverseAuction.setItem(item);
+        ReverseAuctionFormDto reverseAuctionFormDto = new ReverseAuctionFormDto();
+        reverseAuctionFormDto.setStartTime(LocalDateTime.now().minusHours(51));
+        reverseAuctionFormDto.setPriceUnit(1000);
+        reverseAuctionFormDto.setTimeUnit(1);
+        reverseAuctionFormDto.setMaxRate(50);
+        reverseAuctionFormDto.setItemId(itemId);
 
-        return reverseAuctionRepository.save(reverseAuction);
+        return reverseAuctionService.saveReverseAuction(reverseAuctionFormDto);
     }
 
-    public ReverseAuction createInProgressReverseAuction(String email) {
-        Member member = this.createMember(email);
-
-        ReverseAuction reverseAuction = this.createReverseAuction();
-
-        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId());
-
-        return reverseAuction;
-    }
-
-    public ReverseAuction createFinishedReverseAuction(String email) {
-        Member member = this.createMember(email);
-
-        ReverseAuction reverseAuction = this.createReverseAuction();
-
-        Bid bid = bidService.saveBid(member.getEmail(), reverseAuction.getId());
-
-        bidService.approveBid(bid.getId());
-
-        return reverseAuction;
+    public DiscountDto createDiscountDto(ReverseAuction reverseAuction) {
+        return new DiscountDto(reverseAuction.getStartTime()
+                , reverseAuction.getItem().getPrice()
+                , reverseAuction.getTimeUnit()
+                , reverseAuction.getPriceUnit());
     }
 
     @Test
     @DisplayName("역경매 등록 테스트")
     public void createReverseAuctionTest() {
-        Item item = this.createItem();
+        ReverseAuction reverseAuction = this.createReverseAuction();
 
-        ReverseAuction reverseAuction = new ReverseAuction();
-        reverseAuction.setStartTime(LocalDateTime.now());
-        reverseAuction.setPriceUnit(1000);
-        reverseAuction.setTimeUnit(1);
-        reverseAuction.setMaxRate(50);
-        reverseAuction.setItem(item);
-
-        ReverseAuction savedReverseAuction = reverseAuctionRepository.save(reverseAuction);
+        assertNotNull(reverseAuction);
     }
 
     @Test
-    @DisplayName("역경매 조회 테스트")
-    public void selectReverseAuctionTest() {
-        this.createReverseAuction();
-        this.createReverseAuction();
-        this.createReverseAuction();
-        this.createReverseAuction();
+    @DisplayName("역경매 기본 조회 테스트")
+    public void getReverseAuctionDtlTest() {
+        ReverseAuction reverseAuction = this.createReverseAuction();
+        ReverseAuctionDto reverseAuctionDto = reverseAuctionService.getReverseAuctionDtl(reverseAuction.getId());
+        DiscountDto discountDto = this.createDiscountDto(reverseAuction);
 
-        ReverseAuctionSearchDto reverseAuctionSearchDto = new ReverseAuctionSearchDto();
-
-        PageRequest pageRequest = PageRequest.of(0, 6);
-
-        Page<ReverseAuctionHistoryDto> reverseAuctionDtoList = reverseAuctionRepository.getAdminReverseAuctionPage(reverseAuctionSearchDto, pageRequest);
-
-        for(ReverseAuctionHistoryDto reverseAuctionDto : reverseAuctionDtoList) {
-            System.out.println(reverseAuctionDto.toString());
-            System.out.println(reverseAuctionDto.getDiscountDto().getCurrentPrice());
-            System.out.println(reverseAuctionDto.getDiscountDto().getCurrentDiscountPrice());
-            System.out.println(reverseAuctionDto.getDiscountDto().getCurrentDiscountRate());
-        }
+        assertEquals(reverseAuctionDto.getId(), reverseAuction.getId());
+        assertEquals(reverseAuctionDto.getTimeUnit(), reverseAuction.getTimeUnit());
+        assertEquals(reverseAuctionDto.getPriceUnit(), reverseAuction.getPriceUnit());
+        assertEquals(reverseAuctionDto.getMaxRate(), reverseAuction.getMaxRate());
+        assertEquals(reverseAuctionDto.getStartTime(), reverseAuction.getStartTime());
+        assertEquals(reverseAuctionDto.getItemNm(), reverseAuction.getItem().getItemNm());
+        assertEquals(reverseAuctionDto.getItemShippingFee(), reverseAuction.getItem().getShippingFee());
+        assertEquals(reverseAuctionDto.getDiscountDto().getCurrentDiscountPrice(), discountDto.getCurrentDiscountPrice());
+        assertEquals(reverseAuctionDto.getDiscountDto().getCurrentDiscountRate(), discountDto.getCurrentDiscountRate());
+        assertEquals(reverseAuctionDto.getDiscountDto().getCurrentPrice(), discountDto.getCurrentPrice());
+        assertNotNull(reverseAuctionDto.getImgUrl());
     }
-
-    @Test
-    @DisplayName("진행중인 역경매 조회 테스트")
-    public void inProgressReverseAuctionTest() {
-        this.createInProgressReverseAuction("test1@test.com");
-        this.createInProgressReverseAuction("test2@test.com");
-        this.createInProgressReverseAuction("test3@test.com");
-        this.createInProgressReverseAuction("test4@test.com");
-        this.createFinishedReverseAuction("test5@test.com");
-
-        ReverseAuctionSearchDto reverseAuctionSearchDto = new ReverseAuctionSearchDto();
-
-        PageRequest pageRequest = PageRequest.of(0, 6);
-
-        Page<ReverseAuctionDto> reverseAuctionDtoList = reverseAuctionRepository.getUserReverseAuctionPage(reverseAuctionSearchDto, pageRequest);
-
-        for(ReverseAuctionDto reverseAuctionDto : reverseAuctionDtoList) {
-            System.out.println(reverseAuctionDto.toString());
-        }
-    }
-
-    @Test
-    @DisplayName("이전 역경매 조회 테스트")
-    public void previousReverseAuctionTest() {
-        this.createInProgressReverseAuction("test1@test.com");
-        this.createInProgressReverseAuction("test2@test.com");
-        this.createInProgressReverseAuction("test3@test.com");
-        this.createInProgressReverseAuction("test4@test.com");
-        this.createFinishedReverseAuction("test5@test.com");
-
-        List<ReverseAuctionHistoryDto> reverseAuctionDtoList = reverseAuctionRepository.getPreviousReverseAuctionPage();
-
-        for(ReverseAuctionHistoryDto reverseAuctionDto : reverseAuctionDtoList) {
-            System.out.println(reverseAuctionDto.toString());
-        }
-    }
-
 
     @Test
     @DisplayName("역경매 수정 테스트")
     public void updateReverseAuctionTest() {
         ReverseAuction reverseAuction = this.createReverseAuction();
 
+        Long newItemId = this.createItem();
+
         ReverseAuctionFormDto reverseAuctionFormDto = reverseAuctionFormMapper.toDto(reverseAuction);
-        reverseAuctionFormDto.setMaxRate(60);
+        reverseAuctionFormDto.setItemId(newItemId);
+        reverseAuctionFormDto.setMaxRate(reverseAuction.getMaxRate() + 1);
+        reverseAuctionFormDto.setPriceUnit(reverseAuction.getPriceUnit() + 1);
+        reverseAuctionFormDto.setTimeUnit(reverseAuction.getTimeUnit() + 1);
 
-        reverseAuctionFormMapper.updateFromDto(reverseAuctionFormDto, reverseAuction);
+        Long reverseAuctionId = reverseAuctionService.updateReserveAuction(reverseAuctionFormDto);
 
-        reverseAuctionRepository.save(reverseAuction);
+        ReverseAuctionDto reverseAuctionDto = reverseAuctionService.getReverseAuctionDtl(reverseAuctionId);
 
-        em.flush();
-        em.clear();
-
-        ReverseAuction savedReverseAuction = reverseAuctionRepository.findById(reverseAuction.getId()).orElseThrow(EntityNotFoundException::new);
-
-        assertEquals(savedReverseAuction.getMaxRate(), 60);
+        assertEquals(reverseAuctionDto.getItemNm(), reverseAuction.getItem().getItemNm());
+        assertEquals(reverseAuctionDto.getMaxRate(), reverseAuction.getMaxRate());
+        assertEquals(reverseAuctionDto.getPriceUnit(), reverseAuction.getPriceUnit());
+        assertEquals(reverseAuctionDto.getTimeUnit(), reverseAuction.getTimeUnit());
     }
 
     @Test
@@ -234,14 +150,79 @@ class ReverseAuctionServiceTest {
     public void deleteReverseAuctionTest() {
         ReverseAuction reverseAuction = this.createReverseAuction();
 
-        reverseAuctionRepository.save(reverseAuction);
+        reverseAuctionService.deleteReverseAuction(reverseAuction.getId());
 
-        em.flush();
-        em.clear();
+        ReverseAuctionDto reverseAuctionDto = reverseAuctionService.getReverseAuctionDtl(reverseAuction.getId());
 
-        ReverseAuction savedReverseAuction = reverseAuctionRepository.findById(reverseAuction.getId()).orElseThrow(EntityNotFoundException::new);
+        assertNull(reverseAuctionDto);
+    }
 
-        reverseAuctionRepository.delete(savedReverseAuction);
+    @Test
+    @DisplayName("사용자 역경매 조회 테스트")
+    public void getUserReverseAuctionPageTest() throws InterruptedException {
+        List<ReverseAuction> reverseAuctionList = new ArrayList<>();
+
+        int reverseAuctionCount = 10;
+        int pageSize = 5;
+
+        for(int i = 0; i < reverseAuctionCount; i++) {
+            reverseAuctionList.add(this.createReverseAuction());
+
+            Thread.sleep(10);
+        }
+
+        ReverseAuctionSearchDto reverseAuctionSearchDto = new ReverseAuctionSearchDto();
+        reverseAuctionSearchDto.setSortColumn(ReverseAuctionSearchSortColumn.REG_TIME);
+        reverseAuctionSearchDto.setSortDirection(Sort.Direction.DESC);
+
+        Pageable pageable = PageRequest.of(0, pageSize);
+
+        Page<ReverseAuctionDto> reverseAuctionDtoPage = reverseAuctionService.getUserReverseAuctionPage(reverseAuctionSearchDto, pageable);
+        List<ReverseAuctionDto> reverseAuctionDtoList = reverseAuctionDtoPage.getContent();
+
+        assertEquals(reverseAuctionDtoPage.getTotalElements(), reverseAuctionCount);
+        assertEquals(reverseAuctionDtoPage.getTotalPages(), reverseAuctionCount / pageSize);
+
+        for(int j = 0; j < pageSize; j++) {
+            ReverseAuction reverseAuction = reverseAuctionList.get(reverseAuctionCount - j - 1);
+            ReverseAuctionDto reverseAuctionDto = reverseAuctionDtoList.get(j);
+
+            assertEquals(reverseAuctionDto.getId(), reverseAuction.getId());
+        }
+    }
+
+    @Test
+    @DisplayName("관리자 역경매 조회 테스트")
+    public void getAdminReverseAuctionPageTest() throws InterruptedException {
+        List<ReverseAuction> reverseAuctionList = new ArrayList<>();
+
+        int reverseAuctionCount = 10;
+        int pageSize = 5;
+
+        for(int i = 0; i < reverseAuctionCount; i++) {
+            reverseAuctionList.add(this.createReverseAuction());
+
+            Thread.sleep(10);
+        }
+
+        ReverseAuctionSearchDto reverseAuctionSearchDto = new ReverseAuctionSearchDto();
+        reverseAuctionSearchDto.setSortColumn(ReverseAuctionSearchSortColumn.REG_TIME);
+        reverseAuctionSearchDto.setSortDirection(Sort.Direction.DESC);
+
+        Pageable pageable = PageRequest.of(0, pageSize);
+
+        Page<ReverseAuctionHistoryDto> reverseAuctionHistoryDtoPage = reverseAuctionService.getAdminReverseAuctionPage(reverseAuctionSearchDto, pageable);
+        List<ReverseAuctionHistoryDto> reverseAuctionHistoryDtoList = reverseAuctionHistoryDtoPage.getContent();
+
+        assertEquals(reverseAuctionHistoryDtoPage.getTotalElements(), reverseAuctionCount);
+        assertEquals(reverseAuctionHistoryDtoPage.getTotalPages(), reverseAuctionCount / pageSize);
+
+        for(int j = 0; j < pageSize; j++) {
+            ReverseAuction reverseAuction = reverseAuctionList.get(reverseAuctionCount - j - 1);
+            ReverseAuctionHistoryDto reverseAuctionDto = reverseAuctionHistoryDtoList.get(j);
+
+            assertEquals(reverseAuctionDto.getId(), reverseAuction.getId());
+        }
     }
 
 }

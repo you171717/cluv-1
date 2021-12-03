@@ -1,6 +1,5 @@
 package com.shop.mapstruct;
 
-import com.shop.dto.MemberFormDto;
 import com.shop.dto.MemberUpdateFormDto;
 import com.shop.entity.Member;
 import org.mapstruct.Mapper;

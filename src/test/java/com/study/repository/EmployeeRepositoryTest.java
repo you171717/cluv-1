@@ -2,7 +2,6 @@ package com.study.repository;
 
 import com.study.entity.Employee;
 import com.study.entity.EmployeeId;
-import com.study.repository.EmployeeRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

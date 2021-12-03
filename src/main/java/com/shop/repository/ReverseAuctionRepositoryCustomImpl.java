@@ -1,11 +1,11 @@
 package com.shop.repository;
 
 import com.querydsl.core.QueryResults;
-import com.querydsl.core.types.Constant;
-import com.querydsl.core.types.ExpressionUtils;
-import com.querydsl.core.types.Ops;
 import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.core.types.dsl.*;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.CaseBuilder;
+import com.querydsl.core.types.dsl.Coalesce;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shop.constant.ReverseAuctionSearchSortColumn;

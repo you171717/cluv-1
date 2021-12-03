@@ -98,7 +98,7 @@
                 </div>
                 <input type="number" th:field="*{shippingFee}" class="form-control" placeholder="배송비를 입력해주세요">
             </div>
-            <p th:if="${#fields.hasErrors('stockNumber')}" th:errors="*{stockNumber}" class="fieldError">Incorrect data</p>
+            <p th:if="${#fields.hasErrors('shippingFee')}" th:errors="*{shippingFee}" class="fieldError">Incorrect data</p>
             <!-- 상품의 상세 내용 필드 -->
             <div class="input-group">
                 <div class="input-group-prepend">
